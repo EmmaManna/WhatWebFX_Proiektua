@@ -8,6 +8,6 @@ import static org.junit.Assert.*;
 
 public class WhatWebFXTest {
     @Test public void testAppHasAGreeting() {
-       
+
     }
 }
