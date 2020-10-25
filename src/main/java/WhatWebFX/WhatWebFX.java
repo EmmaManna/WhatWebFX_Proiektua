@@ -3,12 +3,10 @@
  */
 package WhatWebFX;
 
-public class App {
-    public String getGreeting() {
-        return "Kaixo mundua.";
-    }
+public class WhatWebFX {
+
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
     }
 }
