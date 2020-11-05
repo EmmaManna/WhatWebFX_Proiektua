@@ -1,4 +1,4 @@
-package WhatWebFX.utils;
+package ehu.isad.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

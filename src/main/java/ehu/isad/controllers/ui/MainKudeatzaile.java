@@ -1,6 +1,6 @@
-package WhatWebFX.controllers.ui;
+package ehu.isad.controllers.ui;
 
-import WhatWebFX.WhatWebFX;
+import ehu.isad.WhatWebFX;
 import javafx.fxml.Initializable;
 
 import java.net.URL;

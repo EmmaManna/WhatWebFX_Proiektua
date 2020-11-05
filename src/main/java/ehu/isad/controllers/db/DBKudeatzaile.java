@@ -1,7 +1,7 @@
-package WhatWebFX.controllers.db;
+package ehu.isad.controllers.db;
 
 
-import WhatWebFX.utils.Utils;
+import ehu.isad.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
