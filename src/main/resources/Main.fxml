@@ -42,15 +42,18 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="305.0" text="Server" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickServer" prefHeight="68.0" prefWidth="305.0" text="Server" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" />
+               </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="323.0" text="WhatWeb" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickWhatWeb" prefHeight="68.0" prefWidth="323.0" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="TERMINAL" />
                </graphic>
@@ -93,14 +96,14 @@
             <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" layoutX="14.0" layoutY="39.0" size="17" />
             <TextField layoutX="37.0" layoutY="19.0" prefHeight="28.0" prefWidth="334.0" style="-fx-border-color: #3F2B63;" />
             <ComboBox layoutX="379.0" layoutY="19.0" prefHeight="28.0" prefWidth="127.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffff;" stylesheets="@fullpackstyling.css" />
-            <Button layoutX="514.0" layoutY="18.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="133.0" stylesheets="@fullpackstyling.css" text="Add URL" textFill="WHITE">
+            <Button layoutX="514.0" layoutY="18.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="28.0" prefWidth="133.0" stylesheets="@fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="16" />
                </graphic>
             </Button>
          </children>
       </Pane>
-      <Button layoutX="903.0" layoutY="1.0" mnemonicParsing="false" styleClass="cancel" stylesheets="@fullpackstyling.css">
+      <Button layoutX="903.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickClose" styleClass="cancel" stylesheets="@fullpackstyling.css">
          <graphic>
             <FontAwesomeIconView glyphName="CLOSE" size="17" />
          </graphic>
