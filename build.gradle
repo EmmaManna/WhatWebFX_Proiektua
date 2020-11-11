@@ -51,7 +51,8 @@ repositories {
     mavenCentral()
 }
 
-def newArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',]
+def newArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',
+                '--add-opens', 'javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons',]
 
 run {
     inputs.property('moduleName', moduleName)
