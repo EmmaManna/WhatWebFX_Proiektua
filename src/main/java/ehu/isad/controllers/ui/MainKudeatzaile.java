@@ -29,7 +29,6 @@ public class MainKudeatzaile implements Initializable {
 
     @FXML
     void onClickServer(ActionEvent event) {
-
     }
 
     @FXML

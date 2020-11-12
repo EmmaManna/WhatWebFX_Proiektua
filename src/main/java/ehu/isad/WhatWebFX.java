@@ -4,6 +4,7 @@
 package ehu.isad;
 
 import ehu.isad.controllers.ui.MainKudeatzaile;
+import ehu.isad.controllers.ui.WhatWebKudeatzaile;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,11 +16,15 @@ import java.io.IOException;
 
 public class WhatWebFX extends Application {
     private Parent mainUI;
+    private Parent WhatWebUI;
 
     private Stage stage;
+
     private Scene sceneM;
+    private Scene sceneWW;
 
     private MainKudeatzaile mainKud;
+    private WhatWebKudeatzaile whatWebKudeatzaile;
 
 
     @Override
@@ -29,15 +34,23 @@ public class WhatWebFX extends Application {
 
         stage.setTitle("WhatWebFX");
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(sceneM);
+        stage.setScene(sceneWW);
         stage.show();
     }
 
     private void pantailakKargatu() throws IOException {
-        FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
+        //Pantaila nagusia kargatu
+        FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
         mainUI = (Parent) loaderMain.load();
         mainKud= loaderMain.getController();
         mainKud.setMainApp(this);
         sceneM = new Scene(mainUI);
+
+        //WhatWeb pantaila kargatu
+        FXMLLoader loaderWhatWebo = new FXMLLoader(getClass().getResource("/FXML/WhatWeb.fxml"));
+        WhatWebUI = (Parent) loaderWhatWebo.load();
+        whatWebKudeatzaile= loaderWhatWebo.getController();
+        whatWebKudeatzaile.setMainApp(this);
+        sceneWW = new Scene(WhatWebUI);
     }
 }

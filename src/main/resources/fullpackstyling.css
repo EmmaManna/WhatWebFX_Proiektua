@@ -9,6 +9,7 @@
 .button:pressed
 {
     -fx-background-color : #7156DD ;
+    border-left-color: #ffffff;
 }
 
 .cancel
@@ -47,7 +48,7 @@
     -fx-alignment: CENTER_LEFT;
 }
 
-.table-row-cell:selected {
+                                                                                                                                                                                                                                     .table-row-cell:selected {
     -fx-background-color:  rgb(127, 172, 243);
 }
 .table-row-cell:selected .text {
