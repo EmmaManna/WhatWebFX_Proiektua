@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="655.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.WhatWebKudeatzaile">
+<AnchorPane  onMouseClicked="#onMouseClicked" onMouseDragged="#onMouseDragged" prefHeight="655.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.WhatWebKudeatzaile">
    <children>
       <VBox prefHeight="655.0" prefWidth="284.0" style="-fx-background-color: #3f2b63;" stylesheets="@../fullpackstyling.css">
          <children>

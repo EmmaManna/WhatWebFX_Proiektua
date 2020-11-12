@@ -38,6 +38,7 @@ public class WhatWebFX extends Application {
         stage.show();
     }
 
+
     private void pantailakKargatu() throws IOException {
         //Pantaila nagusia kargatu
         FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
@@ -52,5 +53,25 @@ public class WhatWebFX extends Application {
         whatWebKudeatzaile= loaderWhatWebo.getController();
         whatWebKudeatzaile.setMainApp(this);
         sceneWW = new Scene(WhatWebUI);
+    }
+
+    public Parent getMainUI() {
+        return mainUI;
+    }
+
+    public Parent getWhatWebUI() {
+        return WhatWebUI;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Scene getSceneM() {
+        return sceneM;
+    }
+
+    public Scene getSceneWW() {
+        return sceneWW;
     }
 }
