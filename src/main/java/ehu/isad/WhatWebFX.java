@@ -34,7 +34,7 @@ public class WhatWebFX extends Application {
 
         stage.setTitle("WhatWebFX");
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(sceneWW);
+        stage.setScene(sceneM);
         stage.show();
     }
 
@@ -53,6 +53,18 @@ public class WhatWebFX extends Application {
         whatWebKudeatzaile= loaderWhatWebo.getController();
         whatWebKudeatzaile.setMainApp(this);
         sceneWW = new Scene(WhatWebUI);
+    }
+
+    public void WhatWeb(){
+        stage.setTitle("WhatWebFX");
+        stage.setScene(sceneWW);
+        stage.show();
+    }
+
+    public void cms(){
+        stage.setTitle("WhatWebFX");
+        stage.setScene(sceneM);
+        stage.show();
     }
 
     public Parent getMainUI() {

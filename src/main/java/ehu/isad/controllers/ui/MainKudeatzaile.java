@@ -40,7 +40,7 @@ public class MainKudeatzaile implements Initializable {
 
     @FXML
     void onClickWhatWeb(ActionEvent event) {
-
+        this.mainApp.WhatWeb();
     }
 
     @Override

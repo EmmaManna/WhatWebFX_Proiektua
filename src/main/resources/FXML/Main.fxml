@@ -103,10 +103,9 @@
             </Button>
          </children>
       </Pane>
-      <Button layoutX="903.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickClose" styleClass="cancel" stylesheets="@../fullpackstyling.css">
+      <Button contentDisplay="CENTER" layoutX="910.0" layoutY="5.0" mnemonicParsing="false" onAction="#onClickClose" prefHeight="17.0" prefWidth="20.0" styleClass="cancel" stylesheets="@../fullpackstyling.css" textAlignment="CENTER">
          <graphic>
-            <FontAwesomeIconView glyphName="CLOSE" size="17" />
-         </graphic>
-      </Button>
+            <FontAwesomeIconView boundsType="VISUAL" fill="#444141" glyphName="CLOSE" size="12" strokeLineCap="ROUND" textAlignment="CENTER" />
+         </graphic></Button>
    </children>
 </AnchorPane>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  onMouseClicked="#onMouseClicked" onMouseDragged="#onMouseDragged" prefHeight="655.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.WhatWebKudeatzaile">
+<AnchorPane onMouseClicked="#onMouseClicked" onMouseDragged="#onMouseDragged" prefHeight="655.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.WhatWebKudeatzaile">
    <children>
       <VBox prefHeight="655.0" prefWidth="284.0" style="-fx-background-color: #3f2b63;" stylesheets="@../fullpackstyling.css">
          <children>
@@ -82,9 +82,9 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="903.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickClose" styleClass="cancel" stylesheets="@../fullpackstyling.css">
+      <Button layoutX="910.0" layoutY="5.0" mnemonicParsing="false" onAction="#onClickClose" prefHeight="17.0" prefWidth="20.0" styleClass="cancel" stylesheets="@../fullpackstyling.css">
          <graphic>
-            <FontAwesomeIconView glyphName="CLOSE" size="17" />
+            <FontAwesomeIconView fill="#444141" glyphName="CLOSE" size="12" />
          </graphic>
       </Button>
       <TabPane layoutX="284.0" layoutY="120.0" prefHeight="535.0" prefWidth="654.0" tabClosingPolicy="UNAVAILABLE">

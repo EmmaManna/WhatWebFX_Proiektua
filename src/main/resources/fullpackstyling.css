@@ -14,21 +14,33 @@
 
 .cancel
 {
-    -fx-background-color : #ffffff;
-    -fx-border-color: #DC143C;
+   
+   -fx-background-color: #c1bdbd;
+  -fx-background-radius: 22;
+  -fx-border-radius: 22;
+  -fx-border-width: 1.1;
+  -fx-border-color: #444141;
+  -fx-padding: 0;
+  -fx-font-size: 0;
+  
+
 }
+
+
 .cancel:hover
 {
     -fx-text-fill: black;
     -fx-background-color : #DC143C ;
-    -fx-border-color: black;
+    -fx-border-color: #444141;
+    -fx-effect: innershadow(#444141, #444141, 7, 0, 0, 0);
 }
 .cancel:pressed
 {
     -fx-text-fill: black;
     -fx-background-color : #DC143C ;
-    -fx-border-color: black;
+    -fx-border-color: #444141;
 }
+
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
