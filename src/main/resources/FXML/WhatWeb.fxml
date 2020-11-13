@@ -33,7 +33,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" text="CMS" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickCMS" prefHeight="68.0" prefWidth="296.0" text="CMS" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" />
                </graphic>
@@ -44,7 +44,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" text="Server" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickServer" prefHeight="68.0" prefWidth="296.0" text="Server" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" />
                </graphic>
@@ -55,7 +55,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" text="WhatWeb" textFill="WHITE">
+            <Button fx:id="btn_whatweb" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="TERMINAL" />
                </graphic>

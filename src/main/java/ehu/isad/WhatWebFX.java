@@ -102,33 +102,20 @@ public class WhatWebFX extends Application {
 
     public void WhatWeb(){
         stage.setTitle("WhatWebFX");
+        whatWebKudeatzaile.botoiaFocus();
         stage.setScene(sceneWW);
         stage.show();
     }
 
-    public void cms(){
+    public void CMS(){
         stage.setTitle("WhatWebFX");
+        mainKud.botoiaFocus();
         stage.setScene(sceneM);
         stage.show();
-    }
-
-    public Parent getMainUI() {
-        return mainUI;
-    }
-
-    public Parent getWhatWebUI() {
-        return WhatWebUI;
     }
 
     public Stage getStage() {
         return stage;
     }
 
-    public Scene getSceneM() {
-        return sceneM;
-    }
-
-    public Scene getSceneWW() {
-        return sceneWW;
-    }
 }

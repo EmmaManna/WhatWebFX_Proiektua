@@ -1,10 +1,11 @@
 package ehu.isad.controllers.ui;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
 
 import ehu.isad.WhatWebFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -21,13 +22,31 @@ public class WhatWebKudeatzaile implements Initializable {
     }
 
     @FXML
+    private Button btn_whatweb;
+
+
+    @FXML
     void onClickClose(ActionEvent event) {
         Stage stage=mainApp.getStage();
         stage.close();
     }
 
+    @FXML
+    void onClickCMS(ActionEvent event) {
+        this.mainApp.CMS();
+    }
+
+    @FXML
+    void onClickServer(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void botoiaFocus(){
+        Platform.runLater(() -> btn_whatweb.requestFocus());
     }
 }

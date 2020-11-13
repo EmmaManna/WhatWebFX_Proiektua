@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,51 +26,8 @@ public class MainKudeatzaile implements Initializable {
     }
 
     @FXML
-    private Label lbl_whatwebfx;
-
-    @FXML
     private Button btn_cms;
 
-
-    @FXML
-    private Button btn_server;
-
-    @FXML
-    private Button btn_whatWeb;
-
-
-    @FXML
-    private TableColumn<?, ?> clmn_url;
-
-    @FXML
-    private TableColumn<?, ?> clmn_cms;
-
-    @FXML
-    private TableColumn<?, ?> clmn_version;
-
-    @FXML
-    private TableColumn<?, ?> clmn_azkenEguneraketa;
-
-    @FXML
-    private Label lbl_deskrib;
-
-    @FXML
-    private Label lbl_cmsGoian;
-
-    @FXML
-    private Pane tbl_taula;
-
-    @FXML
-    private TextField txt_bilatu;
-
-    @FXML
-    private ComboBox<?> cmbx_non;
-
-    @FXML
-    private Button btn_addurl;
-
-    @FXML
-    private Button btn_itxi;
 
     @FXML
     void onClickAddURL(ActionEvent event) {
@@ -99,6 +57,10 @@ public class MainKudeatzaile implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void botoiaFocus(){
+        Platform.runLater(() -> btn_cms.requestFocus());
     }
 
 }
