@@ -16,11 +16,6 @@ public class WhatWebKudeatzaile implements Initializable {
 
     private WhatWebFX mainApp;
 
-    //Pantaila mugitzeko kalkulurako
-    private double xOffset = 0;
-    private double yOffset =0;
-
-
     public void setMainApp(WhatWebFX main){
         this.mainApp = main;
     }
@@ -31,22 +26,8 @@ public class WhatWebKudeatzaile implements Initializable {
         stage.close();
     }
 
-
-    @FXML
-    void onMouseClicked(MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
-    }
-
-    @FXML
-    void onMouseDragged(MouseEvent event) {
-        Stage stage=mainApp.getStage();
-        stage.setX(event.getScreenX() - xOffset);
-        stage.setY(event.getScreenY() - yOffset);
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

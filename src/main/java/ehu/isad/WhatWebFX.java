@@ -6,9 +6,11 @@ package ehu.isad;
 import ehu.isad.controllers.ui.MainKudeatzaile;
 import ehu.isad.controllers.ui.WhatWebKudeatzaile;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -26,6 +28,10 @@ public class WhatWebFX extends Application {
     private MainKudeatzaile mainKud;
     private WhatWebKudeatzaile whatWebKudeatzaile;
 
+    //Pantaila mugitzeko kalkulurako
+    private double xOffset = 0;
+    private double yOffset =0;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,6 +40,9 @@ public class WhatWebFX extends Application {
 
         stage.setTitle("WhatWebFX");
         stage.initStyle(StageStyle.UNDECORATED);
+
+        pantailaMugitu();
+
         stage.setScene(sceneM);
         stage.show();
     }
@@ -53,6 +62,42 @@ public class WhatWebFX extends Application {
         whatWebKudeatzaile= loaderWhatWebo.getController();
         whatWebKudeatzaile.setMainApp(this);
         sceneWW = new Scene(WhatWebUI);
+    }
+
+    private void pantailaMugitu(){
+        //Pantaila nagusia
+        mainUI.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        mainUI.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
+        //WhatWeb pantaila
+        WhatWebUI.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        WhatWebUI.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
     }
 
     public void WhatWeb(){
