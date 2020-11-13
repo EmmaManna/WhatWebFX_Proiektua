@@ -33,7 +33,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickCMS" prefHeight="68.0" prefWidth="296.0" text="CMS" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickCMS" prefHeight="68.0" prefWidth="296.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="CMS" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" />
                </graphic>
@@ -44,7 +44,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickServer" prefHeight="68.0" prefWidth="296.0" text="Server" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClickServer" prefHeight="68.0" prefWidth="296.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="Server" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" />
                </graphic>
@@ -55,7 +55,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btn_whatweb" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" text="WhatWeb" textFill="WHITE">
+            <Button fx:id="btn_whatweb" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="296.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="TERMINAL" />
                </graphic>
@@ -96,7 +96,7 @@
                         <Label layoutX="47.0" layoutY="42.0" text="URL:" />
                         <Label layoutX="47.0" layoutY="83.0" text="Log:" />
                         <TextField layoutX="90.0" layoutY="37.0" prefHeight="26.0" prefWidth="467.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
-                        <Button layoutX="474.0" layoutY="358.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" stylesheets="@../fullpackstyling.css" text="Scan" textFill="WHITE">
+                        <Button layoutX="474.0" layoutY="358.0" mnemonicParsing="false" onAction="#onClickScan" prefHeight="28.0" prefWidth="80.0" stylesheets="@../fullpackstyling.css" text="Scan" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>

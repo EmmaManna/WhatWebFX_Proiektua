@@ -11,7 +11,22 @@
     -fx-background-color : #7156DD ;
     border-left-color: #ffffff;
 }
-.button:focused{
+
+
+.buttonMenu
+{
+    -fx-background-color : #3F2B63;
+}
+.buttonMenu:hover
+{
+    -fx-background-color : #7156DD ;
+}
+.buttonMenu:pressed
+{
+    -fx-background-color : #7156DD ;
+    border-left-color: #ffffff;
+}
+.buttonMenu:focused{
     -fx-background-color: #7156DD ;
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px 0px 0px 3px;
