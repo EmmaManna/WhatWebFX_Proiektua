@@ -52,7 +52,6 @@
     -fx-text-fill: black;
     -fx-background-color : #DC143C ;
     -fx-border-color: #444141;
-    -fx-effect: innershadow #444141, #444141, 7, 0, 0, 0;
 }
 .cancel:pressed
 {

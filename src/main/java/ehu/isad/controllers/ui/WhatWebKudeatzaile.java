@@ -41,6 +41,13 @@ public class WhatWebKudeatzaile implements Initializable {
 
     }
 
+    @FXML
+    void onClickScan(ActionEvent event) {
+
+    }
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
