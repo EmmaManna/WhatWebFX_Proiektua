@@ -45,6 +45,9 @@ dependencies {
     //awsome font
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //sqlite
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+
 }
 
 repositories {

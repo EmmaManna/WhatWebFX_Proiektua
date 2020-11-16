@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.LinkedList;
@@ -44,6 +45,9 @@ public class MainKudeatzaile implements Initializable {
     void onClickAddURL(ActionEvent event) {
         this.botoiaFocus();
 
+        //Idatzi Kargatzen bla bla bla
+        //Irudi de homer pentsatzen (monito con pandereta)
+
         Thread taskThread = new Thread( () -> {
 
             String newLine = System.getProperty("line.separator");
@@ -52,6 +56,12 @@ public class MainKudeatzaile implements Initializable {
                 emaitza.append( line + newLine );
             });
 
+            try {
+                WhatWebKud.getInstantzia().insertIrakurri();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             Platform.runLater( () -> {
                 //txt_bilatu.setText(emaitza.toString());
             } );
@@ -59,6 +69,7 @@ public class MainKudeatzaile implements Initializable {
         });
 
         taskThread.start();
+
 
 
     }
