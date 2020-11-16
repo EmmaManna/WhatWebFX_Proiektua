@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -42,25 +43,23 @@ public class MainKudeatzaile implements Initializable {
     @FXML
     void onClickAddURL(ActionEvent event) {
         this.botoiaFocus();
-        this.urlIrakurri(txt_bilatu.getText());
 
         Thread taskThread = new Thread( () -> {
 
             String newLine = System.getProperty("line.separator");
             final StringBuilder emaitza = new StringBuilder();
-            allProcesses().forEach( line ->  {
+            urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
                 emaitza.append( line + newLine );
             });
 
             Platform.runLater( () -> {
                 //txt_bilatu.setText(emaitza.toString());
-                // txertatu();
-
             } );
 
         });
 
         taskThread.start();
+
 
     }
 
