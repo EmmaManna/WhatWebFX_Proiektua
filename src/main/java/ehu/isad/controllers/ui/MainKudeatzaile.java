@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,11 +77,12 @@ public class MainKudeatzaile implements Initializable {
         try {
             String line;
             Process p = null;
+            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                p = Runtime.getRuntime().exec("wsl whatweb --colour='never' " + url);
-            } else {
-                p = Runtime.getRuntime().exec("whatweb  --colour='never' " + url);
+                komandoa = "wsl " + komandoa;
             }
+            p = Runtime.getRuntime().exec(komandoa);
+
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = input.readLine()) != null) {
