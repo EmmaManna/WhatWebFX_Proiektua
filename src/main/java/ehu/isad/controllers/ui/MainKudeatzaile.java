@@ -22,6 +22,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.lang.ProcessHandle.allProcesses;
+
 public class MainKudeatzaile implements Initializable {
 
     private WhatWebFX mainApp;
@@ -41,7 +43,27 @@ public class MainKudeatzaile implements Initializable {
     void onClickAddURL(ActionEvent event) {
         this.botoiaFocus();
         this.urlIrakurri(txt_bilatu.getText());
+
+        Thread taskThread = new Thread( () -> {
+
+            String newLine = System.getProperty("line.separator");
+            final StringBuilder emaitza = new StringBuilder();
+            allProcesses().forEach( line ->  {
+                emaitza.append( line + newLine );
+            });
+
+            Platform.runLater( () -> {
+                //txt_bilatu.setText(emaitza.toString());
+                // txertatu();
+
+            } );
+
+        });
+
+        taskThread.start();
+
     }
+
 
     @FXML
     void onClickClose(ActionEvent event) {
