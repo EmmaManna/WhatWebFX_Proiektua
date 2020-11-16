@@ -9,7 +9,14 @@ import java.io.IOException;
 
 public class WhatWebKud {
 
+    // singleton patroia
+    private static WhatWebKud instantzia = new WhatWebKud();
+
     private WhatWebKud(){
+    }
+
+    public static WhatWebKud getInstantzia() {
+        return instantzia;
     }
 
     public void insertIrakurri() throws IOException {
