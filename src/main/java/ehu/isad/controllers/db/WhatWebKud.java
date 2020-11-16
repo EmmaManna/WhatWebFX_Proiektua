@@ -12,8 +12,8 @@ public class WhatWebKud {
     private WhatWebKud(){
     }
 
-    public void insertIrakur(String artx) throws IOException {
-        FileReader fileR = new FileReader(artx);
+    public void insertIrakurri() throws IOException {
+        FileReader fileR = new FileReader("insertak.sql");
         DBKudeatzaile dbKud = DBKudeatzaile.getInstantzia();
         try(BufferedReader bufferedReader = new BufferedReader(fileR)){
             String lerroa;
@@ -21,6 +21,6 @@ public class WhatWebKud {
                 dbKud.execSQL(lerroa.replace("IGNORE","OR IGNORE"));
             }
         }
-    Utils.ezabatu(artx);
+    Utils.ezabatu();
     }
 }

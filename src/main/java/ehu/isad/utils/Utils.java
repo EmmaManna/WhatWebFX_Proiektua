@@ -21,11 +21,11 @@ public class Utils {
         return properties;
     }
 
-    public static final boolean ezabatu(String path) {
-        if(path==null){
+    public static final boolean ezabatu() {
+        if("insertak.sql"==null){
             return true;
         }
-        File file = new File(path);
+        File file = new File("insertak.sql");
         if(file.exists()){
             return file.delete();
         }
