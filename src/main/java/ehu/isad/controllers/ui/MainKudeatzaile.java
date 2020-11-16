@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainKudeatzaile implements Initializable {
@@ -28,10 +33,14 @@ public class MainKudeatzaile implements Initializable {
     @FXML
     private Button btn_cms;
 
+    @FXML
+    private TextField txt_bilatu;
+
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-
+        this.botoiaFocus();
+        this.urlIrakurri(txt_bilatu.getText());
     }
 
     @FXML
@@ -63,4 +72,28 @@ public class MainKudeatzaile implements Initializable {
         Platform.runLater(() -> btn_cms.requestFocus());
     }
 
+    public List<String> urlIrakurri(String url) {
+        List<String> processes = new LinkedList<String>();
+        try {
+            String line;
+            Process p = null;
+            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
+            if(System.getProperty("os.name").toLowerCase().contains("win")) {
+                komandoa = "wsl " + komandoa;
+            }
+            p = Runtime.getRuntime().exec(komandoa);
+
+            BufferedReader input =
+                    new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = input.readLine()) != null) {
+                processes.add(line);
+                System.out.println(line);
+            }
+            input.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return processes;
+    }
 }
