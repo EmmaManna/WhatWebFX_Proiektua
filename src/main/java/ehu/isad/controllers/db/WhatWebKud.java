@@ -21,6 +21,6 @@ public class WhatWebKud {
                 dbKud.execSQL(lerroa.replace("IGNORE","OR IGNORE"));
             }
         }
-    Utils.ezabatu(artx);
+    Utils.ezabatu();
     }
 }
