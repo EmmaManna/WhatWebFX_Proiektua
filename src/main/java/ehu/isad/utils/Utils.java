@@ -22,10 +22,10 @@ public class Utils {
     }
 
     public static final boolean ezabatu() {
-        if("insertak.sql"==null){
+        if(Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql"==null){
             return true;
         }
-        File file = new File("insertak.sql");
+        File file = new File(Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql");
         if(file.exists()){
             return file.delete();
         }
