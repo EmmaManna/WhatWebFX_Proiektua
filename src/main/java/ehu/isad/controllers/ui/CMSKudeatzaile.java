@@ -45,7 +45,7 @@ public class CMSKudeatzaile {
                     System.getProperty("file.separator")+
                     "tenor.gif";
             Image i = new Image(new File(path).toURI().toString());
-            //mgvw_monito.setImage(i);
+            mgvw_monito.setImage(i);
 
             Thread taskThread = new Thread( () -> {
 
@@ -64,7 +64,7 @@ public class CMSKudeatzaile {
                 Platform.runLater( () -> {
                     //txt_bilatu.setText(emaitza.toString());
                     System.out.println(emaitza.toString());
-                    //mgvw_monito.setVisible(false);
+                    mgvw_monito.setVisible(false);
                     txt_bilatu.setText("");
                 } );
 
@@ -79,7 +79,7 @@ public class CMSKudeatzaile {
         try {
             String line;
             Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql=/home/duxon/IdeaProjects/WhatWebFX_Proiektua/insertak.sql " + url;
+            String komandoa = "whatweb --colour='never' --log-sql="+System.getProperty("user.dir")+System.getProperty("file.separator")+"insertak.sql " + url;
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
