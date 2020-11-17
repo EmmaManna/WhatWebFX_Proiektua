@@ -1,11 +1,13 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import ehu.isad.controllers.db.WhatWebKud;
 import javafx.application.Platform;
 import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,7 +30,6 @@ public class MainKudeatzaile {
     public void setMainApp(WhatWebFX main){
         this.mainApp = main;
     }
-
 
     @FXML
     private Button btnCMS;
@@ -58,6 +60,7 @@ public class MainKudeatzaile {
     void onClickClose(ActionEvent event) {
         mainApp.getStage().close();
     }
+
 
     public void hasieratu(){
         anchorCMS.toFront();

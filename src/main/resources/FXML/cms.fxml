@@ -30,9 +30,9 @@
       <Pane layoutY="87.0" prefHeight="95.0" prefWidth="654.0">
          <children>
             <FontAwesomeIconView glyphName="SEARCH" layoutX="14.0" layoutY="53.0" size="19" />
-            <TextField layoutX="40.0" layoutY="34.0" prefHeight="26.0" prefWidth="365.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+            <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" prefHeight="26.0" prefWidth="365.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
             <ComboBox layoutX="416.0" layoutY="34.0" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
-            <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
+            <Button layoutX="544.0" layoutY="35.0" onAction="#onClickAddURL" mnemonicParsing="false" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
                </graphic>

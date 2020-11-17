@@ -63,10 +63,10 @@
          </children>
       </VBox>
       <AnchorPane fx:id="anchorCMS" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
-         <fx:include source="WhatWeb.fxml" />
+         <fx:include source="cms.fxml" />
       </AnchorPane>
       <AnchorPane fx:id="anchorWhatWebo" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
-         <fx:include source="cms.fxml" />
+         <fx:include source="WhatWeb.fxml" />
       </AnchorPane>
       <Button layoutX="915.0" layoutY="3.0" mnemonicParsing="false" onAction="#onClickClose" prefHeight="17.0" prefWidth="20.0" styleClass="cancel" stylesheets="@../fullpackstyling.css">
          <graphic>
