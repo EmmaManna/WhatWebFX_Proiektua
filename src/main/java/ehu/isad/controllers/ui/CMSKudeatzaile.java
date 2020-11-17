@@ -35,13 +35,17 @@ public class CMSKudeatzaile {
             //Irudi de homer pentsatzen (monito con pandereta)
             String path = System.getProperty("user.dir")+
                     System.getProperty("file.separator")+
+                    "src"+
+                    System.getProperty("file.separator")+
+                    "main"+
+                    System.getProperty("file.separator")+
                     "resources"+
                     System.getProperty("file.separator")+
                     "Images"+
                     System.getProperty("file.separator")+
                     "tenor.gif";
             Image i = new Image(new File(path).toURI().toString());
-            mgvw_monito.setImage(i);
+            //mgvw_monito.setImage(i);
 
             Thread taskThread = new Thread( () -> {
 
@@ -60,7 +64,7 @@ public class CMSKudeatzaile {
                 Platform.runLater( () -> {
                     //txt_bilatu.setText(emaitza.toString());
                     System.out.println(emaitza.toString());
-                    mgvw_monito.setVisible(false);
+                    //mgvw_monito.setVisible(false);
                     txt_bilatu.setText("");
                 } );
 
@@ -74,18 +78,21 @@ public class CMSKudeatzaile {
         List<String> processes = new LinkedList<String>();
         try {
             String line;
-            Process p = null;
-            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
+            Process p=null;
+            String komandoa = "whatweb --colour='never' --log-sql=/home/duxon/IdeaProjects/WhatWebFX_Proiektua/insertak.sql " + url;
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
+            else komandoa="/bin/"+komandoa;
+
             p = Runtime.getRuntime().exec(komandoa);
+
+            System.out.println(p.getOutputStream());
 
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = input.readLine()) != null) {
                 processes.add(line);
-                System.out.println(line);
             }
             input.close();
         } catch (Exception err) {
