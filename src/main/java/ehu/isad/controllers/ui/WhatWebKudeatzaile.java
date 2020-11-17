@@ -14,48 +14,15 @@ import java.util.ResourceBundle;
 
 public class WhatWebKudeatzaile implements Initializable {
 
+    private MainKudeatzaile mainKudeatzaile;
 
-    private WhatWebFX mainApp;
-
-    public void setMainApp(WhatWebFX main){
-        this.mainApp = main;
+    public void setMainKudeatzaile(MainKudeatzaile mainKudeatzaile) {
+        this.mainKudeatzaile = mainKudeatzaile;
     }
-
-    @FXML
-    private Button btn_whatweb;
-
-
-    @FXML
-    void onClickClose(ActionEvent event) {
-        Stage stage=mainApp.getStage();
-        stage.close();
-    }
-
-    @FXML
-    void onClickCMS(ActionEvent event) {
-        this.mainApp.CMS();
-    }
-
-    @FXML
-    void onClickServer(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickScan(ActionEvent event) {
-
-    }
-
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void botoiaFocus(){
-        Platform.runLater(() -> btn_whatweb.requestFocus());
-    }
 }
