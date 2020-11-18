@@ -50,6 +50,10 @@ public class WhatWebKudeatzaile implements Initializable {
 
     }
 
+    public WhatWebKudeatzaile() {
+        System.out.println("WhatWeb kud instantzia");
+    }
+
     @FXML
     void onClickScan(ActionEvent event) {
         if(!txt_url.getText().equals("")){

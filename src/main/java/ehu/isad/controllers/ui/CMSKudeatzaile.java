@@ -28,5 +28,7 @@ public class CMSKudeatzaile {
 
     }
 
-
+    public CMSKudeatzaile() {
+        System.out.println("CMS kud instantzia");
+    }
 }

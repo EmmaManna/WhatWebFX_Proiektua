@@ -27,6 +27,10 @@ public class MainKudeatzaile {
 
     private WhatWebFX mainApp;
 
+    public MainKudeatzaile() {
+        System.out.println("Main kud instantzia");
+    }
+
     public void setMainApp(WhatWebFX main){
         this.mainApp = main;
     }
