@@ -12,6 +12,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -53,6 +55,7 @@ public class WhatWebKudeatzaile implements Initializable {
         System.out.println("WhatWeb kud instantzia");
     }
 
+
     @FXML
     void onClickScan(ActionEvent event) {
         if(!txt_url.getText().equals("")){
@@ -68,26 +71,35 @@ public class WhatWebKudeatzaile implements Initializable {
                 mgvw_loading.setVisible(true);
                 txt_log.setWrapText(true);
 
-                String newLine = System.getProperty("line.separator");
-                final StringBuilder emaitza = new StringBuilder();
-                urlIrakurri(txt_url.getText()).forEach(line ->  {
-                    emaitza.append( line + newLine );
+                Thread taskThread = new Thread( () -> {
+
+                    String newLine = System.getProperty("line.separator");
+                    final StringBuilder emaitza = new StringBuilder();
+                    urlIrakurri(txt_url.getText()).forEach(line ->  {
+                        emaitza.append( line + newLine );
+                    });
+
+                    try {
+                        WhatWebKud.getInstantzia().insertIrakurri();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Platform.runLater( () -> {
+                        if(emaitza.toString().equals("")){
+                            txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
+                        }
+                        else{
+                            txt_log.setText(emaitza.toString());
+                        }
+                        mgvw_loading.setVisible(false);
+                        txt_url.setText("");
+
+                    } );
+
                 });
 
-                try {
-                    WhatWebKud.getInstantzia().insertIrakurri();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                    if(emaitza.toString().equals("")){
-                        txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
-                    }
-                    else{
-                        txt_log.setText(emaitza.toString());
-                    }
-                    mgvw_loading.setVisible(false);
-                    txt_url.setText("");
+                taskThread.start();
             }
         }
         else{
@@ -96,14 +108,20 @@ public class WhatWebKudeatzaile implements Initializable {
 
     }
 
+
     public List<String> urlIrakurri(String url) {
         List<String> processes = new LinkedList<String>();
         try {
             String line;
             Process p=null;
-            String komandoa = "/usr/bin/whatweb --colour='never' --log-sql=/tmp/insertak.sql " + url;
 
-            komandoa = "/usr/bin/whatweb --colour='never' --log-sql=/tmp/insertak.sql ikasten.io";
+            String komandoa = "whatweb --log-sql="+Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
+
+            if(System.getProperty("os.name").toLowerCase().contains("win")) {
+                komandoa = "wsl " + komandoa;
+            }
+            else komandoa="/usr/bin/"+komandoa;
+
             p = Runtime.getRuntime().exec(komandoa);
             p.waitFor();
 
@@ -120,6 +138,15 @@ public class WhatWebKudeatzaile implements Initializable {
         }
 
         return processes;
+    }
+
+
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
+            onClickScan(new ActionEvent());
+        }
     }
 
 }
