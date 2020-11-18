@@ -69,35 +69,26 @@ public class WhatWebKudeatzaile implements Initializable {
                 mgvw_loading.setVisible(true);
                 txt_log.setWrapText(true);
 
-                Thread taskThread = new Thread( () -> {
-
-                    String newLine = System.getProperty("line.separator");
-                    final StringBuilder emaitza = new StringBuilder();
-                    urlIrakurri(txt_url.getText()).forEach(line ->  {
-                        emaitza.append( line + newLine );
-                    });
-
-                    try {
-                        WhatWebKud.getInstantzia().insertIrakurri();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Platform.runLater( () -> {
-                        if(emaitza.toString().equals("")){
-                            txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
-                        }
-                        else{
-                            txt_log.setText(emaitza.toString());
-                        }
-                        mgvw_loading.setVisible(false);
-                        txt_url.setText("");
-
-                    } );
-
+                String newLine = System.getProperty("line.separator");
+                final StringBuilder emaitza = new StringBuilder();
+                urlIrakurri(txt_url.getText()).forEach(line ->  {
+                    emaitza.append( line + newLine );
                 });
 
-                taskThread.start();
+                try {
+                    WhatWebKud.getInstantzia().insertIrakurri();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                    if(emaitza.toString().equals("")){
+                        txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
+                    }
+                    else{
+                        txt_log.setText(emaitza.toString());
+                    }
+                    mgvw_loading.setVisible(false);
+                    txt_url.setText("");
             }
         }
         else{
@@ -111,15 +102,13 @@ public class WhatWebKudeatzaile implements Initializable {
         try {
             String line;
             Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
-            if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                komandoa = "wsl " + komandoa;
-            }
+            String komandoa = "/usr/bin/whatweb --colour='never' --log-sql=/tmp/insertak.sql " + url;
 
-
+            komandoa = "/usr/bin/whatweb --colour='never' --log-sql=/tmp/insertak.sql ikasten.io";
             p = Runtime.getRuntime().exec(komandoa);
+            p.waitFor();
 
-   //         System.out.println(p.getOutputStream());
+            System.out.println(komandoa);
 
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
