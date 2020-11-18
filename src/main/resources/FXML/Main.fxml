@@ -20,7 +20,7 @@
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CODEPEN" layoutX="32.0" layoutY="87.0" size="40" wrappingWidth="46.0">
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" layoutX="32.0" layoutY="87.0" size="40" wrappingWidth="46.0">
                      <font>
                         <Font size="60.0" />
                      </font>
@@ -29,7 +29,7 @@
             </Pane>
             <Button fx:id="btnCMS" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="300.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="CMS" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="DATABASE" />
                </graphic>
                <padding>
                   <Insets left="50.0" />
@@ -46,12 +46,12 @@
                   <Font size="16.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="SERVER" />
                </graphic>
             </Button>
             <Button fx:id="btnWhatWeb" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="323.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="WhatWeb" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="TERMINAL" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="CODE" />
                </graphic>
                <padding>
                   <Insets left="50.0" />
