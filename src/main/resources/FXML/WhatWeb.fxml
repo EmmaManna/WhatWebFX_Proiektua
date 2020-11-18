@@ -36,13 +36,14 @@
                      <children>
                         <Label layoutX="47.0" layoutY="42.0" text="URL:" />
                         <Label layoutX="47.0" layoutY="83.0" text="Log:" />
-                        <TextField layoutX="90.0" layoutY="37.0" prefHeight="26.0" prefWidth="467.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
-                        <Button layoutX="474.0" layoutY="358.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" stylesheets="@../fullpackstyling.css" text="Scan" textFill="WHITE">
+                        <TextField fx:id="txt_url" layoutX="90.0" layoutY="37.0" prefHeight="26.0" prefWidth="467.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
+                        <Button fx:id="btn_scan" layoutX="474.0" layoutY="358.0" mnemonicParsing="false" onAction="#onClickScan" prefHeight="28.0" prefWidth="80.0" stylesheets="@../fullpackstyling.css" text="Scan" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextArea layoutX="90.0" layoutY="83.0" prefHeight="260.0" prefWidth="467.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+                        <TextArea fx:id="txt_log" layoutX="90.0" layoutY="83.0" prefHeight="260.0" prefWidth="467.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+                        <ImageView fx:id="mgvw_loading" fitHeight="139.0" fitWidth="281.0" layoutX="187.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
                </content>
