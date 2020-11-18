@@ -111,7 +111,7 @@ public class WhatWebKudeatzaile implements Initializable {
         try {
             String line;
             Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql/tmp/insertak.sql " + url;
+            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
