@@ -115,7 +115,7 @@ public class WhatWebKudeatzaile implements Initializable {
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
-            else komandoa="/bin/"+komandoa;
+            else komandoa=komandoa;
 
             p = Runtime.getRuntime().exec(komandoa);
 
