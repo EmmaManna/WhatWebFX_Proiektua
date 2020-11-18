@@ -3,5 +3,4 @@ user=
 password=
 useSSL=FALSE
 serverTimezone=Europe/Madrid
-pathToInserts=
 pathToImages=

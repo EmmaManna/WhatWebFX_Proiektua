@@ -1,5 +1,6 @@
 package ehu.isad.controllers.ui;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
@@ -57,18 +58,7 @@ public class WhatWebKudeatzaile implements Initializable {
         }
         else{
             //Irudi de homer pentsatzen (monito con pandereta)
-            String path = System.getProperty("user.dir")+
-                    System.getProperty("file.separator")+
-                    "src"+
-                    System.getProperty("file.separator")+
-                    "main"+
-                    System.getProperty("file.separator")+
-                    "resources"+
-                    System.getProperty("file.separator")+
-                    "Images"+
-                    System.getProperty("file.separator")+
-                    "tenor.gif";
-            Image i = new Image(new File(path).toURI().toString());
+            Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
             mgvw_loading.setImage(i);
 
             Thread taskThread = new Thread( () -> {
@@ -103,7 +93,7 @@ public class WhatWebKudeatzaile implements Initializable {
         try {
             String line;
             Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql="+System.getProperty("user.dir")+System.getProperty("file.separator")+"insertak.sql " + url;
+            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }

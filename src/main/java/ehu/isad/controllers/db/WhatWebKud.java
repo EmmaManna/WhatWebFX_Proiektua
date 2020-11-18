@@ -24,7 +24,7 @@ public class WhatWebKud {
     }
 
     public void insertIrakurri() throws IOException {
-        FileReader fileR = new FileReader(Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql");
+        FileReader fileR = new FileReader("insertak.sql");
         DBKudeatzaile dbKud = DBKudeatzaile.getInstantzia();
         try(BufferedReader bufferedReader = new BufferedReader(fileR)){
             String lerroa;
