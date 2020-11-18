@@ -52,14 +52,16 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onClickScan(ActionEvent event) {
+        txt_log.setText("");
         if(WhatWebKud.getInstantzia().jadaBilatuta(txt_url.getText())){
-            System.out.println("Jada ditugu datuak");
+            txt_log.setText("Jada ditugu datuak");
             txt_url.setText("");
         }
         else{
-            //Irudi de homer pentsatzen (monito con pandereta)
+            //Irudi kargatzen
             Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
             mgvw_loading.setImage(i);
+            txt_log.setWrapText(true);
 
             Thread taskThread = new Thread( () -> {
 

@@ -6,9 +6,10 @@ CREATE TABLE IF NOT EXISTS "plugins" (
 );
 CREATE TABLE IF NOT EXISTS "targets" (
 	"target_id"	INTEGER NOT NULL,
-	"target"	TEXT NOT NULL UNIQUE,
-	"status"	TEXT UNIQUE,
-	PRIMARY KEY("target_id" AUTOINCREMENT)
+	"target"	TEXT NOT NULL ,
+	"status"	TEXT ,
+	PRIMARY KEY("target_id" AUTOINCREMENT),
+	UNIQUE ("target", "status")
 );
 CREATE TABLE IF NOT EXISTS "scans" (
 	"scan_id"	INTEGER NOT NULL,
