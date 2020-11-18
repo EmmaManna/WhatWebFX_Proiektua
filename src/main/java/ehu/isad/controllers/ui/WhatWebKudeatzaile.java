@@ -52,42 +52,54 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onClickScan(ActionEvent event) {
-        txt_log.setText("");
-        if(WhatWebKud.getInstantzia().jadaBilatuta(txt_url.getText())){
-            txt_log.setText("Jada ditugu datuak");
-            txt_url.setText("");
-        }
-        else{
-            //Irudi kargatzen
-            Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
-            mgvw_loading.setImage(i);
-            txt_log.setWrapText(true);
+        if(!txt_url.getText().equals("")){
+            txt_log.setText("");
+            if(WhatWebKud.getInstantzia().jadaBilatuta(txt_url.getText())){
+                txt_log.setText("Jada ditugu datuak");
+                txt_url.setText("");
+            }
+            else{
+                //Irudi kargatzen
+                Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
+                mgvw_loading.setImage(i);
+                mgvw_loading.setVisible(true);
+                txt_log.setWrapText(true);
 
-            Thread taskThread = new Thread( () -> {
+                Thread taskThread = new Thread( () -> {
 
-                String newLine = System.getProperty("line.separator");
-                final StringBuilder emaitza = new StringBuilder();
-                urlIrakurri(txt_url.getText()).forEach(line ->  {
-                    emaitza.append( line + newLine );
+                    String newLine = System.getProperty("line.separator");
+                    final StringBuilder emaitza = new StringBuilder();
+                    urlIrakurri(txt_url.getText()).forEach(line ->  {
+                        emaitza.append( line + newLine );
+                    });
+
+                    try {
+                        WhatWebKud.getInstantzia().insertIrakurri();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Platform.runLater( () -> {
+                        if(emaitza.toString().equals("")){
+                            txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
+                        }
+                        else{
+                            txt_log.setText(emaitza.toString());
+                        }
+                        mgvw_loading.setVisible(false);
+                        txt_url.setText("");
+
+                    } );
+
                 });
 
-                try {
-                    WhatWebKud.getInstantzia().insertIrakurri();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Platform.runLater( () -> {
-                    //txt_bilatu.setText(emaitza.toString());
-                   txt_log.setText(emaitza.toString());
-                    mgvw_loading.setVisible(false);
-                    txt_url.setText("");
-                } );
-
-            });
-
-            taskThread.start();
+                taskThread.start();
+            }
         }
+        else{
+            txt_log.setText("URL bat idatzi mesedez.");
+        }
+
     }
 
     public List<String> urlIrakurri(String url) {
