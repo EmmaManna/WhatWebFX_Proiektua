@@ -51,12 +51,18 @@ public class MainKudeatzaile {
     private AnchorPane anchorWhatWebo;
 
     @FXML
+    private AnchorPane anchorServer;
+
+    @FXML
     void onClick(ActionEvent event) {
         if(event.getSource()==btnCMS){
             anchorCMS.toFront();
         }
         else if (event.getSource()==btnWhatWeb){
             anchorWhatWebo.toFront();
+        }
+        else {
+            anchorServer.toFront();
         }
     }
 
