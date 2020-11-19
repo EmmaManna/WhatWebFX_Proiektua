@@ -1,4 +1,5 @@
 package ehu.isad.controllers.ui;
+import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
