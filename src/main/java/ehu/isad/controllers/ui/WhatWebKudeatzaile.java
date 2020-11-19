@@ -111,16 +111,18 @@ public class WhatWebKudeatzaile implements Initializable {
         try {
             String line;
             Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
+
+            String komandoa = "whatweb --log-sql="+Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
+
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
-            else komandoa="/usr/bin/"+komandoa;
+            //else komandoa="/usr/bin/"+komandoa;
 
             p = Runtime.getRuntime().exec(komandoa);
             p.waitFor();
 
-            System.out.println(p.getOutputStream());
+            System.out.println(komandoa);
 
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
