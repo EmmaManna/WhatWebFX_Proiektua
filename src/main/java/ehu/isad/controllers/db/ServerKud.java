@@ -1,6 +1,9 @@
 package ehu.isad.controllers.db;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ServerKud {
 
@@ -16,10 +19,9 @@ public class ServerKud {
 
 
     public ResultSet lortuTargets(){
-        String query="SELECT * FROM targets";
+        String query="SELECT target FROM targets";
 
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
         return dbKudeatzaile.execSQL(query);
     }
-
 }
