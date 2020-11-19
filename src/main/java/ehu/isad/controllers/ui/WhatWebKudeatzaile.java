@@ -4,7 +4,6 @@ import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
-import ehu.isad.WhatWebFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
