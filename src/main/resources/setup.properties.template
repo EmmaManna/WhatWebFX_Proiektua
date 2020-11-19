@@ -4,3 +4,4 @@ password=
 useSSL=FALSE
 serverTimezone=Europe/Madrid
 pathToImages=
+pathToInserts=

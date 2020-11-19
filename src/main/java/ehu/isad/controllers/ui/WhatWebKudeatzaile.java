@@ -115,8 +115,10 @@ public class WhatWebKudeatzaile implements Initializable {
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
+            //else komandoa="/usr/bin/"+komandoa;
 
             p = Runtime.getRuntime().exec(komandoa);
+            p.waitFor();
 
             System.out.println(p.getOutputStream());
 
@@ -131,6 +133,15 @@ public class WhatWebKudeatzaile implements Initializable {
         }
 
         return processes;
+    }
+
+
+
+    @FXML
+    void onKeyPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
+            onClickScan(new ActionEvent());
+        }
     }
 
 }

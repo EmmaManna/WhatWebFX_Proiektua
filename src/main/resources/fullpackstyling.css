@@ -91,15 +91,14 @@
 /* The increment and decrement button CSS class of scrollbar */
 .table-view .increment-button ,.table-view .decrement-button {
     -fx-background-color:transparent;
-    -fx-background-radius: 2em;
-
+    -fx-background-radius: 0;
 }
 
 /* The main scrollbar **track** CSS class  */
 .table-view .scroll-bar:horizontal .track,
 .table-view .scroll-bar:vertical .track{
     -fx-background-color: transparent;
-    -fx-border-color:derive(  #2D75E8,80%);
+    -fx-border-color:#E0E0E0;
     -fx-background-radius: 2em;
     -fx-border-radius:2em;
 }
@@ -107,11 +106,28 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
 .table-view .scroll-bar:horizontal .thumb,
 .table-view .scroll-bar:vertical .thumb {
-    -fx-background-color:derive( #2D75E8,90%);
+    -fx-background-color:#BEBEBE;
     -fx-background-insets: 2, 0, 0;
     -fx-background-radius: 2em;
 
 }
+
+.table-view .scroll-bar:horizontal .thumb:hover,
+.table-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color:#888888;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+.table-view .scroll-bar:horizontal .thumb:pressed,
+.table-view .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color:#787878;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
 
 /* chart properties */
 
