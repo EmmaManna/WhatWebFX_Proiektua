@@ -15,12 +15,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -50,11 +53,17 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        this.datuaKargatu();
+        cmsList = CmsKud.getInstantzia().lortuCmsak();
+        this.datuaKargatu(cmsList);
     }
 
     public CMSKudeatzaile() {
         System.out.println("CMS kud instantzia");
+    }
+
+    @FXML
+    void onTestuaAldatuDa(KeyEvent event) {
+        this.bilaketak(txt_bilatu.getText());
     }
 
     @Override
@@ -68,12 +77,22 @@ public class CMSKudeatzaile implements Initializable {
         clmn_version.setCellValueFactory(new PropertyValueFactory<>("version"));
 
         //add your data to the table here.
-        datuaKargatu();
+        cmsList = CmsKud.getInstantzia().lortuCmsak();
+        datuaKargatu(cmsList);
     }
 
-    public void datuaKargatu(){
-        cmsList = CmsKud.getInstantzia().lortuCmsak();
-        ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsList);
+    public void datuaKargatu(List<Cms> cmsLista){
+        ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
+    }
+
+    private void bilaketak(String testua){
+        List<Cms> cmsListLag = new ArrayList<Cms>();
+        for(int i=0; i < cmsList.size(); i++){
+            if(cmsList.get(i).getUrl().contains(testua)){
+                cmsListLag.add(cmsList.get(i));
+            }
+        }
+        this.datuaKargatu(cmsListLag);
     }
 }
