@@ -30,7 +30,6 @@ public class WhatWebKud {
         try(BufferedReader bufferedReader = new BufferedReader(fileR)){
             String lerroa;
             while((lerroa=bufferedReader.readLine())!=null){
-                System.out.println(lerroa);
                 dbKud.execSQL(lerroa.replace("IGNORE","OR IGNORE"));
             }
         }
