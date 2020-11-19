@@ -1,4 +1,4 @@
-package ehu.isad.model;
+package ehu.isad.utils;
 
 import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.controllers.ui.WhatWebKudeatzaile;
