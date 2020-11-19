@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.model.Bilaketa;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -46,6 +47,14 @@ public class WhatWebKudeatzaile implements Initializable {
     private ImageView mgvw_loading;
 
 
+    public TextField getTxt_url() {
+        return txt_url;
+    }
+
+    public void setTxt_url(TextField txt_url) {
+        this.txt_url = txt_url;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -70,33 +79,7 @@ public class WhatWebKudeatzaile implements Initializable {
                 mgvw_loading.setVisible(true);
                 txt_log.setWrapText(true);
 
-                Thread taskThread = new Thread( () -> {
-
-                    String newLine = System.getProperty("line.separator");
-                    final StringBuilder emaitza = new StringBuilder();
-                    urlIrakurri(txt_url.getText()).forEach(line ->  {
-                        emaitza.append( line + newLine );
-                    });
-
-                    try {
-                        WhatWebKud.getInstantzia().insertIrakurri();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Platform.runLater( () -> {
-                        if(emaitza.toString().equals("")){
-                            txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
-                        }
-                        else{
-                            txt_log.setText(emaitza.toString());
-                        }
-                        mgvw_loading.setVisible(false);
-                        txt_url.setText("");
-
-                    } );
-
-                });
+                Thread taskThread=hasieratuThread();
 
                 taskThread.start();
             }
@@ -104,37 +87,8 @@ public class WhatWebKudeatzaile implements Initializable {
         else{
             txt_log.setText("URL bat idatzi mesedez.");
         }
-
     }
 
-    public List<String> urlIrakurri(String url) {
-        List<String> processes = new LinkedList<String>();
-        try {
-            String line;
-            Process p=null;
-            String komandoa = "whatweb --colour='never' --log-sql=insertak.sql " + url;
-            if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                komandoa = "wsl " + komandoa;
-            }
-            else komandoa="/usr/bin/"+komandoa;
-
-            p = Runtime.getRuntime().exec(komandoa);
-            p.waitFor();
-
-            System.out.println(p.getOutputStream());
-
-            BufferedReader input =
-                    new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                processes.add(line);
-            }
-            input.close();
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-
-        return processes;
-    }
 
     @FXML
     void onKeyPressed(KeyEvent event) {
@@ -142,5 +96,40 @@ public class WhatWebKudeatzaile implements Initializable {
             onClickScan(new ActionEvent());
         }
     }
+
+    public Thread hasieratuThread(){
+
+        Thread taskThread = new Thread( () -> {
+
+            String newLine = System.getProperty("line.separator");
+            final StringBuilder emaitza = new StringBuilder();
+            Bilaketa bilaketa=new Bilaketa();
+
+            bilaketa.urlIrakurri(txt_url.getText()).forEach(line ->  {
+                emaitza.append( line + newLine );
+            });
+
+            try {
+                WhatWebKud.getInstantzia().insertIrakurri();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater( () -> {
+                if(emaitza.toString().equals("")){
+                    txt_log.setText("Bilatutako URL-a ez da existitzen. Bilatu beste bat mesedez.");
+                }
+                else{
+                    txt_log.setText(emaitza.toString());
+                }
+                mgvw_loading.setVisible(false);
+                txt_url.setText("");
+
+            } );
+
+        });
+        return taskThread;
+    }
+
 
 }

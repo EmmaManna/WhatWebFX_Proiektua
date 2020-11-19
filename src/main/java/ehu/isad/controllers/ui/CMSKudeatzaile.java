@@ -2,7 +2,9 @@ package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.model.Bilaketa;
 import ehu.isad.model.Cms;
+import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,8 @@ public class CMSKudeatzaile implements Initializable {
 
     private List<Cms> cmsList;
 
+    @FXML
+    private ImageView imgLoadin;
 
     @FXML
     private TextField txt_bilatu;
@@ -53,8 +57,48 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        cmsList = CmsKud.getInstantzia().lortuCmsak();
-        this.datuaKargatu(cmsList);
+        String emaitza=CmsKud.getInstantzia().lortuZerbitzaria(txt_bilatu.getText());
+
+        if(emaitza.isEmpty()){
+
+            StringBuilder builder=new StringBuilder();
+
+            imgLoadin.setImage(new Image(
+                            new File(
+                                    Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
+                    )
+            );
+            imgLoadin.setVisible(true);
+
+            Thread taskThread=new Thread(()->{
+                //sartu taulan datua
+                Bilaketa bilaketa=new Bilaketa();
+                bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
+                    builder.append( line + System.getProperty("line.separator"));
+                });
+
+                try {
+                    WhatWebKud.getInstantzia().insertIrakurri();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Platform.runLater(()->{
+                    //eguneratu taula
+                    cmsList = CmsKud.getInstantzia().lortuCmsak();
+                    this.datuaKargatu(cmsList);
+                    imgLoadin.setVisible(false);
+                });
+            });
+
+            taskThread.start();
+        }
+        else {
+            txt_bilatu.setText("");
+            System.out.println("jada URL bilatu duzu");
+        }
+
+
     }
 
     public CMSKudeatzaile() {

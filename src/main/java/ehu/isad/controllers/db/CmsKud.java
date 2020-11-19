@@ -60,5 +60,18 @@ public class CmsKud {
 
     }
 
+    public String lortuZerbitzaria(String server){
+        String query="SELECT target FROM targets WHERE target LIKE '%"+server+"%'";
+        DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
+        ResultSet resultSet=dbKudeatzaile.execSQL(query);
+
+        try{
+            return resultSet.getString("target");
+        } catch (SQLException throwables) {
+            return "";
+        }
+
+    }
+
 
 }
