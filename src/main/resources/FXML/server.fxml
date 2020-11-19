@@ -16,7 +16,7 @@
             <FontAwesomeIconView glyphName="SEARCH" size="15" />
          </graphic>
       </Label>
-      <TableView fx:id="tblServer" layoutX="227.0" layoutY="158.0" prefHeight="355.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css">
+      <TableView fx:id="tblServer" layoutX="164.0" layoutY="159.0" prefHeight="355.0" prefWidth="327.0" stylesheets="@../fullpackstyling.css">
          <columns>
             <TableColumn fx:id="zutabeServer" prefWidth="75.0" text="Server" />
          </columns>
