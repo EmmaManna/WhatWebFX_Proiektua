@@ -47,54 +47,24 @@ public class WhatWebKud {
 
             }
         }
-   //Utils.ezabatu();
+    Utils.ezabatu();
     }
 
     public Boolean jadaBilatuta(String url){
-        String query = "SELECT target FROM targets WHERE target= ? ";
+        String query = "SELECT target FROM targets WHERE target=? ";
         List<String> parametroak = new ArrayList<String>();
         parametroak.add(url);
         List<String> motak = new ArrayList<String>();
         motak.add("String");
-        ResultSet rs = this.eskaeraBabestua(query,parametroak,motak);
-        /*
-        String query = "SELECT target FROM targets WHERE target='"+url+"'";
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        ResultSet rs = dbKudeatzaile.execSQL(query);
-        */
+        List<Integer> likePos = new ArrayList<>();
+        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+
         try {
-           if (rs.next()) {
-               return true;
-            }
+            return rs.next();
+
         } catch(SQLException throwables){
             throwables.printStackTrace();
         }
         return false;
-    }
-
-
-
-    private ResultSet eskaeraBabestua(String query, List<String> parametroak, List<String> motak){
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        try {
-            PreparedStatement ps = dbKudeatzaile.conn.prepareStatement(query);
-            int kont = 0;
-            int zenb = 1;
-            while(kont < motak.size()){
-                if(motak.get(kont).equals("int")){
-                    ps.setInt(zenb,Integer.parseInt(parametroak.get(kont)));
-                }
-                else{
-                    ps.setString(zenb, parametroak.get(kont));
-                }
-                kont++;
-                zenb++;
-            }
-             return ps.executeQuery();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
     }
 }
