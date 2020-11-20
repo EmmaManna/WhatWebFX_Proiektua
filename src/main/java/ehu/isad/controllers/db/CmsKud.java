@@ -43,7 +43,8 @@ public class CmsKud {
 
     private void cmsKargatu(List<Cms> cmsak){
         for(int i=0; i<cmsak.size(); i++){
-            String query = "SELECT name, version FROM plugins P, scans S, targets T WHERE P.plugin_id=S.plugin_id AND S.plugin_id IN (1716,732,414,827,185,1342,1433,1706,1215,1568) AND T.target_id=S.target_id AND T.target LIKE '" + cmsak.get(i).getUrl()+"'" ;
+            String url = cmsak.get(i).getUrl().getText();
+            String query = "SELECT name, version FROM plugins P, scans S, targets T WHERE P.plugin_id=S.plugin_id AND S.plugin_id IN (1716,732,414,827,185,1342,1433,1706,1215,1568) AND T.target_id=S.target_id AND T.target LIKE '" + url+"'" ;
             DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
             ResultSet rs = dbKudeatzaile.execSQL(query);
             try {

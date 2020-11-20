@@ -1,19 +1,22 @@
 package ehu.isad.model;
 
+import javafx.scene.control.Hyperlink;
+
 public class Cms {
-    private String url;
+    private Hyperlink url;
     private String cms;
     private String version;
     private String lastUpdated;
 
     public Cms(String url, String cms, String version, String lastUpdated) {
-        this.url = url;
+        this.url = new Hyperlink(url);
         this.cms = cms;
         this.version = version;
         this.lastUpdated = lastUpdated;
     }
 
-    public String getUrl() {
+    public Hyperlink getUrl() {
+        //String text=this.url.getText();
         return url;
     }
 
@@ -30,7 +33,7 @@ public class Cms {
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = new Hyperlink(url);
     }
 
     public void setCms(String cms) {

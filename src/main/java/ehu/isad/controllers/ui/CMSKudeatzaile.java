@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -40,7 +41,7 @@ public class CMSKudeatzaile implements Initializable {
     private TableView<Cms> tbl_cms;
 
     @FXML
-    private TableColumn<Cms, String> clmn_url;
+    private TableColumn<Cms, Hyperlink> clmn_url;
 
     @FXML
     private TableColumn<Cms, String> clmn_cms;
@@ -50,6 +51,8 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     private TableColumn<Cms, String> clmn_lastupdate;
+
+
 
     @FXML
     void onClickAddURL(ActionEvent event) {
@@ -110,11 +113,14 @@ public class CMSKudeatzaile implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Nola bistaratu gelaxkak (zutabearen arabera)
         // Get value from property of UserAccount.
+
         tbl_cms.setEditable(true);
         clmn_cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
         clmn_lastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdated"));
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("url"));
         clmn_version.setCellValueFactory(new PropertyValueFactory<>("version"));
+
+
 
         //add your data to the table here.
         cmsList = CmsKud.getInstantzia().lortuCmsak();
@@ -127,12 +133,16 @@ public class CMSKudeatzaile implements Initializable {
     }
 
     private void bilaketak(String testua){
+        String url = "";
         List<Cms> cmsListLag = new ArrayList<Cms>();
         for(int i=0; i < cmsList.size(); i++){
-            if(cmsList.get(i).getUrl().contains(testua)){
+            url = cmsList.get(i).getUrl().getText();
+            if(url.contains(testua)){
                 cmsListLag.add(cmsList.get(i));
             }
         }
         this.datuaKargatu(cmsListLag);
     }
+
+
 }
