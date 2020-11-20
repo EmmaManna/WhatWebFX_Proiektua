@@ -1,5 +1,6 @@
 package ehu.isad.controllers.ui;
 
+import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.ServerKud;
 import ehu.isad.controllers.db.WhatWebKud;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,15 +8,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class ServerKudeatzaile {
+public class ServerKudeatzaile implements Initializable {
 
     @FXML
     private TableView<String> tblServer;
@@ -34,21 +39,9 @@ public class ServerKudeatzaile {
     }
 
     private ObservableList<String> kargatuLista(){
-        ObservableList<String> lista= FXCollections.observableArrayList();
-
         ServerKud serverKud=ServerKud.getInstantzia();
-        ResultSet resultSet=serverKud.lortuTargets();
-
-        try{
-            while (resultSet.next()){
-                lista.add(resultSet.getString("target"));
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-            return null;
-        }
-
+        List<String> targets = serverKud.lortuTargets();
+        ObservableList<String> lista= FXCollections.observableArrayList(targets);
         return lista;
     }
 
@@ -58,5 +51,8 @@ public class ServerKudeatzaile {
     }
 
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        hasieratu();
+    }
 }
