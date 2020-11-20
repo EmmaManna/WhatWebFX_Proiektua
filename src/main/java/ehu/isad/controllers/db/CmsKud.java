@@ -20,7 +20,7 @@ public class CmsKud {
 
     public List<Cms> lortuCmsak(){
 
-        String query = "SELECT target FROM targets";
+        String query = "SELECT target, lastUpdated FROM targets WHERE status=200";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
@@ -30,7 +30,7 @@ public class CmsKud {
                 String url = rs.getString("target");
                 String cms = "Ezezaguna";
                 String version =  "";
-                String lastUpdate =  "";
+                String lastUpdate =  rs.getString("lastUpdated");
                 emaitza.add(new Cms(url,cms,version,lastUpdate));
             }
             this.cmsKargatu(emaitza);
