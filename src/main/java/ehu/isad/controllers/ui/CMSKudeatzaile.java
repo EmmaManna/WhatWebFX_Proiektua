@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -119,6 +120,9 @@ public class CMSKudeatzaile implements Initializable {
         //add your data to the table here.
         cmsList = CmsKud.getInstantzia().lortuCmsak();
         datuaKargatu(cmsList);
+
+        //Taula hutsa dagoenean agertzen den mezua
+        tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
     }
 
     public void datuaKargatu(List<Cms> cmsLista){
