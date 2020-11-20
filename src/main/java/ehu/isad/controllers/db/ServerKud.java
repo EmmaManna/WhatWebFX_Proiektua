@@ -1,6 +1,11 @@
 package ehu.isad.controllers.db;
 
+import ehu.isad.model.Cms;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerKud {
 
@@ -15,11 +20,24 @@ public class ServerKud {
     }
 
 
-    public ResultSet lortuTargets(){
+    public List<String> lortuTargets(){
         String query="SELECT * FROM targets";
-
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
-        return dbKudeatzaile.execSQL(query);
+        ResultSet rs = dbKudeatzaile.execSQL(query);
+
+        List<String> lista = new ArrayList<>();
+
+        try{
+            while (rs.next()){
+                lista.add(rs.getString("target"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return lista;
     }
 
 }
