@@ -55,9 +55,9 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        String emaitza=CmsKud.getInstantzia().lortuZerbitzaria(txt_bilatu.getText());
+        Boolean emaitza=WhatWebKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
 
-        if(emaitza.isEmpty()){
+        if(!emaitza){
 
             StringBuilder builder=new StringBuilder();
 
