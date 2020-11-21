@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 public class CMSKudeatzaile implements Initializable {
 
     private List<Cms> cmsList;
+    private List<Cms> cmsListGuziak;
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
@@ -161,6 +162,7 @@ public class CMSKudeatzaile implements Initializable {
 
         //add your data to the table here.
         cmsList = CmsKud.getInstantzia().lortuCmsak();
+        cmsListGuziak=cmsList;
         datuaKargatu(cmsList);
 
         //Taula hutsa dagoenean agertzen den mezua
@@ -203,16 +205,17 @@ public class CMSKudeatzaile implements Initializable {
         List<Cms> cmsListLag = new ArrayList<Cms>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             String url = "";
-            for(int i=0; i < cmsList.size(); i++){
-                url = cmsList.get(i).getUrl().getText();
+            for(int i=0; i < cmsListGuziak.size(); i++){
+                url = cmsListGuziak.get(i).getUrl().getText();
                 if(CmsKud.getInstantzia().herrialdekoaDa(herrialdea.getString(),url,herrialdea.getModule())){
-                    cmsListLag.add(cmsList.get(i));
+                    cmsListLag.add(cmsListGuziak.get(i));
                 }
             }
         }
         else{
-            cmsListLag=cmsList;
+            cmsListLag=cmsListGuziak;
         }
+        cmsList = cmsListLag;
         this.datuaKargatu(cmsListLag);
     }
 }
