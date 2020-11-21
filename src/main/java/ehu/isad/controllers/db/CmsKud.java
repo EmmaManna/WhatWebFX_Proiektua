@@ -113,7 +113,6 @@ public class CmsKud {
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
         List<Herrialdea> emaitza = new ArrayList<>();
-        emaitza.add(new Herrialdea("NA","EZEZAGUNA"));
         try {
             while (rs.next()) {
                 String string = rs.getString("string");
@@ -130,9 +129,6 @@ public class CmsKud {
     public Boolean herrialdekoaDa(String string, String url, String module){
         String query = "SELECT * FROM scans S, targets T WHERE T.target_id=S.target_id AND T.status=200 AND string= ? AND target= ? AND module=?";
         List<String> parametroak = new ArrayList<String>();
-        if(string.equals("EZEZAGUNA")){
-            string="";
-        }
         parametroak.add(string);
         parametroak.add(url);
         parametroak.add(module);
