@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -54,5 +55,7 @@ public class ServerKudeatzaile implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hasieratu();
+        //Taula hutsa dagoenean agertzen den mezua
+        tblServer.setPlaceholder(new Label("Ez dago emaitzik"));
     }
 }
