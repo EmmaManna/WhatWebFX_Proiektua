@@ -3,4 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="WhatWebFX.main" options="--add-exports jdk.scripting.nashorn/jdk.nashorn.internal.objects=oinarria" />
+    </option>
+  </component>
 </project>

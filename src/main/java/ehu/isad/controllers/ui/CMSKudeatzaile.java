@@ -2,6 +2,7 @@ package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.model.HyperLinkCell;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.model.Cms;
 import ehu.isad.utils.Utils;
@@ -9,13 +10,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class CMSKudeatzaile implements Initializable {
 
@@ -42,7 +42,7 @@ public class CMSKudeatzaile implements Initializable {
     private TableView<Cms> tbl_cms;
 
     @FXML
-    private TableColumn<Cms, String> clmn_url;
+    private TableColumn<Cms, Hyperlink> clmn_url;
 
     @FXML
     private TableColumn<Cms, String> clmn_cms;
@@ -118,6 +118,41 @@ public class CMSKudeatzaile implements Initializable {
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("url"));
         clmn_version.setCellValueFactory(new PropertyValueFactory<>("version"));
 
+        clmn_url.setCellFactory(new HyperLinkCell());
+
+        /*
+        clmn_url.setCellFactory(tc -> {
+            TableCell<Cms, Hyperlink> cell = new TableCell<Cms, Hyperlink>();
+            cell.setOnMouseClicked(event -> {
+                 if (event.getClickCount() == 2 && (! cell.isEmpty()) ) {
+                    Hyperlink hl = cell.getItem();
+                    //Hyperlink hl = rowData.getUrl();
+                    System.out.println(hl);
+                }
+            });
+            return cell ;
+        });
+
+         */
+        /*
+        tbl_cms.setRowFactory( tr -> {
+            TableRow<Cms> row = new TableRow<>();
+            row.setOnMouseMoved(event -> {
+                if (! row.isEmpty()) {
+                    Cms rowData = row.getItem();
+                    Hyperlink hl = rowData.getUrl();
+                    //System.out.println(hl);
+                    hl.setOnAction(e -> {
+                        System.out.println(hl.toString());
+                    });
+                }
+            });
+            return row ;
+        });
+
+         */
+
+
         //add your data to the table here.
         cmsList = CmsKud.getInstantzia().lortuCmsak();
         datuaKargatu(cmsList);
@@ -130,8 +165,11 @@ public class CMSKudeatzaile implements Initializable {
 
     private void bilaketak(String testua){
         List<Cms> cmsListLag = new ArrayList<Cms>();
+        String url = "";
         for(int i=0; i < cmsList.size(); i++){
-            if(cmsList.get(i).getUrl().contains(testua)){
+            url = cmsList.get(i).getUrl().getText();
+            //url = cmsList.get(i).getUrl();
+            if(url.contains(testua)){
                 cmsListLag.add(cmsList.get(i));
             }
         }
