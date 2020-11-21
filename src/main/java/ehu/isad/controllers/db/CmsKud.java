@@ -1,6 +1,7 @@
 package ehu.isad.controllers.db;
 
 import ehu.isad.model.Cms;
+import ehu.isad.model.Herrialdea;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -106,9 +107,46 @@ public class CmsKud {
         return query;
     }
 
-    public void lortuHerrialdeak(){
+    public List<Herrialdea> lortuHerrialdeak(){
+        String query = "SELECT DISTINCT string, module FROM scans S, targets T WHERE NOT module='' AND NOT string='' AND T.target_id=S.target_id AND status=200";
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        ResultSet rs = dbKudeatzaile.execSQL(query);
 
+        List<Herrialdea> emaitza = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                String string = rs.getString("string");
+                String module = rs.getString("module");
+                emaitza.add(new Herrialdea(module,string));
+            }
+            emaitza.add(new Herrialdea("","IRAGAZKI GABE"));
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return emaitza;
     }
+
+    public Boolean herrialdekoaDa(String string, String url, String module){
+        String query = "SELECT * FROM scans S, targets T WHERE T.target_id=S.target_id AND T.status=200 AND string= ? AND target= ? AND module=?";
+        List<String> parametroak = new ArrayList<String>();
+        parametroak.add(string);
+        parametroak.add(url);
+        parametroak.add(module);
+        List<String> motak = new ArrayList<String>();
+        motak.add("String");
+        motak.add("String");
+        motak.add("String");
+        List<Integer> likePos = new ArrayList<>();
+        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+
+        try {
+          return rs.next();
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
 
 
 }
