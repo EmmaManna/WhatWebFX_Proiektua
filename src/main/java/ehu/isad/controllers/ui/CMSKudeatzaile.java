@@ -2,11 +2,14 @@ package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.model.Herrialdea;
 import ehu.isad.model.HyperLinkCell;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.model.Cms;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +34,9 @@ import java.util.ResourceBundle;
 public class CMSKudeatzaile implements Initializable {
 
     private List<Cms> cmsList;
+
+    @FXML
+    private ComboBox<Herrialdea> cmbx_herrialdeak;
 
     @FXML
     private ImageView imgLoadin;
@@ -159,7 +165,21 @@ public class CMSKudeatzaile implements Initializable {
 
         //Taula hutsa dagoenean agertzen den mezua
         tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
+
+        //comboBox-a kargatu
+        List<Herrialdea> herrialdeLista = CmsKud.getInstantzia().lortuHerrialdeak();
+        ObservableList<Herrialdea> herrialdeak = FXCollections.observableArrayList(herrialdeLista);
+        cmbx_herrialdeak.setItems(herrialdeak);
+
+        //Adding action to the choice box
+        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                });
+
     }
+
+
 
     public void datuaKargatu(List<Cms> cmsLista){
         ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsLista);
@@ -175,6 +195,23 @@ public class CMSKudeatzaile implements Initializable {
             if(url.contains(testua)){
                 cmsListLag.add(cmsList.get(i));
             }
+        }
+        this.datuaKargatu(cmsListLag);
+    }
+
+    private void iragazkia(Herrialdea herrialdea){
+        List<Cms> cmsListLag = new ArrayList<Cms>();
+        if(!herrialdea.getString().equals("IRAGAZKI GABE")){
+            String url = "";
+            for(int i=0; i < cmsList.size(); i++){
+                url = cmsList.get(i).getUrl().getText();
+                if(CmsKud.getInstantzia().herrialdekoaDa(herrialdea.getString(),url,herrialdea.getModule())){
+                    cmsListLag.add(cmsList.get(i));
+                }
+            }
+        }
+        else{
+            cmsListLag=cmsList;
         }
         this.datuaKargatu(cmsListLag);
     }
