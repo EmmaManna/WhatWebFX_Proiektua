@@ -132,8 +132,9 @@ public class CMSKudeatzaile implements Initializable {
             });
             return cell ;
         });
-
          */
+
+
         /*
         tbl_cms.setRowFactory( tr -> {
             TableRow<Cms> row = new TableRow<>();
