@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,52 +63,58 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        Boolean emaitza=WhatWebKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
+        if(!txt_bilatu.getText().equals("")){
+            Boolean emaitza=WhatWebKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
+            if(!emaitza){
 
-        if(!emaitza){
+                StringBuilder builder=new StringBuilder();
 
-            StringBuilder builder=new StringBuilder();
+                imgLoadin.setImage(new Image(
+                                new File(
+                                        Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
+                        )
+                );
+                imgLoadin.setVisible(true);
 
-            imgLoadin.setImage(new Image(
-                            new File(
-                                    Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                    )
-            );
-            imgLoadin.setVisible(true);
+                Thread taskThread=new Thread(()->{
+                    //sartu taulan datua
+                    Bilaketa bilaketa=new Bilaketa();
+                    bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
+                        builder.append( line + System.getProperty("line.separator"));
+                    });
 
-            Thread taskThread=new Thread(()->{
-                //sartu taulan datua
-                Bilaketa bilaketa=new Bilaketa();
-                bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
-                    builder.append( line + System.getProperty("line.separator"));
+                    try {
+                        WhatWebKud.getInstantzia().insertIrakurri();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Platform.runLater(()->{
+                        //eguneratu taula
+                        cmsList = CmsKud.getInstantzia().lortuCmsak();
+                        this.datuaKargatu(cmsList);
+                        imgLoadin.setVisible(false);
+                    });
                 });
 
-                try {
-                    WhatWebKud.getInstantzia().insertIrakurri();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Platform.runLater(()->{
-                    //eguneratu taula
-                    cmsList = CmsKud.getInstantzia().lortuCmsak();
-                    this.datuaKargatu(cmsList);
-                    imgLoadin.setVisible(false);
-                });
-            });
-
-            taskThread.start();
+                taskThread.start();
+            }
+            else {
+                txt_bilatu.setText("");
+                System.out.println("jada URL bilatu duzu");
+            }
         }
-        else {
-            txt_bilatu.setText("");
-            System.out.println("jada URL bilatu duzu");
+        else{
+            txt_bilatu.setText("URL bat sartu mesedez");
         }
-
-
     }
 
     public CMSKudeatzaile() {
 
+    }
+    @FXML
+    void onKlikEgin(MouseEvent event) {
+        txt_bilatu.setText("");
     }
 
     @FXML

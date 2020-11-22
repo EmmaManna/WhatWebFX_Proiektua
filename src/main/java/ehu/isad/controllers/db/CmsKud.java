@@ -38,7 +38,6 @@ public class CmsKud {
     }
 
     public List<Cms> lortuCmsak(){
-
         String query = "SELECT target, lastUpdated FROM targets WHERE status=200 ORDER BY lastUpdated DESC";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
@@ -98,10 +97,10 @@ public class CmsKud {
             query = "(";
             for(int i=0; i<cmsIzenak.size(); i++){
                 if(i+1==cmsIzenak.size()){
-                    query = query+"P.name='"+cmsIzenak.get(0)+"')";
+                    query = query+"P.name='"+cmsIzenak.get(i)+"')";
                 }
                 else
-                    query = query+"P.name='"+cmsIzenak.get(0)+"' OR ";
+                    query = query+"P.name='"+cmsIzenak.get(i)+"' OR ";
             }
         }
         return query;

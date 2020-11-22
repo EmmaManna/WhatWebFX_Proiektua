@@ -32,7 +32,7 @@
          <children>
             <ImageView fx:id="imgLoadin" fitHeight="31.0" fitWidth="44.0" layoutX="578.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
             <FontAwesomeIconView glyphName="SEARCH" layoutX="14.0" layoutY="53.0" size="19" />
-            <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" prefHeight="26.0" prefWidth="365.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+            <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" onMouseClicked="#onKlikEgin" prefHeight="26.0" prefWidth="365.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
             <ComboBox fx:id="cmbx_herrialdeak" layoutX="416.0" layoutY="34.0" prefHeight="26.0" prefWidth="120.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" visibleRowCount="5" />
             <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>

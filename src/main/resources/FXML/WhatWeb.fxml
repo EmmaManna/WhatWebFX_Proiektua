@@ -36,7 +36,7 @@
                      <children>
                         <Label layoutX="47.0" layoutY="42.0" text="URL:" />
                         <Label layoutX="47.0" layoutY="83.0" text="Log:" />
-                        <TextField fx:id="txt_url" layoutX="90.0" layoutY="37.0" onKeyPressed="#onKeyPressed" prefHeight="26.0" prefWidth="467.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
+                        <TextField fx:id="txt_url" layoutX="90.0" layoutY="37.0" onKeyPressed="#onKeyPressed" onMouseClicked="#onKlikEgin" prefHeight="26.0" prefWidth="467.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
                         <Button fx:id="btn_scan" layoutX="474.0" layoutY="358.0" mnemonicParsing="false" onAction="#onClickScan" prefHeight="28.0" prefWidth="80.0" stylesheets="@../fullpackstyling.css" text="Scan" textFill="WHITE">
                            <font>
                               <Font size="14.0" />

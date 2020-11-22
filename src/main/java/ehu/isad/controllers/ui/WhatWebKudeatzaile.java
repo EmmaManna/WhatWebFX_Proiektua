@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,11 +53,17 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        txt_log.setEditable(false);
     }
 
     public WhatWebKudeatzaile() {
 
+    }
+
+    @FXML
+    void onKlikEgin(MouseEvent event) {
+        txt_log.setText("");
+        txt_url.setText("");
     }
 
     @FXML
@@ -65,7 +72,6 @@ public class WhatWebKudeatzaile implements Initializable {
             txt_log.setText("");
             if(WhatWebKud.getInstantzia().jadaBilatuta(txt_url.getText())){
                 txt_log.setText("Jada ditugu datuak");
-                txt_url.setText("");
             }
             else{
                 //Irudi kargatzen
@@ -118,7 +124,6 @@ public class WhatWebKudeatzaile implements Initializable {
                     txt_log.setText(emaitza.toString());
                 }
                 mgvw_loading.setVisible(false);
-                txt_url.setText("");
 
             } );
 
