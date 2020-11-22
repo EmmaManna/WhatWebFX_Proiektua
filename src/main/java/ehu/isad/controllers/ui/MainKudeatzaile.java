@@ -76,8 +76,4 @@ public class MainKudeatzaile {
         anchorCMS.toFront();
     }
 
-    public void botoiaFocus(){
-        Platform.runLater(() -> btnCMS.requestFocus());
-    }
-
 }
