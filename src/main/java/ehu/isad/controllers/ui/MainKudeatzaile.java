@@ -1,6 +1,7 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
+import ehu.isad.controllers.db.ServerKud;
 import ehu.isad.controllers.db.WhatWebKud;
 import javafx.application.Platform;
 import javafx.css.Style;
@@ -27,8 +28,8 @@ public class MainKudeatzaile {
 
     private WhatWebFX mainApp;
 
-    public MainKudeatzaile() {
-        System.out.println("Main kud instantzia");
+    public MainKudeatzaile(WhatWebFX mainApp) {
+        this.mainApp = mainApp;
     }
 
     public void setMainApp(WhatWebFX main){
@@ -54,15 +55,26 @@ public class MainKudeatzaile {
     private AnchorPane anchorServer;
 
     @FXML
+    private CMSKudeatzaile cmsController ;
+
+    @FXML
+    private ServerKudeatzaile serverController ;
+
+    @FXML
+    private WhatWebKudeatzaile whatWebController ;
+
+    @FXML
     void onClick(ActionEvent event) {
         if(event.getSource()==btnCMS){
             anchorCMS.toFront();
+            cmsController.taulaEguneratu();
         }
         else if (event.getSource()==btnWhatWeb){
             anchorWhatWebo.toFront();
         }
         else {
             anchorServer.toFront();
+            serverController.hasieratu();
         }
     }
 

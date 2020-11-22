@@ -3,7 +3,9 @@
  */
 package ehu.isad;
 
+import ehu.isad.controllers.ui.CMSKudeatzaile;
 import ehu.isad.controllers.ui.MainKudeatzaile;
+import ehu.isad.controllers.ui.ServerKudeatzaile;
 import ehu.isad.controllers.ui.WhatWebKudeatzaile;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.fxml.FXML;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -28,6 +31,9 @@ public class WhatWebFX extends Application {
     private Scene sceneM;
 
     private MainKudeatzaile mainKud;
+    private CMSKudeatzaile cmsKud;
+    private ServerKudeatzaile serverKud;
+    private WhatWebKudeatzaile whatWebKud;
 
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
@@ -50,13 +56,37 @@ public class WhatWebFX extends Application {
 
     private void pantailakKargatu() throws IOException {
         //Pantaila nagusia kargatu
-        FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
-        mainUI = (Parent) loaderMain.load();
-        mainKud= loaderMain.getController();
-        mainKud.setMainApp(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
+        mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
+        cmsKud = new CMSKudeatzaile();
+        serverKud = new ServerKudeatzaile();
+        whatWebKud = new WhatWebKudeatzaile();
+
+        Callback<Class<?>, Object> controllerFactory = type -> {
+            if (type == MainKudeatzaile.class) {
+                return mainKud ;
+            } else if (type == CMSKudeatzaile.class) {
+                return cmsKud;
+            } else if (type == ServerKudeatzaile.class) {
+                return serverKud;
+            } else if(type == WhatWebKudeatzaile.class){
+                return whatWebKud;
+            } else {
+                // default behavior for controllerFactory:
+                try {
+                    return type.newInstance();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                    throw new RuntimeException(exc); // fatal, just bail...
+                }
+            }
+        };
+        loader.setControllerFactory(controllerFactory);
+        mainUI = (Parent) loader.load();
         mainKud.hasieratu();
         sceneM = new Scene(mainUI);
     }
+
 
     private void pantailaMugitu(){
         //Pantaila nagusia

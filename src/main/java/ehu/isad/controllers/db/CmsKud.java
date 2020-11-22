@@ -39,7 +39,7 @@ public class CmsKud {
 
     public List<Cms> lortuCmsak(){
 
-        String query = "SELECT target, lastUpdated FROM targets WHERE status=200";
+        String query = "SELECT target, lastUpdated FROM targets WHERE status=200 ORDER BY lastUpdated DESC";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
