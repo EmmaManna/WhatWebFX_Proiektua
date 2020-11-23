@@ -28,7 +28,7 @@
             </Label>
          </children>
       </Pane>
-      <TabPane layoutY="87.0" prefHeight="535.0" prefWidth="654.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="87.0" prefHeight="535.0" prefWidth="654.0" stylesheets="@../fullpackstyling.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="WhatWeb">
                <content>

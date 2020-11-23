@@ -81,6 +81,7 @@ public class MainKudeatzaile {
     @FXML
     void onClickClose(ActionEvent event) {
         mainApp.getStage().close();
+        System.exit(0);
     }
 
     @FXML
