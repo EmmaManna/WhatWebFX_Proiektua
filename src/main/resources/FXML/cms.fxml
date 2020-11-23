@@ -43,6 +43,7 @@
       </Pane>
       <TableView fx:id="tbl_cms" layoutX="14.0" layoutY="182.0" prefHeight="435.0" prefWidth="627.0" stylesheets="@../fullpackstyling.css">
         <columns>
+            <TableColumn fx:id="clmn_screenshot" prefWidth="75.0" text="Pantaila Kaptura" />
           <TableColumn fx:id="clmn_url" prefWidth="75.0" text="URL" />
           <TableColumn fx:id="clmn_cms" prefWidth="75.0" text="CMS" />
             <TableColumn fx:id="clmn_version" prefWidth="75.0" text="Version" />

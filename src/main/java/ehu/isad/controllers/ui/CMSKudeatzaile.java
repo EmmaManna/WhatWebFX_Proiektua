@@ -51,6 +51,9 @@ public class CMSKudeatzaile implements Initializable {
     private TableView<Cms> tbl_cms;
 
     @FXML
+    private TableColumn<Cms, Button> clmn_screenshot;
+
+    @FXML
     private TableColumn<Cms, Hyperlink> clmn_url;
 
     @FXML
@@ -207,11 +210,10 @@ public class CMSKudeatzaile implements Initializable {
     }
 
     private void addButtonToTable() {
-        TableColumn<Cms, Void> colBtn = new TableColumn("Pantaila Kaptura");
-        Callback<TableColumn<Cms, Void>, TableCell<Cms, Void>> cellFactory = new Callback<TableColumn<Cms, Void>, TableCell<Cms, Void>>() {
+        Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>> cellFactory = new Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>>() {
             @Override
-            public TableCell<Cms, Void> call(final TableColumn<Cms, Void> param) {
-                final TableCell<Cms, Void> cell = new TableCell<Cms, Void>() {
+            public TableCell<Cms, Button> call(final TableColumn<Cms, Button> param) {
+                final TableCell<Cms, Button> cell = new TableCell<Cms, Button>() {
 
                     private final Button btn = new Button("Action");
 
@@ -222,7 +224,7 @@ public class CMSKudeatzaile implements Initializable {
                     }
 
                     @Override
-                    public void updateItem(Void item, boolean empty) {
+                    public void updateItem(Button item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
@@ -235,7 +237,6 @@ public class CMSKudeatzaile implements Initializable {
             }
         };
 
-        colBtn.setCellFactory(cellFactory);
-        tbl_cms.getColumns().add(colBtn);
+        clmn_screenshot.setCellFactory(cellFactory);
     }
 }
