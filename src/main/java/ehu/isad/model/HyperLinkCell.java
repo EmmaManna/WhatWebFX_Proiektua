@@ -19,13 +19,16 @@ public class HyperLinkCell implements  Callback<TableColumn<Cms, Hyperlink>, Tab
                 if (item != null) {
                     item.setOnAction(e -> {
                         String url = item.getText();
-                        try {
-                            System.out.println( url );
-                            Desktop.getDesktop().browse(new URI(url));
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (URISyntaxException e1) {
-                            e1.printStackTrace();
+                        System.out.println( url );
+                        if( Desktop.isDesktopSupported() )
+                        {
+                            new Thread(() -> {
+                                try {
+                                    Desktop.getDesktop().browse( new URI(url) );
+                                } catch (IOException | URISyntaxException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }).start();
                         }
 
                     });
