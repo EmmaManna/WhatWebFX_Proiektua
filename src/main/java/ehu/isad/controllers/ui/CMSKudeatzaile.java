@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -124,6 +125,9 @@ public class CMSKudeatzaile implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Botoiak gehitu
+        addButtonToTable();
+
         // Nola bistaratu gelaxkak (zutabearen arabera)
         // Get value from property of UserAccount.
         tbl_cms.setEditable(true);
@@ -147,6 +151,7 @@ public class CMSKudeatzaile implements Initializable {
                 (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
                     this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
                 });
+
 
     }
 
@@ -199,5 +204,38 @@ public class CMSKudeatzaile implements Initializable {
         List<Herrialdea> herrialdeLista = CmsKud.getInstantzia().lortuHerrialdeak();
         ObservableList<Herrialdea> herrialdeak = FXCollections.observableArrayList(herrialdeLista);
         cmbx_herrialdeak.setItems(herrialdeak);
+    }
+
+    private void addButtonToTable() {
+        TableColumn<Cms, Void> colBtn = new TableColumn("Pantaila Kaptura");
+        Callback<TableColumn<Cms, Void>, TableCell<Cms, Void>> cellFactory = new Callback<TableColumn<Cms, Void>, TableCell<Cms, Void>>() {
+            @Override
+            public TableCell<Cms, Void> call(final TableColumn<Cms, Void> param) {
+                final TableCell<Cms, Void> cell = new TableCell<Cms, Void>() {
+
+                    private final Button btn = new Button("Action");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            System.out.println("CUCU");
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+        tbl_cms.getColumns().add(colBtn);
     }
 }
