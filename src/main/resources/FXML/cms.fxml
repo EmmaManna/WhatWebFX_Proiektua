@@ -43,15 +43,12 @@
       </Pane>
       <TableView fx:id="tbl_cms" layoutX="14.0" layoutY="182.0" prefHeight="435.0" prefWidth="627.0" stylesheets="@../fullpackstyling.css">
         <columns>
-            <TableColumn fx:id="clmn_screenshot" prefWidth="75.0" text="Pantaila Kaptura" />
-          <TableColumn fx:id="clmn_url" prefWidth="75.0" text="URL" />
-          <TableColumn fx:id="clmn_cms" prefWidth="75.0" text="CMS" />
-            <TableColumn fx:id="clmn_version" prefWidth="75.0" text="Version" />
-            <TableColumn fx:id="clmn_lastupdate" prefWidth="75.0" text="Last Updated" />
+            <TableColumn fx:id="clmn_screenshot" prefWidth="69.99997234344482" text="" />
+          <TableColumn fx:id="clmn_url" prefWidth="183.33332061767578" text="URL" />
+          <TableColumn fx:id="clmn_cms" prefWidth="137.3333740234375" text="CMS" />
+            <TableColumn fx:id="clmn_version" prefWidth="113.33334350585938" text="Bertsioa" />
+            <TableColumn fx:id="clmn_lastupdate" minWidth="0.0" prefWidth="126.6666259765625" text="Azken Eguneraketa" />
         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>

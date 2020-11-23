@@ -94,11 +94,11 @@
 }
 .screenshot:hover
 {
-    -fx-background-color : #c1bdbd ;
+    -fx-background-color : #b0abab;
 }
 .screenshot:pressed
 {
-    -fx-background-color : #c1bdbd ;
+    -fx-background-color : #b0abab ;
     border-left-color: #444141;
 }
 

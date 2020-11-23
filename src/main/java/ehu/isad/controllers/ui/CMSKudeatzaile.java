@@ -132,6 +132,7 @@ public class CMSKudeatzaile implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //Botoiak gehitu
         addButtonToTable();
+        clmn_screenshot.setStyle( "-fx-alignment: CENTER;");
 
         // Nola bistaratu gelaxkak (zutabearen arabera)
         // Get value from property of UserAccount.
@@ -220,7 +221,7 @@ public class CMSKudeatzaile implements Initializable {
                     private final Button btn = new Button("");
 
                     {
-                        btn.setStyle("-fx-background-color : #c1bdbd; border-left-color: #444141;");
+                        btn.getStyleClass().add("screenshot");
                         btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
                         btn.setOnAction((ActionEvent event) -> {
                             System.out.println("CUCU");
