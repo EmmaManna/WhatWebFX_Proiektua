@@ -88,6 +88,20 @@
     -fx-border-color: #444141;
 }
 
+.screenshot
+{
+    -fx-background-color : #c1bdbd;
+}
+.screenshot:hover
+{
+    -fx-background-color : #c1bdbd ;
+}
+.screenshot:pressed
+{
+    -fx-background-color : #c1bdbd ;
+    border-left-color: #444141;
+}
+
 
 .table-view .column-header,
 .table-view .column-header-background .filler {

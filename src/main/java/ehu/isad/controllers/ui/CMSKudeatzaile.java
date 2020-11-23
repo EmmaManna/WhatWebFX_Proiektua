@@ -1,5 +1,7 @@
 package ehu.isad.controllers.ui;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.model.Herrialdea;
@@ -215,9 +217,11 @@ public class CMSKudeatzaile implements Initializable {
             public TableCell<Cms, Button> call(final TableColumn<Cms, Button> param) {
                 final TableCell<Cms, Button> cell = new TableCell<Cms, Button>() {
 
-                    private final Button btn = new Button("Action");
+                    private final Button btn = new Button("");
 
                     {
+                        btn.setStyle("-fx-background-color : #c1bdbd; border-left-color: #444141;");
+                        btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
                         btn.setOnAction((ActionEvent event) -> {
                             System.out.println("CUCU");
                         });
