@@ -60,6 +60,34 @@
     -fx-border-color: #444141;
 }
 
+.minimize
+{
+
+    -fx-background-color: #c1bdbd;
+    -fx-background-radius: 22;
+    -fx-border-radius: 22;
+    -fx-border-width: 1.1;
+    -fx-border-color: #444141;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+
+
+}
+
+
+.minimize:hover
+{
+    -fx-text-fill: black;
+    -fx-background-color : #0272A6 ;
+    -fx-border-color: #444141;
+}
+.minimize:pressed
+{
+    -fx-text-fill: black;
+    -fx-background-color : #0272A6 ; ;
+    -fx-border-color: #444141;
+}
+
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
