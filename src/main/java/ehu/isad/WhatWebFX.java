@@ -7,6 +7,7 @@ import ehu.isad.controllers.ui.CMSKudeatzaile;
 import ehu.isad.controllers.ui.MainKudeatzaile;
 import ehu.isad.controllers.ui.ServerKudeatzaile;
 import ehu.isad.controllers.ui.WhatWebKudeatzaile;
+import ehu.isad.utils.Utils;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,12 +15,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.fxml.FXML;
 import javafx.util.Callback;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class WhatWebFX extends Application {
@@ -45,12 +49,15 @@ public class WhatWebFX extends Application {
         pantailakKargatu();
 
         stage.setTitle("WhatWebFX");
+        this.ikonoaJarri("");
         stage.initStyle(StageStyle.UNDECORATED);
 
         pantailaMugitu();
 
         stage.setScene(sceneM);
         stage.show();
+
+
     }
 
 
@@ -110,6 +117,18 @@ public class WhatWebFX extends Application {
 
     public Stage getStage() {
         return stage;
+    }
+
+    private void ikonoaJarri(String izena){
+        String path = Utils.lortuEzarpenak().getProperty("pathToImages")+izena+"icon.png";
+        try {
+            if(stage.getIcons().size()>0){
+                stage.getIcons().remove(0);
+            }
+            stage.getIcons().add(new Image(new FileInputStream(path)));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

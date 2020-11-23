@@ -83,6 +83,11 @@ public class MainKudeatzaile {
         mainApp.getStage().close();
     }
 
+    @FXML
+    void onClickMin(ActionEvent event) {
+        mainApp.getStage().setIconified(true);
+    }
+
 
     public void hasieratu(){
         anchorCMS.toFront();
