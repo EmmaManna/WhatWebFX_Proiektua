@@ -1,10 +1,6 @@
 package ehu.isad.controllers.ui;
 
-import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.ServerKud;
-import ehu.isad.controllers.db.WhatWebKud;
-import ehu.isad.model.Cms;
-import ehu.isad.model.Herrialdea;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,12 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;

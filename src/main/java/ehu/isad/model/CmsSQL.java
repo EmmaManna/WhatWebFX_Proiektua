@@ -2,14 +2,14 @@ package ehu.isad.model;
 
 import javafx.scene.control.Hyperlink;
 
-public class Cms {
+public class CmsSQL {
     //private String url;
     private Hyperlink url;
     private String cms;
     private String version;
     private String lastUpdated;
 
-    public Cms(String url, String cms, String version, String lastUpdated) {
+    public CmsSQL(String url, String cms, String version, String lastUpdated) {
         this.url = new Hyperlink(url);
         //this.url = url;
         this.cms = cms;

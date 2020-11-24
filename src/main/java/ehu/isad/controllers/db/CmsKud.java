@@ -1,6 +1,6 @@
 package ehu.isad.controllers.db;
 
-import ehu.isad.model.Cms;
+import ehu.isad.model.CmsSQL;
 import ehu.isad.model.Herrialdea;
 
 import java.sql.ResultSet;
@@ -37,19 +37,19 @@ public class CmsKud {
         cmsIzenak.add("TYPO3");
     }
 
-    public List<Cms> lortuCmsak(){
+    public List<CmsSQL> lortuCmsak(){
         String query = "SELECT target, lastUpdated FROM targets WHERE status=200 ORDER BY lastUpdated DESC";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
-        List<Cms> emaitza = new ArrayList<>();
+        List<CmsSQL> emaitza = new ArrayList<>();
         try {
             while (rs.next()) {
                 String url = rs.getString("target");
                 String cms = "Ezezaguna";
                 String version =  "";
                 String lastUpdate =  rs.getString("lastUpdated");
-                emaitza.add(new Cms(url,cms,version,lastUpdate));
+                emaitza.add(new CmsSQL(url,cms,version,lastUpdate));
             }
             this.cmsKargatu(emaitza);
 
@@ -60,7 +60,7 @@ public class CmsKud {
     }
 
 
-    private void cmsKargatu(List<Cms> cmsak){
+    private void cmsKargatu(List<CmsSQL> cmsak){
         for(int i=0; i<cmsak.size(); i++){
 
             String query = "SELECT name, version FROM plugins P, scans S, targets T WHERE P.plugin_id=S.plugin_id AND "+ this.cmsMotakJarri()+" AND T.target_id=S.target_id AND T.target LIKE ?";

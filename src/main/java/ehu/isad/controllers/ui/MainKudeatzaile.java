@@ -1,28 +1,11 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.WhatWebFX;
-import ehu.isad.controllers.db.ServerKud;
-import ehu.isad.controllers.db.WhatWebKud;
-import javafx.application.Platform;
-import javafx.css.Style;
+import ehu.isad.model.MongoErabiltzailea;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainKudeatzaile {
 
@@ -46,7 +29,10 @@ public class MainKudeatzaile {
     private Button btnWhatWeb;
 
     @FXML
-    private AnchorPane anchorCMS;
+    private AnchorPane anchorCMSSQL;
+
+    @FXML
+    private AnchorPane anchorCMSMongo;
 
     @FXML
     private AnchorPane anchorWhatWebo;
@@ -55,7 +41,10 @@ public class MainKudeatzaile {
     private AnchorPane anchorServer;
 
     @FXML
-    private CMSKudeatzaile cmsController ;
+    private CMSMongoKudeatzaile cmsMongoKudeatzaile ;
+
+    @FXML
+    private CMSSQLKudeatzaile cmssqlKudeatzaile ;
 
     @FXML
     private ServerKudeatzaile serverController ;
@@ -66,8 +55,15 @@ public class MainKudeatzaile {
     @FXML
     void onClick(ActionEvent event) {
         if(event.getSource()==btnCMS){
-            anchorCMS.toFront();
-            cmsController.taulaEguneratu();
+            MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
+            if (!erabiltzailea.getCollection().equals("")) {
+                anchorCMSMongo.toFront();
+                cmsMongoKudeatzaile.taulaEguneratu();
+            }
+            else{
+                anchorCMSSQL.toFront();
+                cmssqlKudeatzaile.taulaEguneratu();
+            }
         }
         else if (event.getSource()==btnWhatWeb){
             anchorWhatWebo.toFront();
@@ -91,7 +87,7 @@ public class MainKudeatzaile {
 
 
     public void hasieratu(){
-        anchorCMS.toFront();
+        anchorCMSSQL.toFront();
     }
 
 }

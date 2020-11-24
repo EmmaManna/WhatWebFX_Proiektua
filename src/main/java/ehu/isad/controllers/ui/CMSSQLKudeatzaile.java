@@ -5,18 +5,15 @@ import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.model.Herrialdea;
 import ehu.isad.model.HyperLinkCell;
 import ehu.isad.utils.Bilaketa;
-import ehu.isad.model.Cms;
+import ehu.isad.model.CmsSQL;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -32,10 +29,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class CMSKudeatzaile implements Initializable {
+public class CMSSQLKudeatzaile implements Initializable {
 
-    private List<Cms> cmsList;
-    private List<Cms> cmsListGuziak;
+    private List<CmsSQL> cmsList;
+    private List<CmsSQL> cmsListGuziak;
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
@@ -47,19 +44,19 @@ public class CMSKudeatzaile implements Initializable {
     private TextField txt_bilatu;
 
     @FXML
-    private TableView<Cms> tbl_cms;
+    private TableView<CmsSQL> tbl_cms;
 
     @FXML
-    private TableColumn<Cms, Hyperlink> clmn_url;
+    private TableColumn<CmsSQL, Hyperlink> clmn_url;
 
     @FXML
-    private TableColumn<Cms, String> clmn_cms;
+    private TableColumn<CmsSQL, String> clmn_cms;
 
     @FXML
-    private TableColumn<Cms, String> clmn_version;
+    private TableColumn<CmsSQL, String> clmn_version;
 
     @FXML
-    private TableColumn<Cms, String> clmn_lastupdate;
+    private TableColumn<CmsSQL, String> clmn_lastupdate;
 
     @FXML
     void onClickAddURL(ActionEvent event) {
@@ -109,9 +106,10 @@ public class CMSKudeatzaile implements Initializable {
         }
     }
 
-    public CMSKudeatzaile() {
+    public CMSSQLKudeatzaile() {
 
     }
+
     @FXML
     void onKlikEgin(MouseEvent event) {
         txt_bilatu.setText("");
@@ -152,13 +150,13 @@ public class CMSKudeatzaile implements Initializable {
 
 
 
-    public void datuaKargatu(List<Cms> cmsLista){
-        ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsLista);
+    public void datuaKargatu(List<CmsSQL> cmsLista){
+        ObservableList<CmsSQL> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 
     private void bilaketak(String testua){
-        List<Cms> cmsListLag = new ArrayList<Cms>();
+        List<CmsSQL> cmsListLag = new ArrayList<CmsSQL>();
         String url = "";
         for(int i=0; i < cmsList.size(); i++){
             url = cmsList.get(i).getUrl().getText();
@@ -171,7 +169,7 @@ public class CMSKudeatzaile implements Initializable {
     }
 
     private void iragazkia(Herrialdea herrialdea){
-        List<Cms> cmsListLag = new ArrayList<Cms>();
+        List<CmsSQL> cmsListLag = new ArrayList<CmsSQL>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             String url = "";
             for(int i=0; i < cmsListGuziak.size(); i++){

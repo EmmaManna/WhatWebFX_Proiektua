@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="625.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.CMSKudeatzaile">
+<AnchorPane prefHeight="625.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.CMSSQLKudeatzaile">
    <children>
       <Pane prefHeight="87.0" prefWidth="654.0" style="-fx-background-color: #7156DD;">
          <children>
@@ -21,7 +21,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="73.0" layoutY="36.0" text="CMS" textFill="WHITE">
+            <Label layoutX="73.0" layoutY="36.0" text="CMS SQLite" textFill="WHITE">
                <font>
                   <Font size="26.0" />
                </font>

@@ -62,14 +62,17 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane fx:id="anchorCMS" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
-         <fx:include fx:id="cms" source="cms.fxml" />
+      <AnchorPane fx:id="anchorCMSSQL" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
+         <fx:include fx:id="cmsSQL" source="cmsSQL.fxml" />
       </AnchorPane>
       <AnchorPane fx:id="anchorWhatWebo" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
          <fx:include fx:id="whatWeb" source="WhatWeb.fxml" />
       </AnchorPane>
       <AnchorPane fx:id="anchorServer" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
          <fx:include fx:id="server" source="server.fxml" />
+      </AnchorPane>
+      <AnchorPane fx:id="anchorCMSMongo" layoutX="284.0" layoutY="41.0" prefHeight="655.0" prefWidth="654.0" style="-fx-background-color: white;">
+         <fx:include fx:id="cmsMongo" source="cmsMongo.fxml" />
       </AnchorPane>
       <Button layoutX="915.0" layoutY="3.0" mnemonicParsing="false" onAction="#onClickClose" prefHeight="17.0" prefWidth="20.0" styleClass="cancel" stylesheets="@../fullpackstyling.css">
          <graphic>

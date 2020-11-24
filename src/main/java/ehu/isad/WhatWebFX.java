@@ -3,23 +3,17 @@
  */
 package ehu.isad;
 
-import ehu.isad.controllers.ui.CMSKudeatzaile;
-import ehu.isad.controllers.ui.MainKudeatzaile;
-import ehu.isad.controllers.ui.ServerKudeatzaile;
-import ehu.isad.controllers.ui.WhatWebKudeatzaile;
+import ehu.isad.controllers.ui.*;
 import ehu.isad.utils.Utils;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.fxml.FXML;
 import javafx.util.Callback;
 
 import java.io.FileInputStream;
@@ -35,9 +29,10 @@ public class WhatWebFX extends Application {
     private Scene sceneM;
 
     private MainKudeatzaile mainKud;
-    private CMSKudeatzaile cmsKud;
+    private CMSSQLKudeatzaile cmsSQLKud;
     private ServerKudeatzaile serverKud;
     private WhatWebKudeatzaile whatWebKud;
+    private CMSMongoKudeatzaile cmsMongoKud;
 
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
@@ -56,8 +51,6 @@ public class WhatWebFX extends Application {
 
         stage.setScene(sceneM);
         stage.show();
-
-
     }
 
 
@@ -65,19 +58,22 @@ public class WhatWebFX extends Application {
         //Pantaila nagusia kargatu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
         mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
-        cmsKud = new CMSKudeatzaile();
+        cmsSQLKud = new CMSSQLKudeatzaile();
         serverKud = new ServerKudeatzaile();
         whatWebKud = new WhatWebKudeatzaile();
+        cmsMongoKud = new CMSMongoKudeatzaile();
 
         Callback<Class<?>, Object> controllerFactory = type -> {
             if (type == MainKudeatzaile.class) {
                 return mainKud ;
-            } else if (type == CMSKudeatzaile.class) {
-                return cmsKud;
+            } else if (type == CMSSQLKudeatzaile.class) {
+                return cmsSQLKud;
             } else if (type == ServerKudeatzaile.class) {
                 return serverKud;
             } else if(type == WhatWebKudeatzaile.class){
                 return whatWebKud;
+            } else if (type == CMSMongoKudeatzaile.class){
+                return cmsMongoKud;
             } else {
                 // default behavior for controllerFactory:
                 try {
