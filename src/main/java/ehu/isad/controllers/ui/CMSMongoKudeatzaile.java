@@ -15,7 +15,7 @@ public class CMSMongoKudeatzaile implements Initializable {
 
 
     public void taulaEguneratu(){
-
+        System.out.println(":)");
     }
 
 

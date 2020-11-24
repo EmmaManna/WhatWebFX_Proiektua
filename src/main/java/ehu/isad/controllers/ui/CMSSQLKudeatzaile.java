@@ -58,6 +58,10 @@ public class CMSSQLKudeatzaile implements Initializable {
     @FXML
     private TableColumn<CmsSQL, String> clmn_lastupdate;
 
+    public CMSSQLKudeatzaile() {
+
+    }
+
     @FXML
     void onClickAddURL(ActionEvent event) {
         if(!txt_bilatu.getText().equals("")){
@@ -106,9 +110,6 @@ public class CMSSQLKudeatzaile implements Initializable {
         }
     }
 
-    public CMSSQLKudeatzaile() {
-
-    }
 
     @FXML
     void onKlikEgin(MouseEvent event) {
