@@ -1,20 +1,20 @@
 package ehu.isad.controllers.ui;
 import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +42,23 @@ public class WhatWebKudeatzaile implements Initializable {
     @FXML
     private ImageView mgvw_loading;
 
+    @FXML
+    private TextField txtUser;
+
+    @FXML
+    private PasswordField txtPass;
+
+    @FXML
+    private TextField txtCollection;
+
+    @FXML
+    private CheckBox checkBoxIkusi;
+
+    @FXML
+    private Pane lblAktibatuta;
+
+    public WhatWebKudeatzaile() { }
+
 
     public TextField getTxt_url() {
         return txt_url;
@@ -53,12 +70,10 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lblAktibatuta.setVisible(false);
         txt_log.setEditable(false);
     }
 
-    public WhatWebKudeatzaile() {
-
-    }
 
     @FXML
     void onKlikEgin(MouseEvent event) {
@@ -98,6 +113,29 @@ public class WhatWebKudeatzaile implements Initializable {
         }
     }
 
+
+    @FXML
+    void onCommit(ActionEvent event) {
+        if(!txtUser.getText().isBlank() && !txtPass.getText().isBlank() && !txtCollection.getText().isBlank()){
+            MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
+
+            erabiltzailea.setCollection(txtCollection.getText());
+            erabiltzailea.setIzena(txtUser.getText());
+            erabiltzailea.setPasahitza(txtPass.getText());
+            lblAktibatuta.setVisible(true);
+        }
+    }
+
+
+    @FXML
+    void onClickCheckBox(ActionEvent event) {
+        if (checkBoxIkusi.isSelected()){
+            txtPass.setVisible(true);
+        }
+        else txtPass.setVisible(false);
+    }
+
+
     public Thread hasieratuThread(){
 
         Thread taskThread = new Thread( () -> {
@@ -110,10 +148,13 @@ public class WhatWebKudeatzaile implements Initializable {
                 emaitza.append( line + newLine );
             });
 
-            try {
-                WhatWebKud.getInstantzia().insertIrakurri();
-            } catch (IOException e) {
-                e.printStackTrace();
+            //mongo ez badu erabiltzen sartu datu basean
+            if (MongoErabiltzailea.getInstance().getCollection().equals("")){
+                try {
+                    WhatWebKud.getInstantzia().insertIrakurri();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             Platform.runLater( () -> {
@@ -130,6 +171,5 @@ public class WhatWebKudeatzaile implements Initializable {
         });
         return taskThread;
     }
-
 
 }

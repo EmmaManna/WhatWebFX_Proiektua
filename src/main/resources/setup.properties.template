@@ -1,4 +1,5 @@
 dbpath=
+dbMongo=
 user=
 password=
 useSSL=FALSE

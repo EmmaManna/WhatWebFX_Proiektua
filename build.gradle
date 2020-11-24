@@ -41,6 +41,11 @@ javafx {
 
 
 dependencies {
+    implementation 'org.mongodb:mongo-java-driver:3.6+'
+
+
+    // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.7'
 
     //awsome font
     implementation fileTree(dir: 'libs', include: ['*.jar'])

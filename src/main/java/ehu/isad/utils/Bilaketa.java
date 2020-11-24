@@ -2,6 +2,7 @@ package ehu.isad.utils;
 
 import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.controllers.ui.WhatWebKudeatzaile;
+import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 
@@ -20,8 +21,18 @@ public class Bilaketa {
             String line;
             Process p=null;
 
-            String komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
+            String komandoa="";
 
+
+            //MongoDB erabiltzen du?
+            if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
+                komandoa="whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+            }
+            else {
+                komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
+            }
+
+            //sistema eragilea
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
                 komandoa = "wsl " + komandoa;
             }
