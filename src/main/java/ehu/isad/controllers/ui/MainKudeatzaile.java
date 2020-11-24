@@ -41,9 +41,9 @@ public class MainKudeatzaile {
     private AnchorPane anchorServer;
 
     private CMSMongoKudeatzaile mongoKudeatzaile=new CMSMongoKudeatzaile();
-    private CMSSQLKudeatzaile sqlKudeatzaile;
-    private ServerKudeatzaile serverKudeatzaile;
-    private WhatWebKudeatzaile whatWebKudeatzaile;
+    private CMSSQLKudeatzaile sqlKudeatzaile=new CMSSQLKudeatzaile();
+    private ServerKudeatzaile serverKudeatzaile=new ServerKudeatzaile();
+    private WhatWebKudeatzaile whatWebKudeatzaile=new WhatWebKudeatzaile();
 
 
 //    @FXML
