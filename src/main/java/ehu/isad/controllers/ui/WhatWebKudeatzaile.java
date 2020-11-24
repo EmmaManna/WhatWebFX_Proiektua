@@ -57,6 +57,9 @@ public class WhatWebKudeatzaile implements Initializable {
     @FXML
     private Pane lblAktibatuta;
 
+    @FXML
+    private TextField txtPassIkusgarri;
+
     public WhatWebKudeatzaile() { }
 
 
@@ -72,6 +75,7 @@ public class WhatWebKudeatzaile implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         lblAktibatuta.setVisible(false);
         txt_log.setEditable(false);
+        txtPass.toFront();
     }
 
 
@@ -130,9 +134,27 @@ public class WhatWebKudeatzaile implements Initializable {
     @FXML
     void onClickCheckBox(ActionEvent event) {
         if (checkBoxIkusi.isSelected()){
+            txtPassIkusgarri.setText(txtPass.getText());
+            txtPass.setVisible(false);
+        }
+        else {
+            txtPass.setText(txtPassIkusgarri.getText());
             txtPass.setVisible(true);
         }
-        else txtPass.setVisible(false);
+    }
+
+
+    @FXML
+    void onClickLogOut(ActionEvent event) {
+        MongoErabiltzailea.getInstance().setPasahitza("");
+        MongoErabiltzailea.getInstance().setIzena("");
+        MongoErabiltzailea.getInstance().setCollection("");
+
+        txtPass.setText("");
+        txtPassIkusgarri.setText("");
+        txtCollection.setText("");
+        txtUser.setText("");
+        lblAktibatuta.setVisible(false);
     }
 
 

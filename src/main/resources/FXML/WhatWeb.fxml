@@ -55,9 +55,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="txtUser" layoutX="242.0" layoutY="111.0" />
-                        <PasswordField fx:id="txtPass" layoutX="242.0" layoutY="164.0" />
-                        <TextField fx:id="txtCollection" layoutX="242.0" layoutY="215.0" />
+                        <TextField fx:id="txtUser" layoutX="242.0" layoutY="111.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+                        <PasswordField fx:id="txtPass" layoutX="242.0" layoutY="164.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+                        <TextField fx:id="txtCollection" layoutX="242.0" layoutY="215.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
                         <Label layoutX="193.0" layoutY="116.0" text="User:" />
                         <Label layoutX="162.0" layoutY="169.0" text="Password:" />
                         <Label layoutX="159.0" layoutY="220.0" text="Collection:" />
@@ -67,7 +67,7 @@
                               <FontAwesomeIconView glyphName="EYE" size="13" wrappingWidth="10.130859375" />
                            </graphic>
                         </CheckBox>
-                        <Pane fx:id="lblAktibatuta" layoutX="47.0" layoutY="285.0" prefHeight="69.0" prefWidth="296.0" style="-fx-background-color: #FFA07A; -fx-border-color: #FF0000;">
+                        <Pane fx:id="lblAktibatuta" layoutX="47.0" layoutY="285.0" prefHeight="69.0" prefWidth="296.0" style="-fx-background-color: #98FB98; -fx-border-color: #228B22;">
                            <children>
                               <Label layoutX="14.0" layoutY="27.0" text="Zorionak bro! MongoDB aktibatu duzu">
                                  <graphic>
@@ -76,6 +76,13 @@
                               </Label>
                            </children>
                         </Pane>
+                        <Button layoutX="578.0" layoutY="462.0" mnemonicParsing="false" onAction="#onClickLogOut" prefHeight="20.0" prefWidth="65.0" styleClass="cancel" stylesheets="@../fullpackstyling.css" text="LogOut" />
+                        <TextField fx:id="txtPassIkusgarri" layoutX="242.0" layoutY="164.0" style="-fx-border-color: #3F2B63; -fx-background-color: #ffffff;" />
+                        <ImageView fitHeight="125.0" fitWidth="200.0" layoutX="454.0">
+                           <image>
+                              <Image url="@../Images/mongoLogo.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>

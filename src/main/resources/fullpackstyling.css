@@ -213,3 +213,22 @@
     -fx-alignment: CENTER;
     -fx-text-fill: white;
 }
+
+
+/*CheckBox style*/
+.check-box .box{
+    -fx-background-color: white;
+    -fx-border-color:grey;
+    -fx-border-radius:3px;
+}
+
+.check-box:selected .mark {
+
+    -fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+    -fx-background-color:  #228B22;
+}
