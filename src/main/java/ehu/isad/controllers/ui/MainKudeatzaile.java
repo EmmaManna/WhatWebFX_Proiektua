@@ -42,13 +42,13 @@ public class MainKudeatzaile {
 
     @FXML
     private CMSMongoKudeatzaile cmsMongoController;
-//
+
     @FXML
     private CMSSQLKudeatzaile cmsSQLController ;
-//
+
     @FXML
     private ServerKudeatzaile serverController ;
-//
+
     @FXML
     private WhatWebKudeatzaile whatWebController ;
 

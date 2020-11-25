@@ -72,7 +72,7 @@ public class WhatWebFX extends Application {
                 return serverKud;
             } else if(type == WhatWebKudeatzaile.class){
                 return whatWebKud;
-            } else if (type == CMSMongoKudeatzaile.class){
+            } else if(type == CMSMongoKudeatzaile.class){
                 return cmsMongoKud;
             } else {
                 // default behavior for controllerFactory:
