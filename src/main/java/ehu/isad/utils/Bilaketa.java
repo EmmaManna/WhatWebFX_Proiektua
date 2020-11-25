@@ -7,6 +7,7 @@ import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -26,7 +27,7 @@ public class Bilaketa {
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
-                komandoa="whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+                komandoa="wsl whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
                 komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
@@ -37,7 +38,7 @@ public class Bilaketa {
                 komandoa = "wsl " + komandoa;
             }
 
-            p = Runtime.getRuntime().exec(komandoa);
+            p = Runtime.getRuntime().exec(komandoa,null, new File(Utils.lortuEzarpenak().getProperty("pathToExekutagarria")));
             p.waitFor();
 
             System.out.println(komandoa);
