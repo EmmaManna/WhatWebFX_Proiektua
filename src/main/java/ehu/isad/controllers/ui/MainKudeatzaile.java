@@ -40,23 +40,17 @@ public class MainKudeatzaile {
     @FXML
     private AnchorPane anchorServer;
 
+    @FXML
     private CMSMongoKudeatzaile cmsMongoController;
-    private CMSSQLKudeatzaile cmsSQLController;
-    private ServerKudeatzaile serverController;
-    private WhatWebKudeatzaile whatWebController;
-
-
-//    @FXML
-//    private CMSMongoKudeatzaile cmsMongo;
 //
-//    @FXML
-//    private CMSSQLKudeatzaile cmsSQL ;
+    @FXML
+    private CMSSQLKudeatzaile cmsSQLController ;
 //
-//    @FXML
-//    private ServerKudeatzaile server ;
+    @FXML
+    private ServerKudeatzaile serverController ;
 //
-//    @FXML
-//    private WhatWebKudeatzaile whatWeb ;
+    @FXML
+    private WhatWebKudeatzaile whatWebController ;
 
     @FXML
     void onClick(ActionEvent event) {
