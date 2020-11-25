@@ -38,7 +38,7 @@ public class Bilaketa {
                 komandoa = "wsl " + komandoa;
             }
 
-            p = Runtime.getRuntime().exec(komandoa,null, new File(Utils.lortuEzarpenak().getProperty("pathToExekutagarria")));
+            p = Runtime.getRuntime().exec(komandoa);
             p.waitFor();
 
             System.out.println(komandoa);
