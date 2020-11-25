@@ -40,10 +40,10 @@ public class MainKudeatzaile {
     @FXML
     private AnchorPane anchorServer;
 
-    private CMSMongoKudeatzaile mongoKudeatzaile=new CMSMongoKudeatzaile();
-    private CMSSQLKudeatzaile sqlKudeatzaile=new CMSSQLKudeatzaile();
-    private ServerKudeatzaile serverKudeatzaile=new ServerKudeatzaile();
-    private WhatWebKudeatzaile whatWebKudeatzaile=new WhatWebKudeatzaile();
+    private CMSMongoKudeatzaile cmsMongoController;
+    private CMSSQLKudeatzaile cmsSQLController;
+    private ServerKudeatzaile serverController;
+    private WhatWebKudeatzaile whatWebController;
 
 
 //    @FXML
@@ -64,11 +64,11 @@ public class MainKudeatzaile {
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
             if (!erabiltzailea.getCollection().equals("")) {
                 anchorCMSMongo.toFront();
-                mongoKudeatzaile.taulaEguneratu();
+                cmsMongoController.taulaEguneratu();
             }
             else{
                 anchorCMSSQL.toFront();
-                sqlKudeatzaile.taulaEguneratu();
+                cmsSQLController.taulaEguneratu();
             }
         }
         else if (event.getSource()==btnWhatWeb){
@@ -76,7 +76,7 @@ public class MainKudeatzaile {
         }
         else {
             anchorServer.toFront();
-            serverKudeatzaile.hasieratu();
+            serverController.hasieratu();
         }
     }
 
