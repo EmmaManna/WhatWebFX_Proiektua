@@ -27,7 +27,7 @@ public class Bilaketa {
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
-                komandoa="wsl whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+                komandoa="whatweb -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
                 komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
@@ -35,7 +35,7 @@ public class Bilaketa {
 
             //sistema eragilea
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                komandoa = "wsl " + komandoa;
+                komandoa = "wsl " +Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+ komandoa;
             }
 
             p = Runtime.getRuntime().exec(komandoa);
