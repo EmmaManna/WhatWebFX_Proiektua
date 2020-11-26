@@ -253,10 +253,22 @@ public class CMSKudeatzaile implements Initializable {
 
                         });
 
-                        btn.setOnMouseMoved((MouseEvent event) -> {
+                        //btn.setOnMouseMoved((MouseEvent event) -> {
                             //PopUp
 
 
+                       // });
+                        btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+                            if (newValue) {
+                                imgLoadin.setImage(new Image(
+                                                new File(
+                                                        Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
+                                        )
+                                );
+                                imgLoadin.setVisible(true);
+                            } else {
+                                imgLoadin.setVisible(false);
+                            }
                         });
 
 
