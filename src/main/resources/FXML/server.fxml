@@ -31,6 +31,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ComboBox fx:id="cmbx_servers" layoutX="496.0" layoutY="159.0" prefHeight="25.0" prefWidth="139.0" promptText="-- Zerbitzariak --" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
+      <ComboBox fx:id="cmbx_servers" layoutX="56.0" layoutY="534.0" prefHeight="26.0" prefWidth="157.0" promptText="-- Zerbitzariak --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
    </children>
 </AnchorPane>
