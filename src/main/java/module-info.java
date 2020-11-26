@@ -8,6 +8,7 @@ open module oinarria {
     requires javafx.controls;
     requires java.desktop;
     requires mongo.java.driver;
+    requires com.google.gson;
 
 
     exports ehu.isad;

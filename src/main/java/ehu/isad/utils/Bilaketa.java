@@ -1,14 +1,8 @@
 package ehu.isad.utils;
 
-import ehu.isad.controllers.db.WhatWebKud;
-import ehu.isad.controllers.ui.WhatWebKudeatzaile;
 import ehu.isad.model.MongoErabiltzailea;
-import ehu.isad.utils.Utils;
-import javafx.application.Platform;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +21,7 @@ public class Bilaketa {
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
-                komandoa="whatweb -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+                komandoa="whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
                 komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
@@ -35,7 +29,7 @@ public class Bilaketa {
 
             //sistema eragilea
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                komandoa = "wsl " +Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+ komandoa;
+                komandoa = "wsl " +Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+ komandoa+" -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb";
             }
 
             p = Runtime.getRuntime().exec(komandoa);

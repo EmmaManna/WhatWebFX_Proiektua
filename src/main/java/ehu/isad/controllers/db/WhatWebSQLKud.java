@@ -3,7 +3,6 @@ package ehu.isad.controllers.db;
 import ehu.isad.utils.Utils;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -13,15 +12,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class WhatWebKud {
+public class WhatWebSQLKud {
 
     // singleton patroia
-    private static WhatWebKud instantzia = new WhatWebKud();
+    private static WhatWebSQLKud instantzia = new WhatWebSQLKud();
 
-    private WhatWebKud(){
+    private WhatWebSQLKud(){
     }
 
-    public static WhatWebKud getInstantzia() {
+    public static WhatWebSQLKud getInstantzia() {
         return instantzia;
     }
 

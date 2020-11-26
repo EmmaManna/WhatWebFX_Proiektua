@@ -1,5 +1,5 @@
 package ehu.isad.controllers.ui;
-import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.controllers.db.WhatWebSQLKud;
 import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
@@ -89,7 +89,7 @@ public class WhatWebKudeatzaile implements Initializable {
     void onClickScan(ActionEvent event) {
         if(!txt_url.getText().equals("")){
             txt_log.setText("");
-            if(WhatWebKud.getInstantzia().jadaBilatuta(txt_url.getText())){
+            if(WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_url.getText())){
                 txt_log.setText("Jada ditugu datuak");
             }
             else{
@@ -173,7 +173,7 @@ public class WhatWebKudeatzaile implements Initializable {
             //mongo ez badu erabiltzen sartu datu basean
             if (MongoErabiltzailea.getInstance().getCollection().equals("")){
                 try {
-                    WhatWebKud.getInstantzia().insertIrakurri();
+                    WhatWebSQLKud.getInstantzia().insertIrakurri();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

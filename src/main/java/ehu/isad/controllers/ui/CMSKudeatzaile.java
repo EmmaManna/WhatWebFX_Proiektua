@@ -1,11 +1,11 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsKud;
-import ehu.isad.controllers.db.WhatWebKud;
-import ehu.isad.model.Herrialdea;
-import ehu.isad.model.HyperLinkCell;
+import ehu.isad.controllers.db.CmsMongoKud;
+import ehu.isad.controllers.db.WhatWebMongoKud;
+import ehu.isad.controllers.db.WhatWebSQLKud;
+import ehu.isad.model.*;
 import ehu.isad.utils.Bilaketa;
-import ehu.isad.model.Cms;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -33,6 +33,9 @@ public class CMSKudeatzaile implements Initializable {
 
     private List<Cms> cmsList;
     private List<Cms> cmsListGuziak;
+
+    private List<CmsMongo> cmsMongoList;
+    private List<CmsMongo> comMongoListGuztiak;
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
@@ -64,41 +67,21 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        if(!txt_bilatu.getText().equals("")){
-            Boolean emaitza=WhatWebKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
+        String mongoEgoera=MongoErabiltzailea.getInstance().getCollection();
+        if(!txt_bilatu.getText().equals("") && mongoEgoera.equals("")){
+            Boolean emaitza= WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
             if(!emaitza){
-
-                StringBuilder builder=new StringBuilder();
-
-                imgLoadin.setImage(new Image(
-                                new File(
-                                        Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                        )
-                );
-                imgLoadin.setVisible(true);
-
-                Thread taskThread=new Thread(()->{
-                    //sartu taulan datua
-                    Bilaketa bilaketa=new Bilaketa();
-                    bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
-                        builder.append( line + System.getProperty("line.separator"));
-                    });
-
-                    try {
-                        WhatWebKud.getInstantzia().insertIrakurri();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Platform.runLater(()->{
-                        //eguneratu taula
-                        cmsList = CmsKud.getInstantzia().lortuCmsak();
-                        this.datuaKargatu(cmsList);
-                        imgLoadin.setVisible(false);
-                    });
-                });
-
-                taskThread.start();
+                bilatuSQL();
+            }
+            else {
+                txt_bilatu.setText("");
+                System.out.println("jada URL bilatu duzu");
+            }
+        }
+        else if (!txt_bilatu.getText().equals("") && !mongoEgoera.equals("")){
+            Boolean emaitza= WhatWebMongoKud.getInstance().jadaBilatutaMongo(txt_bilatu.getText());
+            if (!emaitza){
+                bilatuMongo();
             }
             else {
                 txt_bilatu.setText("");
@@ -108,6 +91,66 @@ public class CMSKudeatzaile implements Initializable {
         else{
             txt_bilatu.setText("URL bat sartu mesedez");
         }
+    }
+
+    private void bilatuSQL(){
+        StringBuilder builder=new StringBuilder();
+
+        imgLoadin.setImage(new Image(
+            new File(
+                    Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
+            )
+        );
+        imgLoadin.setVisible(true);
+
+        Thread taskThread=new Thread(()->{
+            //sartu taulan datua
+            Bilaketa bilaketa=new Bilaketa();
+            bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
+                builder.append( line + System.getProperty("line.separator"));
+            });
+
+            try {
+                WhatWebSQLKud.getInstantzia().insertIrakurri();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(()->{
+                //eguneratu taula
+                cmsList = CmsKud.getInstantzia().lortuCmsak();
+                this.datuaKargatu(cmsList);
+                imgLoadin.setVisible(false);
+            });
+        });
+
+        taskThread.start();
+    }
+
+    private void bilatuMongo(){
+        StringBuilder builder=new StringBuilder();
+
+        imgLoadin.setImage(new Image(
+                        new File(
+                                Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
+                )
+        );
+        imgLoadin.setVisible(true);
+
+        Thread taskThread=new Thread(()->{
+            //sartu taulan datua
+            Bilaketa bilaketa=new Bilaketa();
+            bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
+                builder.append( line + System.getProperty("line.separator"));
+            });
+
+            Platform.runLater(()->{
+                cmsMongoList= CmsMongoKud.getInstance().lortuCmsMongo();
+                imgLoadin.setVisible(false);
+            });
+        });
+
+        taskThread.start();
     }
 
 
@@ -148,7 +191,6 @@ public class CMSKudeatzaile implements Initializable {
                 });
 
     }
-
 
 
     public void datuaKargatu(List<Cms> cmsLista){
