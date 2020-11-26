@@ -8,6 +8,7 @@ import ehu.isad.model.Herrialdea;
 import ehu.isad.model.HyperLinkCell;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.model.Cms;
+import ehu.isad.utils.Sarea;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -158,9 +159,20 @@ public class CMSKudeatzaile implements Initializable {
                     this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
                 });
 
-
     }
 
+    public class RemoveCell<T> extends TableCell<T, Void> {
+        private final Hyperlink link;
+
+        public RemoveCell() {
+            link = new Hyperlink("Remove");
+            link.setOnAction(evt -> {
+                // remove row item from tableview
+                getTableView().getItems().remove(getTableRow().getIndex());
+            });
+        }
+
+    }
 
 
     public void datuaKargatu(List<Cms> cmsLista){
@@ -224,7 +236,19 @@ public class CMSKudeatzaile implements Initializable {
                         btn.getStyleClass().add("screenshot");
                         btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
                         btn.setOnAction((ActionEvent event) -> {
-                            System.out.println("CUCU");
+                            imgLoadin.setVisible(true);
+                            Thread taskThread=new Thread(()->{
+                                Sarea s = new Sarea();
+                                TableRow<Cms> errenkada = getTableRow();
+                                s.irudiaLortu(errenkada.getItem().getUrl().getText());
+
+                                Platform.runLater(()->{
+                                    //eguneratu taula
+                                    imgLoadin.setVisible(false);
+                                });
+                            });
+                            taskThread.start();
+
                         });
                     }
 
