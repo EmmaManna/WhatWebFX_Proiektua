@@ -91,7 +91,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="156.0" layoutY="38.0" text="Bienvenido, te estabamos esperando" />
+                        <Label layoutX="156.0" layoutY="38.0" text="Bienvenido, te estábamos esperando" />
                         <ImageView fitHeight="342.0" fitWidth="611.0" layoutX="25.0" layoutY="101.0">
                            <image>
                               <Image url="@../argazki.jpg" />

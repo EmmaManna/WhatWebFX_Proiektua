@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class HyperLinkCell implements  Callback<TableColumn<CmsSQL, Hyperlink>, TableCell<CmsSQL, Hyperlink>> {
+public class HyperLinkCell implements  Callback<TableColumn<Cms, Hyperlink>, TableCell<Cms, Hyperlink>> {
     @Override
-    public TableCell<CmsSQL, Hyperlink> call(TableColumn<CmsSQL, Hyperlink> arg) {
-        TableCell<CmsSQL, Hyperlink> cell = new TableCell<CmsSQL, Hyperlink>() {
+    public TableCell<Cms, Hyperlink> call(TableColumn<Cms, Hyperlink> arg) {
+        TableCell<Cms, Hyperlink> cell = new TableCell<Cms, Hyperlink>() {
             @Override
             protected void updateItem(Hyperlink item, boolean empty) {
                 if (item != null) {

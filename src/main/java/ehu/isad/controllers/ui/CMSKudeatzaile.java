@@ -5,7 +5,7 @@ import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.model.Herrialdea;
 import ehu.isad.model.HyperLinkCell;
 import ehu.isad.utils.Bilaketa;
-import ehu.isad.model.CmsSQL;
+import ehu.isad.model.Cms;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -29,10 +29,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class CMSSQLKudeatzaile implements Initializable {
+public class CMSKudeatzaile implements Initializable {
 
-    private List<CmsSQL> cmsList;
-    private List<CmsSQL> cmsListGuziak;
+    private List<Cms> cmsList;
+    private List<Cms> cmsListGuziak;
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
@@ -44,21 +44,21 @@ public class CMSSQLKudeatzaile implements Initializable {
     private TextField txt_bilatu;
 
     @FXML
-    private TableView<CmsSQL> tbl_cms;
+    private TableView<Cms> tbl_cms;
 
     @FXML
-    private TableColumn<CmsSQL, Hyperlink> clmn_url;
+    private TableColumn<Cms, Hyperlink> clmn_url;
 
     @FXML
-    private TableColumn<CmsSQL, String> clmn_cms;
+    private TableColumn<Cms, String> clmn_cms;
 
     @FXML
-    private TableColumn<CmsSQL, String> clmn_version;
+    private TableColumn<Cms, String> clmn_version;
 
     @FXML
-    private TableColumn<CmsSQL, String> clmn_lastupdate;
+    private TableColumn<Cms, String> clmn_lastupdate;
 
-    public CMSSQLKudeatzaile() {
+    public CMSKudeatzaile() {
 
     }
 
@@ -151,13 +151,13 @@ public class CMSSQLKudeatzaile implements Initializable {
 
 
 
-    public void datuaKargatu(List<CmsSQL> cmsLista){
-        ObservableList<CmsSQL> cmsak = FXCollections.observableArrayList(cmsLista);
+    public void datuaKargatu(List<Cms> cmsLista){
+        ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 
     private void bilaketak(String testua){
-        List<CmsSQL> cmsListLag = new ArrayList<CmsSQL>();
+        List<Cms> cmsListLag = new ArrayList<Cms>();
         String url = "";
         for(int i=0; i < cmsList.size(); i++){
             url = cmsList.get(i).getUrl().getText();
@@ -170,7 +170,7 @@ public class CMSSQLKudeatzaile implements Initializable {
     }
 
     private void iragazkia(Herrialdea herrialdea){
-        List<CmsSQL> cmsListLag = new ArrayList<CmsSQL>();
+        List<Cms> cmsListLag = new ArrayList<Cms>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             String url = "";
             for(int i=0; i < cmsListGuziak.size(); i++){

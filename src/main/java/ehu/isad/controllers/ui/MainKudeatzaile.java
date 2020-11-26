@@ -41,10 +41,10 @@ public class MainKudeatzaile {
     private AnchorPane anchorServer;
 
     @FXML
-    private CMSMongoKudeatzaile cmsMongoController;
+    private CMSKudeatzaile cmsMongoController;
 
     @FXML
-    private CMSSQLKudeatzaile cmsSQLController ;
+    private CMSKudeatzaile cmsSQLController ;
 
     @FXML
     private ServerKudeatzaile serverController ;
@@ -57,6 +57,7 @@ public class MainKudeatzaile {
         if(event.getSource()==btnCMS){
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
             if (!erabiltzailea.getCollection().equals("")) {
+                mainApp.SQLMongoKargatu();
                 anchorCMSMongo.toFront();
                 cmsMongoController.taulaEguneratu();
             }

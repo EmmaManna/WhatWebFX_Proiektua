@@ -4,6 +4,7 @@
 package ehu.isad;
 
 import ehu.isad.controllers.ui.*;
+import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -29,10 +30,10 @@ public class WhatWebFX extends Application {
     private Scene sceneM;
 
     private MainKudeatzaile mainKud;
-    private CMSSQLKudeatzaile cmsSQLKud;
+    private CMSKudeatzaile cmsSQLKud;
     private ServerKudeatzaile serverKud;
     private WhatWebKudeatzaile whatWebKud;
-    private CMSMongoKudeatzaile cmsMongoKud;
+    private CMSKudeatzaile cmsMongoKud;
 
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
@@ -42,6 +43,7 @@ public class WhatWebFX extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         pantailakKargatu();
+        SQLMongoKargatu();
 
         stage.setTitle("WhatWebFX");
         this.ikonoaJarri("");
@@ -58,22 +60,16 @@ public class WhatWebFX extends Application {
         //Pantaila nagusia kargatu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
         mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
-        cmsSQLKud = new CMSSQLKudeatzaile();
         serverKud = new ServerKudeatzaile();
         whatWebKud = new WhatWebKudeatzaile();
-        cmsMongoKud = new CMSMongoKudeatzaile();
 
         Callback<Class<?>, Object> controllerFactory = type -> {
             if (type == MainKudeatzaile.class) {
                 return mainKud ;
-            } else if (type == CMSSQLKudeatzaile.class) {
-                return cmsSQLKud;
             } else if (type == ServerKudeatzaile.class) {
                 return serverKud;
             } else if(type == WhatWebKudeatzaile.class){
                 return whatWebKud;
-            } else if(type == CMSMongoKudeatzaile.class){
-                return cmsMongoKud;
             } else {
                 // default behavior for controllerFactory:
                 try {
@@ -88,6 +84,13 @@ public class WhatWebFX extends Application {
         mainUI = (Parent) loader.load();
         mainKud.hasieratu();
         sceneM = new Scene(mainUI);
+    }
+
+    public void SQLMongoKargatu(){
+        if (MongoErabiltzailea.getInstance().getCollection().equals("")){
+            cmsSQLKud = new CMSKudeatzaile();
+        }
+        else cmsMongoKud = new CMSKudeatzaile();
     }
 
 
