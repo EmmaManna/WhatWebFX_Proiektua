@@ -29,6 +29,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -250,6 +252,14 @@ public class CMSKudeatzaile implements Initializable {
                             taskThread.start();
 
                         });
+
+                        btn.setOnMouseMoved((MouseEvent event) -> {
+                            //PopUp
+
+
+                        });
+
+
                     }
 
                     @Override
