@@ -26,6 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.File;
@@ -260,13 +262,29 @@ public class CMSKudeatzaile implements Initializable {
                        // });
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
                             if (newValue) {
+                                Stage s = new Stage();
+
                                 imgLoadin.setImage(new Image(
                                                 new File(
                                                         Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
                                         )
                                 );
                                 imgLoadin.setVisible(true);
-                            } else {
+                                HBox hbox = new HBox(imgLoadin);
+                                Scene sc = new Scene(hbox,200,100);
+                                s.setScene(sc);
+                                s.show();
+                                btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
+                                    @Override
+                                    public void handle(MouseEvent event) {
+                                    double xOffset = event.getSceneX();
+                                    double yOffset = event.getSceneY();
+                                    s.setX(xOffset-event.getX());
+                                    s.setY(yOffset-event.getY());
+                                    }
+                                });
+                            }
+                                else {
                                 imgLoadin.setVisible(false);
                             }
                         });
