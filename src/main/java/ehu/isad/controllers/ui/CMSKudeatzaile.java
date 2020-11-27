@@ -48,6 +48,9 @@ public class CMSKudeatzaile implements Initializable {
     private List<Cms> cmsList;
     private List<Cms> cmsListGuziak;
     private WhatWebFX mainApp;
+    private ImageView screenshot = new ImageView();
+    private Popup pop = new Popup();
+
 
     public CMSKudeatzaile(WhatWebFX mainApp) {
         this.mainApp = mainApp;
@@ -58,9 +61,6 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     private ImageView imgLoadin;
-
-    @FXML
-    private ImageView screenshot = new ImageView();
 
     @FXML
     private TextField txt_bilatu;
@@ -146,6 +146,10 @@ public class CMSKudeatzaile implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Popup hasieratu
+        screenshot.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"nopreview.png").toURI().toString()));
+        pop.getContent().add(screenshot);
+
         //Botoiak gehitu
         addButtonToTable();
         clmn_screenshot.setStyle( "-fx-alignment: CENTER;");
@@ -246,25 +250,33 @@ public class CMSKudeatzaile implements Initializable {
                 final TableCell<Cms, Button> cell = new TableCell<Cms, Button>() {
 
                     private final Button btn = new Button("");
-
                     {
                         btn.getStyleClass().add("screenshot");
                         btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
+
                         btn.setOnAction((ActionEvent event) -> {
                             imgLoadin.setVisible(true);
                             Thread taskThread=new Thread(()->{
                                 Sarea s = new Sarea();
                                 TableRow<Cms> errenkada = getTableRow();
-                                s.irudiaLortu(errenkada.getItem().getUrl().getText());
+                                if(!irudiaBadago(ezabatuAtzekoa(errenkada.getItem().getUrl().getText()))){
+                                    s.irudiaLortu(errenkada.getItem().getUrl().getText());
 
-                                Platform.runLater(()->{
-                                    //eguneratu taula
-                                    imgLoadin.setVisible(false);
-                                });
+                                    Platform.runLater(()->{
+                                        //eguneratu taula
+                                        imgLoadin.setVisible(false);
+                                    });
+                                }
                             });
                             taskThread.start();
 
+                            //irudia bistaratu
+                            TableRow<Cms> errenkada = getTableRow();
+                            String irudia = errenkada.getItem().getUrl().getText();
+                            irudia = ezabatuAtzekoa(irudia);
+                            irudiaBistaratu(irudia, btn.getLayoutX(), btn.getLayoutY());
                         });
+
 
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
                             if (newValue) {
@@ -272,7 +284,7 @@ public class CMSKudeatzaile implements Initializable {
                                 String irudia = errenkada.getItem().getUrl().getText();
                                 irudiaPrestatu(irudia);
 
-                                Popup pop = new Popup();
+                                pop.getContent().remove(0);
                                 pop.setAnchorX(200);
                                 pop.setAnchorY(100);
                                 pop.getContent().add(screenshot);
@@ -285,13 +297,12 @@ public class CMSKudeatzaile implements Initializable {
                                         pop.setX(xOffset-event.getX()+35);
                                         pop.setY(yOffset-event.getY());
                                         pop.show(mainApp.getStage());
-
                                     }
                                 });
                             }
-                                else {
+                            else {
+                                pop.hide();
                                 screenshot.setVisible(false);
-
                             }
                         });
 
@@ -306,10 +317,18 @@ public class CMSKudeatzaile implements Initializable {
                         } else {
                             setGraphic(btn);
                         }
+
+
                     }
+
+
                 };
+
+
                 return cell;
             }
+
+
         };
 
         clmn_screenshot.setCellFactory(cellFactory);
@@ -326,13 +345,38 @@ public class CMSKudeatzaile implements Initializable {
 
     private void irudiaPrestatu(String irudia){
         irudia = ezabatuAtzekoa(irudia);
-        File f =  new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png");
-        if(!f.exists()){
+        if(!irudiaBadago(irudia)){
             irudia = "nopreview";
         }
         screenshot.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png").toURI().toString()));
         screenshot.setFitHeight(125);
         screenshot.setFitWidth(200);
         screenshot.setVisible(true);
+    }
+
+    private Boolean irudiaBadago(String irudia){
+        File f =  new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png");
+        return f.exists();
+    }
+
+    private void irudiaBistaratu(String irudia, double x, double y){
+        screenshot.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png").toURI().toString()));
+        screenshot.setFitHeight(525);
+        screenshot.setFitWidth(700);
+        screenshot.setVisible(true);
+
+        pop.getContent().remove(0);
+        pop.setAnchorX(700);
+        pop.setAnchorY(525);
+
+        pop.setX(x+500);
+        pop.setY(y+100);
+
+        pop.getContent().add(screenshot);
+        if(!pop.isShowing()){
+            pop.show(mainApp.getStage());
+        }
+        pop.setAutoHide(true);
+
     }
 }

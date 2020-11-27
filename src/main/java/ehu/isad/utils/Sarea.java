@@ -54,7 +54,7 @@ public class Sarea {
         String query = null;
         try {
             //query = String.format("page=%,d",
-                   // URLEncoder.encode(orrialdea, charset));
+            // URLEncoder.encode(orrialdea, charset));
 
             //GET eskaera
             URLConnection connection = new URL(url /*+ "?" + query*/).openConnection();
