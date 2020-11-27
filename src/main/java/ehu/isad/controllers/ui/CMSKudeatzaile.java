@@ -34,8 +34,6 @@ public class CMSKudeatzaile implements Initializable {
     private List<Cms> cmsList;
     private List<Cms> cmsListGuziak;
 
-    private List<CmsMongo> cmsMongoList;
-    private List<CmsMongo> comMongoListGuztiak;
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
@@ -61,27 +59,14 @@ public class CMSKudeatzaile implements Initializable {
     @FXML
     private TableColumn<Cms, String> clmn_lastupdate;
 
-    public CMSKudeatzaile() {
-
-    }
+    public CMSKudeatzaile() { }
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        String mongoEgoera=MongoErabiltzailea.getInstance().getCollection();
-        if(!txt_bilatu.getText().equals("") && mongoEgoera.equals("")){
+        if(!txt_bilatu.getText().equals("")){
             Boolean emaitza= WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
             if(!emaitza){
                 bilatuSQL();
-            }
-            else {
-                txt_bilatu.setText("");
-                System.out.println("jada URL bilatu duzu");
-            }
-        }
-        else if (!txt_bilatu.getText().equals("") && !mongoEgoera.equals("")){
-            Boolean emaitza= WhatWebMongoKud.getInstance().jadaBilatutaMongo(txt_bilatu.getText());
-            if (!emaitza){
-                bilatuMongo();
             }
             else {
                 txt_bilatu.setText("");
@@ -127,31 +112,6 @@ public class CMSKudeatzaile implements Initializable {
         taskThread.start();
     }
 
-    private void bilatuMongo(){
-        StringBuilder builder=new StringBuilder();
-
-        imgLoadin.setImage(new Image(
-                        new File(
-                                Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                )
-        );
-        imgLoadin.setVisible(true);
-
-        Thread taskThread=new Thread(()->{
-            //sartu taulan datua
-            Bilaketa bilaketa=new Bilaketa();
-            bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
-                builder.append( line + System.getProperty("line.separator"));
-            });
-
-            Platform.runLater(()->{
-                cmsMongoList= CmsMongoKud.getInstance().lortuCmsMongo();
-                imgLoadin.setVisible(false);
-            });
-        });
-
-        taskThread.start();
-    }
 
 
     @FXML

@@ -7,6 +7,7 @@ import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -28,7 +29,7 @@ public class WhatWebMongoKud {
 
 
     public Boolean jadaBilatutaMongo(String url){
-        List<String> lista= Arrays.asList();
+        List<String> lista=new ArrayList<>();
         //String query="db."+ MongoErabiltzailea.getInstance().getCollection()+".find({target:"+url+"})";
 
         try (MongoClient client = new MongoClient("localhost", 27017)) {
@@ -36,21 +37,21 @@ public class WhatWebMongoKud {
             MongoCollection<Document> collection=database.getCollection(MongoErabiltzailea.getInstance().getCollection());
 
             Document query = new Document();
-            Document agerpenak=new Document();
-            agerpenak.append("target","$target");
-            agerpenak.append("_id",0);
+            query.append("target",url);
 
-            Consumer<Document> processBlock = new Consumer<Document>() {
+            Document projection=new Document();
+            projection.append("target",1.0);
+            projection.append("_id",0.0);
+
+            Consumer<Document> konprobatu = new Consumer<Document>() {
 
                 @Override
                 public void accept(Document document) {
-                    if (!document.isEmpty()){
-                        lista.add(document.toJson());
-                    }
+                    lista.add(document.toJson());
                 }
             };
 
-            collection.find(query).projection(agerpenak).forEach(processBlock);
+            collection.find(query).projection(projection).forEach(konprobatu);
 
         }
         catch (MongoException e){

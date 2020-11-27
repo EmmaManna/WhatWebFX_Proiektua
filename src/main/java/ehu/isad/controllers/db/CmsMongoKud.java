@@ -11,6 +11,7 @@ import ehu.isad.utils.Utils;
 import org.bson.Document;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -28,7 +29,7 @@ public class CmsMongoKud {
     }
 
     public List<CmsMongo> lortuCmsMongo() {
-        List<CmsMongo> lista = Arrays.asList();
+        List<CmsMongo> lista = new ArrayList<>();
 
         try (MongoClient client = new MongoClient("localhost", 27017)) {
             MongoDatabase database = client.getDatabase(Utils.lortuEzarpenak().getProperty("dbMongo"));
@@ -46,6 +47,7 @@ public class CmsMongoKud {
             Consumer<Document> processBlock = new Consumer<Document>() {
                 @Override
                 public void accept(Document document) {
+                    System.out.println(document.toJson());
                     CmsMongo lag = new Gson().fromJson(document.toJson(), CmsMongo.class);
                     lista.add(lag);
                 }
@@ -59,4 +61,9 @@ public class CmsMongoKud {
         }
         return lista;
     }
+
+    /*
+    public Boolean herrialdekoaDa(String url){
+
+    }*/
 }

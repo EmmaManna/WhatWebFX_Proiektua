@@ -33,7 +33,7 @@ public class WhatWebFX extends Application {
     private CMSKudeatzaile cmsSQLKud;
     private ServerKudeatzaile serverKud;
     private WhatWebKudeatzaile whatWebKud;
-    private CMSKudeatzaile cmsMongoKud;
+    private CMSMongoKudeatzaile cmsMongoKud;
 
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
@@ -43,7 +43,6 @@ public class WhatWebFX extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         pantailakKargatu();
-        SQLMongoKargatu();
 
         stage.setTitle("WhatWebFX");
         this.ikonoaJarri("");
@@ -62,6 +61,9 @@ public class WhatWebFX extends Application {
         mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
         serverKud = new ServerKudeatzaile();
         whatWebKud = new WhatWebKudeatzaile();
+        cmsSQLKud = new CMSKudeatzaile();
+        cmsMongoKud = new CMSMongoKudeatzaile();
+
 
         Callback<Class<?>, Object> controllerFactory = type -> {
             if (type == MainKudeatzaile.class) {
@@ -70,7 +72,12 @@ public class WhatWebFX extends Application {
                 return serverKud;
             } else if(type == WhatWebKudeatzaile.class){
                 return whatWebKud;
-            } else {
+            } else if (type == CMSKudeatzaile.class){
+                return cmsSQLKud;
+            } else if (type == CMSMongoKudeatzaile.class){
+                return cmsMongoKud;
+            }
+            else {
                 // default behavior for controllerFactory:
                 try {
                     return type.newInstance();
@@ -85,14 +92,6 @@ public class WhatWebFX extends Application {
         mainKud.hasieratu();
         sceneM = new Scene(mainUI);
     }
-
-    public void SQLMongoKargatu(){
-        if (MongoErabiltzailea.getInstance().getCollection().equals("")){
-            cmsSQLKud = new CMSKudeatzaile();
-        }
-        else cmsMongoKud = new CMSKudeatzaile();
-    }
-
 
     private void pantailaMugitu(){
         //Pantaila nagusia
