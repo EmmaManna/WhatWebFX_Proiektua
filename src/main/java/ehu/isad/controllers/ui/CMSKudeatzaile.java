@@ -50,6 +50,7 @@ public class CMSKudeatzaile implements Initializable {
     private WhatWebFX mainApp;
     private ImageView screenshot = new ImageView();
     private Popup pop = new Popup();
+    private Boolean ikusten = false;
 
 
     public CMSKudeatzaile(WhatWebFX mainApp) {
@@ -271,6 +272,7 @@ public class CMSKudeatzaile implements Initializable {
                             taskThread.start();
 
                             //irudia bistaratu
+                            ikusten=true;
                             TableRow<Cms> errenkada = getTableRow();
                             String irudia = errenkada.getItem().getUrl().getText();
                             irudia = ezabatuAtzekoa(irudia);
@@ -279,7 +281,9 @@ public class CMSKudeatzaile implements Initializable {
 
 
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-                            if (newValue) {
+                            if (newValue&!pop.isShowing()) {
+                                ikusten = false;
+                                System.out.println(1);
                                 TableRow<Cms> errenkada = getTableRow();
                                 String irudia = errenkada.getItem().getUrl().getText();
                                 irudiaPrestatu(irudia);
@@ -292,15 +296,19 @@ public class CMSKudeatzaile implements Initializable {
                                 btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
                                     @Override
                                     public void handle(MouseEvent event) {
-                                        double xOffset = event.getScreenX();
-                                        double yOffset = event.getScreenY();
-                                        pop.setX(xOffset-event.getX()+35);
-                                        pop.setY(yOffset-event.getY());
-                                        pop.show(mainApp.getStage());
+                                        if(!ikusten){
+                                            System.out.println(2);
+                                            double xOffset = event.getScreenX();
+                                            double yOffset = event.getScreenY();
+                                            pop.setX(xOffset-event.getX()+35);
+                                            pop.setY(yOffset-event.getY());
+                                        }
                                     }
                                 });
+                                pop.show(mainApp.getStage());
                             }
                             else {
+                                System.out.println(3);
                                 pop.hide();
                                 screenshot.setVisible(false);
                             }
@@ -360,6 +368,9 @@ public class CMSKudeatzaile implements Initializable {
     }
 
     private void irudiaBistaratu(String irudia, double x, double y){
+        if(!irudiaBadago(irudia)){
+            irudia = "nopreview";
+        }
         screenshot.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png").toURI().toString()));
         screenshot.setFitHeight(525);
         screenshot.setFitWidth(700);
