@@ -56,8 +56,6 @@ public class WhatWebFX extends Application {
 
         stage.setScene(sceneM);
         stage.show();
-
-
     }
 
 
@@ -65,7 +63,7 @@ public class WhatWebFX extends Application {
         //Pantaila nagusia kargatu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
         mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
-        cmsKud = new CMSKudeatzaile();
+        cmsKud = new CMSKudeatzaile(this);
         serverKud = new ServerKudeatzaile();
         whatWebKud = new WhatWebKudeatzaile();
 
@@ -130,5 +128,6 @@ public class WhatWebFX extends Application {
             e.printStackTrace();
         }
     }
+
 
 }

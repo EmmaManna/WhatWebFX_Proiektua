@@ -2,6 +2,7 @@ package ehu.isad.controllers.ui;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import ehu.isad.WhatWebFX;
 import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.WhatWebKud;
 import ehu.isad.model.Herrialdea;
@@ -19,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -44,12 +47,20 @@ public class CMSKudeatzaile implements Initializable {
 
     private List<Cms> cmsList;
     private List<Cms> cmsListGuziak;
+    private WhatWebFX mainApp;
+
+    public CMSKudeatzaile(WhatWebFX mainApp) {
+        this.mainApp = mainApp;
+    }
 
     @FXML
     private ComboBox<Herrialdea> cmbx_herrialdeak;
 
     @FXML
     private ImageView imgLoadin;
+
+    @FXML
+    private ImageView screenshot = new ImageView();
 
     @FXML
     private TextField txt_bilatu;
@@ -255,37 +266,32 @@ public class CMSKudeatzaile implements Initializable {
 
                         });
 
-                        //btn.setOnMouseMoved((MouseEvent event) -> {
-                            //PopUp
-
-
-                       // });
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
                             if (newValue) {
-                                Stage s = new Stage();
+                                TableRow<Cms> errenkada = getTableRow();
+                                String irudia = errenkada.getItem().getUrl().getText();
+                                irudiaPrestatu(irudia);
 
-                                imgLoadin.setImage(new Image(
-                                                new File(
-                                                        Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                                        )
-                                );
-                                imgLoadin.setVisible(true);
-                                HBox hbox = new HBox(imgLoadin);
-                                Scene sc = new Scene(hbox,200,100);
-                                s.setScene(sc);
-                                s.show();
+                                Popup pop = new Popup();
+                                pop.setAnchorX(200);
+                                pop.setAnchorY(100);
+                                pop.getContent().add(screenshot);
+
                                 btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
                                     @Override
                                     public void handle(MouseEvent event) {
-                                    double xOffset = event.getSceneX();
-                                    double yOffset = event.getSceneY();
-                                    s.setX(xOffset-event.getX());
-                                    s.setY(yOffset-event.getY());
+                                        double xOffset = event.getScreenX();
+                                        double yOffset = event.getScreenY();
+                                        pop.setX(xOffset-event.getX()+35);
+                                        pop.setY(yOffset-event.getY());
+                                        pop.show(mainApp.getStage());
+
                                     }
                                 });
                             }
                                 else {
-                                imgLoadin.setVisible(false);
+                                screenshot.setVisible(false);
+
                             }
                         });
 
@@ -307,5 +313,26 @@ public class CMSKudeatzaile implements Initializable {
         };
 
         clmn_screenshot.setCellFactory(cellFactory);
+    }
+
+    private String ezabatuAtzekoa(String izena){
+        izena= izena.replace("https://","");
+        izena=izena.replace("http://","");
+        while(izena.contains("/")){
+            izena=izena.substring(0,izena.length()-1);
+        }
+        return izena;
+    }
+
+    private void irudiaPrestatu(String irudia){
+        irudia = ezabatuAtzekoa(irudia);
+        File f =  new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png");
+        if(!f.exists()){
+            irudia = "nopreview";
+        }
+        screenshot.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png").toURI().toString()));
+        screenshot.setFitHeight(125);
+        screenshot.setFitWidth(200);
+        screenshot.setVisible(true);
     }
 }
