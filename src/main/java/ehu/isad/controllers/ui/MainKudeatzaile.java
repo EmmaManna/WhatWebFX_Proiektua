@@ -58,6 +58,7 @@ public class MainKudeatzaile {
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
             if (!erabiltzailea.getCollection().equals("")) {
                 anchorCMSMongo.toFront();
+                cmsMongoController.hasieratu();
                 cmsMongoController.taulaEguneratu();
             }
             else{

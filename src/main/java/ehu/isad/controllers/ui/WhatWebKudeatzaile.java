@@ -120,7 +120,7 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onCommit(ActionEvent event) {
-        if(!txtUser.getText().isBlank() && !txtPass.getText().isBlank() && !txtCollection.getText().isBlank()){
+        if(!txtCollection.getText().isBlank()){
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
 
             erabiltzailea.setCollection(txtCollection.getText());

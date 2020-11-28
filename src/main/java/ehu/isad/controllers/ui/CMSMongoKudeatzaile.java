@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CMSMongoKudeatzaile implements Initializable {
+public class CMSMongoKudeatzaile {
 
     private List<CmsMongo> cmsMongoList;
     private List<CmsMongo> cmsMongoListGuztiak;
@@ -55,8 +55,7 @@ public class CMSMongoKudeatzaile implements Initializable {
     @FXML
     private TableColumn<CmsMongo, String> clmn_version;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void hasieratu(){
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
         clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
 
@@ -64,15 +63,12 @@ public class CMSMongoKudeatzaile implements Initializable {
         //Taula hutsa dagoenean agertzen den mezua
         tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
 
-        //comboBox-a kargatu
-//        this.comboBoxKargatu();
-//
-//        //Adding action to the choice box
-//        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
-//                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-//                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
-//                });
-//
+        //Adding action to the choice box
+        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                });
+
 
     }
 
@@ -108,11 +104,11 @@ public class CMSMongoKudeatzaile implements Initializable {
         for(int i=0; i < cmsMongoList.size(); i++){
             url = cmsMongoList.get(i).getTarget();
             //url = cmsList.get(i).getUrl();
-            if(url.contains(testua)){
+            if(url.contains(cmsMongoList.get(i).getTarget())){
                 cmsListLag.add(cmsMongoList.get(i));
             }
         }
-//        this.datuaKargatu(cmsListLag);
+        this.datuaKargatu(cmsListLag);
     }
 
 
@@ -147,32 +143,26 @@ public class CMSMongoKudeatzaile implements Initializable {
 
 
     private void comboBoxKargatu(){
-        List<Herrialdea> herrialdeLista = CmsKud.getInstantzia().lortuHerrialdeak();
+        List<Herrialdea> herrialdeLista = CmsMongoKud.getInstance().lortuHerrialdeak();
         ObservableList<Herrialdea> herrialdeak = FXCollections.observableArrayList(herrialdeLista);
         cmbx_herrialdeak.setItems(herrialdeak);
     }
 
-    /*
+
     private void iragazkia(Herrialdea herrialdea){
         List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
-            String url = "";
-            for(int i=0; i < cmsListLag.size(); i++){
-                url = cmsListLag.get(i).getTarget();
-                if(CmsMongoKud.getInstance().herrialdekoaDa(url)){
-                    cmsListLag.add(cmsListLag.get(i));
-                }
-            }
+            cmsListLag=CmsMongoKud.getInstance().herrialdekoaDa(herrialdea.getString());
         }
         else{
-            cmsListLag=cmsListLag;
+            cmsListLag=cmsMongoListGuztiak;
         }
         cmsMongoList = cmsListLag;
         this.datuaKargatu(cmsListLag);
     }
 
 
-     */
+
 
     public void datuaKargatu(List<CmsMongo> cmsLista){
         ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsMongoList);
@@ -180,6 +170,8 @@ public class CMSMongoKudeatzaile implements Initializable {
     }
 
     public void taulaEguneratu(){
+
+
         cmsMongoList=CmsMongoKud.getInstance().lortuCmsMongo();
         cmsMongoListGuztiak=cmsMongoList;
         datuaKargatu(cmsMongoList);
