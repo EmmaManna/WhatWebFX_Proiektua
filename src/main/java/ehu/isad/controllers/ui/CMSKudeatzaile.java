@@ -256,34 +256,34 @@ public class CMSKudeatzaile implements Initializable {
                         btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
 
                         btn.setOnAction((ActionEvent event) -> {
+                            pop.hide();
                             imgLoadin.setVisible(true);
                             Thread taskThread=new Thread(()->{
                                 Sarea s = new Sarea();
                                 TableRow<Cms> errenkada = getTableRow();
-                                if(!irudiaBadago(ezabatuAtzekoa(errenkada.getItem().getUrl().getText()))){
+                                if(!irudiaBadago(ezabatuAtzekoa(errenkada.getItem().getUrl().getText()))) {
                                     s.irudiaLortu(errenkada.getItem().getUrl().getText());
-
+                                }
                                     Platform.runLater(()->{
                                         //eguneratu taula
                                         imgLoadin.setVisible(false);
+                                        //irudia bistaratu
+                                        ikusten=true;
+                                        //TableRow<Cms> errenkada = getTableRow();
+                                        String irudia = errenkada.getItem().getUrl().getText();
+                                        irudia = ezabatuAtzekoa(irudia);
+                                        irudiaBistaratu(irudia, btn.getLayoutX(), btn.getLayoutY());
                                     });
-                                }
+
                             });
                             taskThread.start();
 
-                            //irudia bistaratu
-                            ikusten=true;
-                            TableRow<Cms> errenkada = getTableRow();
-                            String irudia = errenkada.getItem().getUrl().getText();
-                            irudia = ezabatuAtzekoa(irudia);
-                            irudiaBistaratu(irudia, btn.getLayoutX(), btn.getLayoutY());
                         });
 
 
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
                             if (newValue&!pop.isShowing()) {
                                 ikusten = false;
-                                System.out.println(1);
                                 TableRow<Cms> errenkada = getTableRow();
                                 String irudia = errenkada.getItem().getUrl().getText();
                                 irudiaPrestatu(irudia);
@@ -297,7 +297,6 @@ public class CMSKudeatzaile implements Initializable {
                                     @Override
                                     public void handle(MouseEvent event) {
                                         if(!ikusten){
-                                            System.out.println(2);
                                             double xOffset = event.getScreenX();
                                             double yOffset = event.getScreenY();
                                             pop.setX(xOffset-event.getX()+35);
@@ -308,7 +307,6 @@ public class CMSKudeatzaile implements Initializable {
                                 pop.show(mainApp.getStage());
                             }
                             else {
-                                System.out.println(3);
                                 pop.hide();
                                 screenshot.setVisible(false);
                             }
