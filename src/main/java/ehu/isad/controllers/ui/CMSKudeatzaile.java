@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -272,7 +273,8 @@ public class CMSKudeatzaile implements Initializable {
                                         //TableRow<Cms> errenkada = getTableRow();
                                         String irudia = errenkada.getItem().getUrl().getText();
                                         irudia = ezabatuAtzekoa(irudia);
-                                        irudiaBistaratu(irudia, btn.getLayoutX(), btn.getLayoutY());
+                                        Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+                                        irudiaBistaratu(irudia, bounds.getCenterX(), bounds.getCenterY());
                                     });
 
                             });
@@ -378,8 +380,12 @@ public class CMSKudeatzaile implements Initializable {
         pop.setAnchorX(700);
         pop.setAnchorY(525);
 
+        System.out.println(x);
+
         pop.setX(x+500);
         pop.setY(y+100);
+
+        System.out.println(pop.getX());
 
         pop.getContent().add(screenshot);
         if(!pop.isShowing()){
