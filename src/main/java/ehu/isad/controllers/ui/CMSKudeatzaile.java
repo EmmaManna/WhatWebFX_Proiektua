@@ -274,7 +274,7 @@ public class CMSKudeatzaile implements Initializable {
                                         String irudia = errenkada.getItem().getUrl().getText();
                                         irudia = ezabatuAtzekoa(irudia);
                                         Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
-                                        irudiaBistaratu(irudia, bounds.getCenterX(), bounds.getCenterY());
+                                        irudiaBistaratu(irudia, bounds.getMinX(), bounds.getMinY());
                                     });
 
                             });
