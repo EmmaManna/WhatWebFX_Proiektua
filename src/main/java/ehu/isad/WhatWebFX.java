@@ -61,7 +61,7 @@ public class WhatWebFX extends Application {
         mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
         serverKud = new ServerKudeatzaile();
         whatWebKud = new WhatWebKudeatzaile();
-        cmsSQLKud = new CMSKudeatzaile();
+        cmsSQLKud = new CMSKudeatzaile(this);
         cmsMongoKud = new CMSMongoKudeatzaile();
 
 

@@ -1,7 +1,7 @@
 package ehu.isad.utils;
 
 import ehu.isad.controllers.db.CmsKud;
-import ehu.isad.controllers.db.WhatWebKud;
+import ehu.isad.controllers.db.WhatWebSQLKud;
 import javafx.application.Platform;
 
 import javax.imageio.ImageIO;
