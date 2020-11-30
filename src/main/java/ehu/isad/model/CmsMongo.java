@@ -1,11 +1,13 @@
 package ehu.isad.model;
 
+import javafx.scene.control.Hyperlink;
+
 import java.util.Arrays;
 
 public class CmsMongo {
     private String target;
-
     private Plugins plugins;
+
 
     public class Plugins{
         private MetaGenerator MetaGenerator;

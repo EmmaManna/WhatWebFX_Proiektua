@@ -9,6 +9,7 @@ import ehu.isad.model.CmsMongo;
 import ehu.isad.model.Herrialdea;
 import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
+import javafx.scene.control.Hyperlink;
 import org.bson.Document;
 import com.google.gson.Gson;
 
@@ -50,6 +51,7 @@ public class CmsMongoKud {
                 public void accept(Document document) {
                     System.out.println(document.toJson());
                     CmsMongo lag = new Gson().fromJson(document.toJson(), CmsMongo.class);
+                    //lag.setTargetLink(new Hyperlink(lag.getTarget()));
                     lista.add(lag);
                 }
             };
@@ -86,6 +88,7 @@ public class CmsMongoKud {
                 @Override
                 public void accept(Document document) {
                     var lag=new Gson().fromJson(document.toJson(),CmsMongo.class);
+                    //lag.setTargetLink(new Hyperlink(lag.getTarget()));
                     lista.add(lag);
                 }
             };

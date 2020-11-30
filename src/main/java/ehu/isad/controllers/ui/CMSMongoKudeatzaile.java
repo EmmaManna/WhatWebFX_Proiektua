@@ -47,7 +47,7 @@ public class CMSMongoKudeatzaile {
     private TableView<CmsMongo> tbl_cms;
 
     @FXML
-    private TableColumn<CmsMongo, String> clmn_url;
+    private TableColumn<CmsMongo, Hyperlink> clmn_url;
 
     @FXML
     private TableColumn<CmsMongo, String> clmn_cms;
@@ -57,6 +57,12 @@ public class CMSMongoKudeatzaile {
 
     public void hasieratu(){
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
+//        clmn_url.setCellFactory(param -> new TableCell<>(){
+//            public void updateItem(){
+//                final Hyperlink hyperlink=new Hyperlink(param.getText());
+//            }
+//        });
+
         clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
 
 
