@@ -1,12 +1,8 @@
 package ehu.isad.controllers.ui;
 
-import ehu.isad.controllers.db.CmsKud;
 import ehu.isad.controllers.db.CmsMongoKud;
 import ehu.isad.controllers.db.WhatWebMongoKud;
-import ehu.isad.model.Cms;
-import ehu.isad.model.CmsMongo;
-import ehu.isad.model.Herrialdea;
-import ehu.isad.model.MongoErabiltzailea;
+import ehu.isad.model.*;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
@@ -15,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -24,10 +19,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class CMSMongoKudeatzaile {
 
@@ -52,13 +45,13 @@ public class CMSMongoKudeatzaile {
     @FXML
     private TableColumn<CmsMongo, String> clmn_cms;
 
-    @FXML
-    private TableColumn<CmsMongo, String> clmn_version;
-
     public void hasieratu(){
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
+
+        clmn_url.setCellFactory(tc -> new EstekaCell());
 //        clmn_url.setCellFactory(param -> new TableCell<>(){
-//            public void updateItem(){
+//            @Override
+//            protected void updateItem(Hyperlink item, boolean empty) {
 //                final Hyperlink hyperlink=new Hyperlink(param.getText());
 //            }
 //        });
@@ -69,13 +62,14 @@ public class CMSMongoKudeatzaile {
         //Taula hutsa dagoenean agertzen den mezua
         tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
 
+        this.taulaEguneratu();
+
+
         //Adding action to the choice box
         cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
                     this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
                 });
-
-
     }
 
     @FXML
@@ -117,8 +111,6 @@ public class CMSMongoKudeatzaile {
         this.datuaKargatu(cmsListLag);
     }
 
-
-
     private void bilatuMongo(){
         StringBuilder builder=new StringBuilder();
 
@@ -138,7 +130,6 @@ public class CMSMongoKudeatzaile {
 
             Platform.runLater(()->{
                 cmsMongoList= CmsMongoKud.getInstance().lortuCmsMongo();
-
                 imgLoadin.setVisible(false);
             });
         });
@@ -146,29 +137,49 @@ public class CMSMongoKudeatzaile {
         taskThread.start();
     }
 
-
-
     private void comboBoxKargatu(){
-        List<Herrialdea> herrialdeLista = CmsMongoKud.getInstance().lortuHerrialdeak();
+        List<Herrialdea> herrialdeLista = new ArrayList<>();
+        for (int i=0;i<cmsMongoList.size();i++){
+            var lag=cmsMongoList.get(i);
+            if (lag.getPlug().getCountry()!=null){
+                Herrialdea unekoa=new Herrialdea(lag.getPlug().getCountry().getModule(),lag.getPlug().getCountry().getString());
+                Boolean bool=false;
+                int j=0;
+                while (!bool && j<herrialdeLista.size()){
+                    if(herrialdeLista.get(j).getString().equals(unekoa.getString())){
+                        bool=true;
+                    }
+                    j++;
+                }
+                if(!bool){
+                    herrialdeLista.add(unekoa);
+                }
+            }
+        }
+        herrialdeLista.add(new Herrialdea("","IRAGAZKI GABE"));
         ObservableList<Herrialdea> herrialdeak = FXCollections.observableArrayList(herrialdeLista);
         cmbx_herrialdeak.setItems(herrialdeak);
     }
 
-
     private void iragazkia(Herrialdea herrialdea){
-        List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
-            cmsListLag=CmsMongoKud.getInstance().herrialdekoaDa(herrialdea.getString());
+            List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
+            cmsMongoList.forEach((p)->{
+                if (p.getPlug().getCountry()!=null){
+                    if (p.getPlug().getCountry().getString().equals(herrialdea.getString())){
+                        cmsListLag.add(p);
+                    }
+
+                }
+            });
+            cmsMongoList = cmsListLag;
+            this.datuaKargatu(cmsListLag);
         }
         else{
-            cmsListLag=cmsMongoListGuztiak;
+            cmsMongoList=cmsMongoListGuztiak;
+            this.datuaKargatu(cmsMongoListGuztiak);
         }
-        cmsMongoList = cmsListLag;
-        this.datuaKargatu(cmsListLag);
     }
-
-
-
 
     public void datuaKargatu(List<CmsMongo> cmsLista){
         ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsMongoList);
@@ -176,12 +187,10 @@ public class CMSMongoKudeatzaile {
     }
 
     public void taulaEguneratu(){
-
-
         cmsMongoList=CmsMongoKud.getInstance().lortuCmsMongo();
         cmsMongoListGuztiak=cmsMongoList;
         datuaKargatu(cmsMongoList);
-//        this.comboBoxKargatu();
+        this.comboBoxKargatu();
     }
 
 }

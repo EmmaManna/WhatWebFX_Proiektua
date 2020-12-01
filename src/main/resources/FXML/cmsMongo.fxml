@@ -33,7 +33,7 @@
              <ImageView fx:id="imgLoadin" fitHeight="31.0" fitWidth="44.0" layoutX="578.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
              <FontAwesomeIconView glyphName="SEARCH" layoutX="14.0" layoutY="53.0" size="19" />
              <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" onMouseClicked="#onKlikEgin" prefHeight="28.0" prefWidth="334.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
-             <ComboBox fx:id="cmbx_herrialdeak" layoutX="383.0" layoutY="34.0" prefHeight="28.0" prefWidth="153.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" visibleRowCount="5" />
+             <ComboBox fx:id="cmbx_herrialdeak" layoutX="383.0" layoutY="34.0" prefHeight="28.0" prefWidth="153.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
              <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
@@ -43,9 +43,8 @@
       </Pane>
       <TableView fx:id="tbl_cms" layoutX="14.0" layoutY="180.0" prefHeight="435.0" prefWidth="626.0" stylesheets="@../fullpackstyling.css">
         <columns>
-          <TableColumn fx:id="clmn_url" prefWidth="75.0" text="URL" />
-          <TableColumn fx:id="clmn_cms" prefWidth="75.0" text="CMS" />
-            <TableColumn fx:id="clmn_version" prefWidth="75.0" text="Version" />
+          <TableColumn fx:id="clmn_url" prefWidth="373.0" text="URL" />
+          <TableColumn fx:id="clmn_cms" prefWidth="251.0" text="CMS" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

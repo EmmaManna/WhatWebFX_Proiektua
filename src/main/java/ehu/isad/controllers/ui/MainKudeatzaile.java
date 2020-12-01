@@ -59,7 +59,6 @@ public class MainKudeatzaile {
             if (!erabiltzailea.getCollection().equals("")) {
                 anchorCMSMongo.toFront();
                 cmsMongoController.hasieratu();
-                cmsMongoController.taulaEguneratu();
             }
             else{
                 anchorCMSSQL.toFront();

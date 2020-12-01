@@ -45,13 +45,16 @@ public class CmsMongoKud {
             projection.append("_id", 0.0);
             projection.append("target", 1.0);
             projection.append("plugins.MetaGenerator.string", 1.0);
+            projection.append("plugins.Country.module",1.0);
+            projection.append("plugins.Country.string",1.0);
+
 
             Consumer<Document> processBlock = new Consumer<Document>() {
                 @Override
                 public void accept(Document document) {
                     System.out.println(document.toJson());
+
                     CmsMongo lag = new Gson().fromJson(document.toJson(), CmsMongo.class);
-                    //lag.setTargetLink(new Hyperlink(lag.getTarget()));
                     lista.add(lag);
                 }
             };
@@ -62,88 +65,6 @@ public class CmsMongoKud {
             // handle MongoDB exception
             e.printStackTrace();
         }
-        return lista;
-    }
-
-
-    public List<CmsMongo> herrialdekoaDa(String izena){
-        List<CmsMongo> lista=new ArrayList<>();
-
-        try (MongoClient client = new MongoClient("localhost", 27017)) {
-
-            MongoDatabase database = client.getDatabase(Utils.lortuEzarpenak().getProperty("dbMongo"));
-            MongoCollection<Document> collection = database.getCollection(MongoErabiltzailea.getInstance().getCollection());
-
-            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
-
-            Document query = new Document();
-            query.append("plugins.Country.string", izena);
-
-            Document projection = new Document();
-            projection.append("_id", 0.0);
-            projection.append("target", 1.0);
-            projection.append("plugins.MetaGenerator.string", 1.0);
-
-            Consumer<Document> processBlock = new Consumer<Document>() {
-                @Override
-                public void accept(Document document) {
-                    var lag=new Gson().fromJson(document.toJson(),CmsMongo.class);
-                    //lag.setTargetLink(new Hyperlink(lag.getTarget()));
-                    lista.add(lag);
-                }
-            };
-
-            collection.find(query).projection(projection).forEach(processBlock);
-
-        } catch (MongoException e) {
-            // handle MongoDB exception
-        }
-        return lista;
-    }
-
-    public List<Herrialdea> lortuHerrialdeak(){
-        List<Herrialdea> lista=new ArrayList<>();
-
-        try (MongoClient client = new MongoClient("localhost", 27017)) {
-
-            MongoDatabase database = client.getDatabase(Utils.lortuEzarpenak().getProperty("dbMongo"));
-            MongoCollection<Document> collection = database.getCollection(MongoErabiltzailea.getInstance().getCollection());
-
-            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
-
-            Document query = new Document();
-            query.append("$and", Arrays.asList(
-                    new Document()
-                            .append("plugins.Country.string", new Document()
-                                    .append("$exists", true)
-                            ),
-                    new Document()
-                            .append("plugins.Country.module", new Document()
-                                    .append("$exists", true)
-                            )
-                    )
-            );
-
-            Document projection = new Document();
-            projection.append("_id", 0.0);
-            projection.append("target", 0.0);
-            projection.append("plugins.Country.string", 1.0);
-            projection.append("plugins.Country.module", 1.0);
-
-            Consumer<Document> processBlock = new Consumer<Document>() {
-                @Override
-                public void accept(Document document) {
-                    Herrialdea lag=new Gson().fromJson(document.toJson(),Herrialdea.class);
-                    lista.add(lag);
-                }
-            };
-
-            collection.find(query).projection(projection).forEach(processBlock);
-
-        } catch (MongoException e) {
-            // handle MongoDB exception
-        }
-
         return lista;
     }
 }

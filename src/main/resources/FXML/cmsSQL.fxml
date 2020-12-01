@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="625.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.CMSKudeatzaile">
    <children>
       <Pane prefHeight="87.0" prefWidth="654.0" style="-fx-background-color: #7156DD;">
@@ -26,8 +32,8 @@
          <children>
             <ImageView fx:id="imgLoadin" fitHeight="31.0" fitWidth="44.0" layoutX="578.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
             <FontAwesomeIconView glyphName="SEARCH" layoutX="14.0" layoutY="53.0" size="19" />
-            <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" onMouseClicked="#onKlikEgin" prefHeight="26.0" prefWidth="365.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
-            <ComboBox fx:id="cmbx_herrialdeak" layoutX="416.0" layoutY="34.0" prefHeight="26.0" prefWidth="120.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" visibleRowCount="5" />
+            <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" onMouseClicked="#onKlikEgin" prefHeight="28.0" prefWidth="349.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
+            <ComboBox fx:id="cmbx_herrialdeak" layoutX="399.0" layoutY="34.0" prefHeight="28.0" prefWidth="137.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
             <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />

@@ -1,9 +1,10 @@
 package ehu.isad.model;
 
+import ehu.isad.controllers.ui.CmsI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 
-public class Cms {
+public class Cms  {
     //private String url;
     private Hyperlink url;
     private String cms;
