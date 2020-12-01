@@ -117,6 +117,13 @@ public class WhatWebKudeatzaile implements Initializable {
         }
     }
 
+    @FXML
+    void EnterSakatuCommit(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
+            onCommit(new ActionEvent());
+        }
+    }
+
 
     @FXML
     void onCommit(ActionEvent event) {
