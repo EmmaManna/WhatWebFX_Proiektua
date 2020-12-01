@@ -47,14 +47,7 @@ public class CMSMongoKudeatzaile {
 
     public void hasieratu(){
         clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
-
         clmn_url.setCellFactory(tc -> new EstekaCell());
-//        clmn_url.setCellFactory(param -> new TableCell<>(){
-//            @Override
-//            protected void updateItem(Hyperlink item, boolean empty) {
-//                final Hyperlink hyperlink=new Hyperlink(param.getText());
-//            }
-//        });
 
         clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
 
@@ -74,16 +67,23 @@ public class CMSMongoKudeatzaile {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
-        String mongoEgoera= MongoErabiltzailea.getInstance().getCollection();
-        if (!txt_bilatu.getText().equals("") && !mongoEgoera.equals("")){
-            Boolean emaitza= WhatWebMongoKud.getInstance().jadaBilatutaMongo(txt_bilatu.getText());
+        if (!txt_bilatu.getText().equals("\\s+")){
+            Boolean emaitza=false;
+            int i=0;
+            while (!emaitza && i<cmsMongoListGuztiak.size()) {
+                CmsMongo cmsMongo=cmsMongoListGuztiak.get(i);
+                if (cmsMongo.getTarget().equals(txt_bilatu.getText())){
+                    emaitza=true;
+                }
+                i++;
+            }
             if (!emaitza){
+                cmbx_herrialdeak.setValue(new Herrialdea("","IRAGAZKI GABE"));
                 bilatuMongo();
             }
             else {
                 txt_bilatu.setText("");
-                System.out.println("jada URL bilatu duzu");
-            }
+                txt_bilatu.setText("Jada URL bilatu duzu");            }
         }
         else txt_bilatu.setText("URL bat sartu mesedez");
     }
@@ -103,8 +103,8 @@ public class CMSMongoKudeatzaile {
         String url = "";
         for(int i=0; i < cmsMongoList.size(); i++){
             url = cmsMongoList.get(i).getTarget();
-            //url = cmsList.get(i).getUrl();
-            if(url.contains(cmsMongoList.get(i).getTarget())){
+
+            if(url.contains(testua)){
                 cmsListLag.add(cmsMongoList.get(i));
             }
         }
@@ -129,8 +129,9 @@ public class CMSMongoKudeatzaile {
             });
 
             Platform.runLater(()->{
-                cmsMongoList= CmsMongoKud.getInstance().lortuCmsMongo();
+                taulaEguneratu();
                 imgLoadin.setVisible(false);
+                txt_bilatu.setText("");
             });
         });
 
@@ -164,7 +165,7 @@ public class CMSMongoKudeatzaile {
     private void iragazkia(Herrialdea herrialdea){
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
-            cmsMongoList.forEach((p)->{
+            cmsMongoListGuztiak.forEach((p)->{
                 if (p.getPlug().getCountry()!=null){
                     if (p.getPlug().getCountry().getString().equals(herrialdea.getString())){
                         cmsListLag.add(p);
@@ -182,7 +183,7 @@ public class CMSMongoKudeatzaile {
     }
 
     public void datuaKargatu(List<CmsMongo> cmsLista){
-        ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsMongoList);
+        ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 

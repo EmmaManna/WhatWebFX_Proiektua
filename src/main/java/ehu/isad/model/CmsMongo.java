@@ -1,6 +1,5 @@
 package ehu.isad.model;
 
-import ehu.isad.controllers.ui.CmsI;
 import javafx.scene.control.Hyperlink;
 
 import java.util.Arrays;

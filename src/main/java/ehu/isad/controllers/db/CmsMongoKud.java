@@ -52,8 +52,7 @@ public class CmsMongoKud {
             Consumer<Document> processBlock = new Consumer<Document>() {
                 @Override
                 public void accept(Document document) {
-                    System.out.println(document.toJson());
-
+                    //System.out.println(document.toJson());
                     CmsMongo lag = new Gson().fromJson(document.toJson(), CmsMongo.class);
                     lista.add(lag);
                 }
