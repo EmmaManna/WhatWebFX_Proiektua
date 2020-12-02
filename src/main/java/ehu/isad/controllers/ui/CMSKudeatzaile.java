@@ -259,6 +259,7 @@ public class CMSKudeatzaile implements Initializable {
                         btn.setOnAction((ActionEvent event) -> {
                             pop.hide();
                             imgLoadin.setVisible(true);
+                            //FIXME: irudia
                             Thread taskThread=new Thread(()->{
                                 Sarea s = new Sarea();
                                 TableRow<Cms> errenkada = getTableRow();
