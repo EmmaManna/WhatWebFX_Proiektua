@@ -30,18 +30,18 @@ public class ServerKud {
         serverIzenak.add("Cherokee");
     }
 
+
     public List<String> lortuTargets(){
+        //Eskaneatutako URL guztien zerrenda lortu
         String query="SELECT * FROM targets";
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
-
         List<String> lista = new ArrayList<>();
 
         try{
             while (rs.next()){
                 lista.add(rs.getString("target"));
             }
-
         }catch (SQLException e){
             e.printStackTrace();
             return null;
@@ -49,7 +49,9 @@ public class ServerKud {
         return lista;
     }
 
+
     public List<String> lortuZerbitzaria(){
+        //Eskaneatutako URL guztiek erabiltzen dituzten zerbitzari motak lortu
         String query = "SELECT DISTINCT name FROM scans S, plugins P WHERE P.plugin_id=S.plugin_id AND "+serverMotakJarri();
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
@@ -67,6 +69,7 @@ public class ServerKud {
         return emaitza;
     }
 
+
     private String serverMotakJarri(){
         String query = "";
         if(serverIzenak.size()>0){
@@ -82,7 +85,9 @@ public class ServerKud {
         return query;
     }
 
+
     public Boolean zerbitzariaDa(String izena, String url){
+        //Emandako URL-a zehaztutako zerbitzarikoa den konprobatzen du
         String query = "SELECT * FROM scans S, plugins P, targets T WHERE P.plugin_id=S.plugin_id AND T.target_id=S.target_id AND name= ? AND target= ?";
         List<String> parametroak = new ArrayList<String>();
         parametroak.add(izena);
@@ -100,6 +105,5 @@ public class ServerKud {
         }
         return false;
     }
-
 
 }

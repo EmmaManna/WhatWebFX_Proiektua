@@ -22,13 +22,12 @@ public class CmsMongoKud {
     //singleton
     private static CmsMongoKud mongoKud = new CmsMongoKud();
 
-    public CmsMongoKud() {
-
-    }
+    private CmsMongoKud() { }
 
     public static CmsMongoKud getInstance() {
         return mongoKud;
     }
+
 
     public List<CmsMongo> lortuCmsMongo() {
         List<CmsMongo> lista = new ArrayList<>();

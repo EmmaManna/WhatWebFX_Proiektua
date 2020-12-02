@@ -37,7 +37,10 @@ public class CmsKud {
         cmsIzenak.add("TYPO3");
     }
 
+
     public List<Cms> lortuCmsak(){
+        //Eskaneatu den orrialde bakoitzeko URL-a, erabiltzen duen CMS-a eta
+        // bertsioa (ezagunak badira), eta kargatu ziren data lortu
         String query = "SELECT target, lastUpdated FROM targets WHERE status=200 ORDER BY lastUpdated DESC";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
@@ -61,8 +64,8 @@ public class CmsKud {
 
 
     private void cmsKargatu(List<Cms> cmsak){
+        //Parametro bezala emandako listako URL bakoitzeko, erabiltzen duen CMS-a eta bertsioak lortu, ezagunak badira
         for(int i=0; i<cmsak.size(); i++){
-
             String query = "SELECT name, version FROM plugins P, scans S, targets T WHERE P.plugin_id=S.plugin_id AND "+ this.cmsMotakJarri()+" AND T.target_id=S.target_id AND T.target LIKE ?";
             List<String> parametroak = new ArrayList<String>();
             parametroak.add(cmsak.get(i).getUrl().getText());
@@ -71,12 +74,6 @@ public class CmsKud {
             List<Integer> likePos = new ArrayList<>();
             likePos.add(1);
             ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
-
-            /*
-            String query = "SELECT name, version FROM plugins P, scans S, targets T WHERE P.plugin_id=S.plugin_id AND "+ this.cmsMotakJarri()+" AND T.target_id=S.target_id AND T.target LIKE '" + cmsak.get(i).getUrl()+"'" ;
-            DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-            ResultSet rs = dbKudeatzaile.execSQL(query);
-             */
 
             try {
                 if(rs.next()){
@@ -90,6 +87,7 @@ public class CmsKud {
             }
         }
     }
+
 
     private String cmsMotakJarri(){
         String query = "";
@@ -106,7 +104,9 @@ public class CmsKud {
         return query;
     }
 
+
     public List<Herrialdea> lortuHerrialdeak(){
+        //Eskaneatutako herrialde guztien zerbitzariaren kokapenak lortu, ezagunak badira
         String query = "SELECT DISTINCT string, module FROM scans S, targets T WHERE NOT module='' AND NOT string='' AND T.target_id=S.target_id AND status=200";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
@@ -128,7 +128,9 @@ public class CmsKud {
         return emaitza;
     }
 
+
     public Boolean herrialdekoaDa(String string, String url, String module){
+        //Emandako URL-a zehaztutako herrialdeakoa den konprobatzen da
         String query = "SELECT * FROM scans S, targets T WHERE T.target_id=S.target_id AND T.status=200 AND string= ? AND target= ? AND module=?";
         List<String> parametroak = new ArrayList<String>();
         parametroak.add(string);
@@ -148,7 +150,5 @@ public class CmsKud {
         }
         return false;
     }
-
-
 
 }

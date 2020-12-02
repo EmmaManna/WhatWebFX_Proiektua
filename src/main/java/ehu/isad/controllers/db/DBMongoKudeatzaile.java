@@ -14,7 +14,6 @@ public class DBMongoKudeatzaile {
     public void execMongo(){
 
         try (MongoClient client = new MongoClient("localhost", 27017)) {
-
             MongoDatabase database = client.getDatabase("whatweb");
             MongoCollection<Document> collection = database.getCollection("whatweb");
 
@@ -34,7 +33,6 @@ public class DBMongoKudeatzaile {
         } catch (MongoException e) {
             // handle MongoDB exception
         }
-
     }
 
 }

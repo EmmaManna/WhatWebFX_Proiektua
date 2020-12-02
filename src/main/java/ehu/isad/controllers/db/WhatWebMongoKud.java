@@ -20,8 +20,7 @@ public class WhatWebMongoKud {
 
     private static WhatWebMongoKud instantzia=new WhatWebMongoKud();
 
-    private WhatWebMongoKud(){
-    }
+    private WhatWebMongoKud(){ }
 
     public static WhatWebMongoKud getInstance(){
         return instantzia;

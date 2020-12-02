@@ -87,21 +87,18 @@ public class CMSKudeatzaile implements Initializable {
 
     @FXML
     void onClickAddURL(ActionEvent event) {
+        //Add url botoia sakatzean, WhatWeb-i egiten zaio dei eta datuak sartzen dira DB-an
+        //Bitartean kargatzen dagoela adieraziko da,
+        // URL-rik sartu ez bada mezu bat agertuko da. Jada bago ez da ezer egingo.
         if(!txt_bilatu.getText().equals("")){
             Boolean emaitza=WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_bilatu.getText());
+
             if(!emaitza){
-
                 StringBuilder builder=new StringBuilder();
-
-                imgLoadin.setImage(new Image(
-                                new File(
-                                        Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                        )
-                );
+                imgLoadin.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()));
                 imgLoadin.setVisible(true);
 
                 Thread taskThread=new Thread(()->{
-                    //sartu taulan datua
                     Bilaketa bilaketa=new Bilaketa();
                     bilaketa.urlIrakurri(txt_bilatu.getText()).forEach(line ->  {
                         builder.append( line + System.getProperty("line.separator"));
@@ -121,12 +118,10 @@ public class CMSKudeatzaile implements Initializable {
                         imgLoadin.setVisible(false);
                     });
                 });
-
                 taskThread.start();
             }
             else {
-                txt_bilatu.setText("");
-                System.out.println("jada URL bilatu duzu");
+                txt_bilatu.setText(txt_bilatu.getText()+" jada gordeta dago");
             }
         }
         else{
@@ -134,18 +129,23 @@ public class CMSKudeatzaile implements Initializable {
         }
     }
 
-    public CMSKudeatzaile() {
 
-    }
+    public CMSKudeatzaile() { }
+
+
     @FXML
     void onKlikEgin(MouseEvent event) {
+        //Bilaketa kutxan klik egitean zegoen testua ezabatzen da
         txt_bilatu.setText("");
     }
 
+
     @FXML
     void onTestuaAldatuDa(KeyEvent event) {
+        //Bilaketa kutxan letra bat idatzen den bakoitzean taula eguneratzen da
         this.bilaketak(txt_bilatu.getText());
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -157,14 +157,8 @@ public class CMSKudeatzaile implements Initializable {
         addButtonToTable();
         clmn_screenshot.setStyle( "-fx-alignment: CENTER;");
 
-        // Nola bistaratu gelaxkak (zutabearen arabera)
-        // Get value from property of UserAccount.
-        tbl_cms.setEditable(true);
-        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
-        clmn_lastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdated"));
-        clmn_url.setCellValueFactory(new PropertyValueFactory<>("url"));
-        clmn_version.setCellValueFactory(new PropertyValueFactory<>("version"));
-        clmn_url.setCellFactory(new HyperLinkCell());
+       //Zutabeak hasieratu
+        this.zutabeakHasieratu();
 
         //add your data to the table here.
         this.taulaEguneratu();
@@ -175,15 +169,33 @@ public class CMSKudeatzaile implements Initializable {
         //comboBox-a kargatu
         this.comboBoxKargatu();
 
-        //Adding action to the choice box
+        //ComboBox-ari akzioa gehitu
+        this.comboBoxAction();
+    }
+
+
+    private void zutabeakHasieratu(){
+        // Nola bistaratu gelaxkak (zutabearen arabera)
+        // Get value from property of UserAccount.
+        tbl_cms.setEditable(true);
+        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("cms"));
+        clmn_lastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdated"));
+        clmn_url.setCellValueFactory(new PropertyValueFactory<>("url"));
+        clmn_version.setCellValueFactory(new PropertyValueFactory<>("version"));
+        clmn_url.setCellFactory(new HyperLinkCell());
+    }
+
+
+    private void comboBoxAction(){
+        //ComboBox-ean aldaketa bat dagoenean iragazkia aplikatzen da aukeratutako herrialdearen arabera
         cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
                     if(new_val.intValue()>-1){
                         this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
                     }
                 });
-
     }
+
 
     public class RemoveCell<T> extends TableCell<T, Void> {
         private final Hyperlink link;
@@ -195,21 +207,23 @@ public class CMSKudeatzaile implements Initializable {
                 getTableView().getItems().remove(getTableRow().getIndex());
             });
         }
-
     }
 
 
     public void datuaKargatu(List<Cms> cmsLista){
+        //Taulan jarri beharreko datuak kargatzen dira
         ObservableList<Cms> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 
+
     private void bilaketak(String testua){
+        //Bilaketa bat egitean emandako testua duten URL-ak lortzen dira, eta taula eguneratzen da
         List<Cms> cmsListLag = new ArrayList<Cms>();
         String url = "";
         for(int i=0; i < cmsList.size(); i++){
             url = cmsList.get(i).getUrl().getText();
-            //url = cmsList.get(i).getUrl();
+
             if(url.contains(testua)){
                 cmsListLag.add(cmsList.get(i));
             }
@@ -217,7 +231,9 @@ public class CMSKudeatzaile implements Initializable {
         this.datuaKargatu(cmsListLag);
     }
 
+
     private void iragazkia(Herrialdea herrialdea){
+        //Zehaztutako herraldean zerbitzaria duten URL-ak lortu eta taula eguneratzen da
         List<Cms> cmsListLag = new ArrayList<Cms>();
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             String url = "";
@@ -235,20 +251,27 @@ public class CMSKudeatzaile implements Initializable {
         this.datuaKargatu(cmsListLag);
     }
 
+
     public void taulaEguneratu(){
+        //Datu berriak satzen direnean, datuak DB-tik lortzen dira
+        //Taula eta comboBox-a eguneratzen dira
         cmsList = CmsKud.getInstantzia().lortuCmsak();
         cmsListGuziak=cmsList;
         datuaKargatu(cmsList);
         this.comboBoxKargatu();
     }
 
+
     private void comboBoxKargatu(){
+        //ComboBox-ean datuak sartzen dira
         List<Herrialdea> herrialdeLista = CmsKud.getInstantzia().lortuHerrialdeak();
         ObservableList<Herrialdea> herrialdeak = FXCollections.observableArrayList(herrialdeLista);
         cmbx_herrialdeak.setItems(herrialdeak);
     }
 
+
     private void addButtonToTable() {
+        //Botoiak taulako errenkada bakoitzean gehitzen ditu, eta propietateak zehazten dira
         Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>> cellFactory = new Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>>() {
             @Override
             public TableCell<Cms, Button> call(final TableColumn<Cms, Button> param) {
@@ -259,66 +282,17 @@ public class CMSKudeatzaile implements Initializable {
                         btn.getStyleClass().add("screenshot");
                         btn.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.CAMERA_RETRO, "1.5em"));
 
+                        //Botoian klik egitean Screenshot-a lortzen eta bistaratzen da
                         btn.setOnAction((ActionEvent event) -> {
-                            pop.hide();
-                            imgLoadin.setVisible(true);
-                            //FIXME: irudia
-                            Thread taskThread=new Thread(()->{
-                                Sarea s = new Sarea();
-                                TableRow<Cms> errenkada = getTableRow();
-                                if(!irudiaBadago(ezabatuAtzekoa(errenkada.getItem().getUrl().getText()))) {
-                                    s.irudiaLortu(errenkada.getItem().getUrl().getText());
-                                }
-                                Platform.runLater(()->{
-                                    //eguneratu taula
-                                    imgLoadin.setVisible(false);
-                                    //irudia bistaratu
-                                    ikusten=true;
-                                    //TableRow<Cms> errenkada = getTableRow();
-                                    String irudia = errenkada.getItem().getUrl().getText();
-                                    irudia = ezabatuAtzekoa(irudia);
-                                    Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
-                                    irudiaBistaratu(irudia, bounds.getMinX(), bounds.getMinY());
-                                });
-
-                            });
-                            taskThread.start();
-
+                            TableRow<Cms> errenkada = getTableRow();
+                            ButtonSetOnAction(btn,errenkada);
                         });
 
-
+                        //Sagua botoiaren jainean jarrita badago preview-a agertzen da
                         btn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-                            if (newValue&!pop.isShowing()) {
-                                ikusten = false;
-                                TableRow<Cms> errenkada = getTableRow();
-                                String irudia = errenkada.getItem().getUrl().getText();
-                                irudiaPrestatu(irudia);
-
-                                pop.getContent().remove(0);
-                                pop.setAnchorX(200);
-                                pop.setAnchorY(100);
-                                pop.getContent().add(screenshot);
-
-                                btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
-                                    @Override
-                                    public void handle(MouseEvent event) {
-                                        if(!ikusten){
-                                            double xOffset = event.getScreenX();
-                                            double yOffset = event.getScreenY();
-                                            pop.setX(xOffset-event.getX()+35);
-                                            pop.setY(yOffset-event.getY());
-                                        }
-                                    }
-                                });
-                                pop.show(mainApp.getStage());
-                            }
-                            else {
-                                pop.hide();
-                                screenshot.setVisible(false);
-                            }
+                            TableRow<Cms> errenkada = getTableRow();
+                            ButtonHover(btn, errenkada, newValue);
                         });
-
-
                     }
 
                     @Override
@@ -329,24 +303,80 @@ public class CMSKudeatzaile implements Initializable {
                         } else {
                             setGraphic(btn);
                         }
-
-
                     }
-
-
                 };
-
-
                 return cell;
             }
-
-
         };
-
         clmn_screenshot.setCellFactory(cellFactory);
     }
 
+
+    private void ButtonSetOnAction(Button btn, TableRow<Cms> errenkada){
+        //Botoian klik egitean Screenshot-a lortzen eta bistaratzen da
+        //Lehengo jada sisteman dagoen konprobatuko da
+        pop.hide();
+        imgLoadin.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()));
+        imgLoadin.setVisible(true);
+
+        Thread taskThread=new Thread(()->{
+            Sarea s = new Sarea();
+            if(!irudiaBadago(ezabatuAtzekoa(errenkada.getItem().getUrl().getText()))) {
+                s.irudiaLortu(errenkada.getItem().getUrl().getText());
+            }
+            Platform.runLater(()->{
+                imgLoadin.setVisible(false);
+                ikusten=true;
+                String irudia = errenkada.getItem().getUrl().getText();
+                irudia = ezabatuAtzekoa(irudia);
+                Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+                irudiaBistaratu(irudia, bounds.getMinX(), bounds.getMinY());
+            });
+        });
+        taskThread.start();
+    }
+
+
+    private void ButtonHover(Button btn, TableRow<Cms> errenkada, Boolean newValue){
+        //Sagua botoiaren jainean jarrita badago preview-a agertzen da
+        //Lehenengo Screeshot-a bistaratuta ez dagoela konporbatzen du
+        if (newValue&!pop.isShowing()) {
+            ikusten = false;
+            PopupPrestatu(errenkada);
+
+            btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(!ikusten){
+                        double xOffset = event.getScreenX();
+                        double yOffset = event.getScreenY();
+                        pop.setX(xOffset-event.getX()+35);
+                        pop.setY(yOffset-event.getY());
+                    }
+                }
+            });
+            pop.show(mainApp.getStage());
+        }
+        else {
+            pop.hide();
+            screenshot.setVisible(false);
+        }
+    }
+
+
+    private void PopupPrestatu(TableRow<Cms> errenkada){
+        //PopUp-a preview-a ikusteko tamaina eta irudia jartzen dio
+        String irudia = errenkada.getItem().getUrl().getText();
+        irudiaPrestatu(irudia);
+        pop.getContent().remove(0);
+        pop.setAnchorX(200);
+        pop.setAnchorY(100);
+        pop.getContent().add(screenshot);
+    }
+
+
     private String ezabatuAtzekoa(String izena){
+        //Emandako String-ari, URL-a, agertzen den lehenengo / aurrera dagoen guztia ezabatu
         izena= izena.replace("https://","");
         izena=izena.replace("http://","");
         while(izena.contains("/")){
@@ -355,7 +385,10 @@ public class CMSKudeatzaile implements Initializable {
         return izena;
     }
 
+
     private void irudiaPrestatu(String irudia){
+        //Preview bistaratzeko prestatzen da: deskargatuta dagoen begiratzen da,
+        //Eta horren arabera zein jarriko den erabakitzen da (Irudia edo no Preview Available)
         irudia = ezabatuAtzekoa(irudia);
         if(!irudiaBadago(irudia)){
             irudia = "nopreview";
@@ -366,12 +399,16 @@ public class CMSKudeatzaile implements Initializable {
         screenshot.setVisible(true);
     }
 
+
     private Boolean irudiaBadago(String irudia){
+        //Zehaztutako izena duen irudia sisteman gordeta dagoen konprobatzen du
         File f =  new File(Utils.lortuEzarpenak().getProperty("pathToImages")+irudia+".png");
         return f.exists();
     }
 
+
     private void irudiaBistaratu(String irudia, double x, double y){
+        //Screenshot-a handi bistaratzeko Popup-a prestatzen da
         if(!irudiaBadago(irudia)){
             irudia = "nopreview";
         }
@@ -383,19 +420,13 @@ public class CMSKudeatzaile implements Initializable {
         pop.getContent().remove(0);
         pop.setAnchorX(700);
         pop.setAnchorY(525);
-
-        System.out.println(x);
-
         pop.setX(x+500);
         pop.setY(y+100);
-
-        System.out.println(pop.getX());
 
         pop.getContent().add(screenshot);
         if(!pop.isShowing()){
             pop.show(mainApp.getStage());
         }
         pop.setAutoHide(true);
-
     }
 }
