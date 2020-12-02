@@ -26,11 +26,6 @@
          </columnResizePolicy>
       </TableView>
       <Pane prefHeight="94.0" prefWidth="654.0" style="-fx-background-color: #7FC7AF;" />
-      <Button layoutX="496.0" layoutY="533.0" mnemonicParsing="false" onAction="#onClickEguneratu" stylesheets="@../fullpackstyling.css" text="Eguneratu" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
       <ComboBox fx:id="cmbx_servers" layoutX="56.0" layoutY="534.0" prefHeight="26.0" prefWidth="157.0" promptText="-- Zerbitzariak --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
    </children>
 </AnchorPane>

@@ -37,7 +37,10 @@ public class ServerKudeatzaile {
     private ComboBox<String> cmbx_servers;
 
     public void hasieratu(){
-        targets=new ArrayList<>();
+        if(targets!=null){
+            targets.clear();
+        }
+        else targets=new ArrayList<>();
         if(MongoErabiltzailea.getInstance().getCollection().equals("")){
             ServerKud serverKud=ServerKud.getInstantzia();
             targets = serverKud.lortuTargets();
@@ -91,12 +94,6 @@ public class ServerKudeatzaile {
                 new SimpleStringProperty(data.getValue()));
 
         tblServer.setItems(emaitza);
-    }
-
-    @FXML
-    void onClickEguneratu(ActionEvent event) {
-        hasieratu();
-        cmbx_servers.setValue("Iragazki Gabe");
     }
 
     private void zerbitzariak(String zerbitzaria){
