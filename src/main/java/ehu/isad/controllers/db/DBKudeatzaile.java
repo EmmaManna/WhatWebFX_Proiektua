@@ -16,7 +16,9 @@ public class DBKudeatzaile {
 
     private void conOpen(String dbpath) {
         try {
+            Class.forName("org.sqlite.JDBC").newInstance();
             String url = "jdbc:sqlite:"+ dbpath ;
+            DriverManager.registerDriver(new org.sqlite.JDBC());
             conn = DriverManager.getConnection(url);
 
             System.out.println("Database connection established");
@@ -24,7 +26,6 @@ public class DBKudeatzaile {
             System.err.println("Cannot connect to database server " + e);
         }
     }
-
 
 
     private void conClose() {
