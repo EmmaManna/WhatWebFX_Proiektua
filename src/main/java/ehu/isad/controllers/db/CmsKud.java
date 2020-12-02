@@ -116,7 +116,10 @@ public class CmsKud {
             while (rs.next()) {
                 String string = rs.getString("string");
                 String module = rs.getString("module");
-                emaitza.add(new Herrialdea(module,string));
+                if(module.length()==2){
+                    emaitza.add(new Herrialdea(module,string));
+                }
+
             }
             emaitza.add(new Herrialdea("","IRAGAZKI GABE"));
         } catch(SQLException throwables){

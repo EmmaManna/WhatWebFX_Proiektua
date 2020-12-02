@@ -101,7 +101,8 @@ public class DBKudeatzaile {
                 System.out.println(count + " rows affected");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Errorea query honetan: "+query);
+            //e.printStackTrace();
         }
 
         return rs;
