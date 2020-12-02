@@ -82,7 +82,10 @@ public class ServerKudeatzaile {
         //Adding action to the choice box
         cmbx_servers.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                    this.zerbitzariak(cmbx_servers.getItems().get(new_val.intValue()));
+                   if(new_val.intValue() > -1){
+                       this.zerbitzariak(cmbx_servers.getItems().get(new_val.intValue()));
+                   }
+
                 });
     }
 
