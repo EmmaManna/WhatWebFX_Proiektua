@@ -115,6 +115,7 @@ public class CMSKudeatzaile implements Initializable {
 
                     Platform.runLater(()->{
                         //eguneratu taula
+                        cmsListGuziak = CmsKud.getInstantzia().lortuCmsak();
                         cmsList = CmsKud.getInstantzia().lortuCmsak();
                         this.datuaKargatu(cmsList);
                         imgLoadin.setVisible(false);
@@ -177,7 +178,9 @@ public class CMSKudeatzaile implements Initializable {
         //Adding action to the choice box
         cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                    if(new_val.intValue()>-1){
+                        this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                    }
                 });
 
     }
