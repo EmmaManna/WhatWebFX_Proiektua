@@ -1,7 +1,6 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsMongoKud;
-import ehu.isad.controllers.db.WhatWebMongoKud;
 import ehu.isad.model.*;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
@@ -45,26 +44,6 @@ public class CMSMongoKudeatzaile {
     @FXML
     private TableColumn<CmsMongo, String> clmn_cms;
 
-    public void hasieratu(){
-        clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
-        clmn_url.setCellFactory(tc -> new EstekaCell());
-
-        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
-
-
-        //Taula hutsa dagoenean agertzen den mezua
-        tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
-
-        this.taulaEguneratu();
-
-
-        //Adding action to the choice box
-        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
-                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
-                });
-    }
-
     @FXML
     void onClickAddURL(ActionEvent event) {
         if (!txt_bilatu.getText().equals("\\s+")){
@@ -98,6 +77,27 @@ public class CMSMongoKudeatzaile {
         this.bilaketak(txt_bilatu.getText());
     }
 
+    public void hasieratu(){
+        clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
+        clmn_url.setCellFactory(tc -> new EstekaCell());
+
+        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
+
+
+        //Taula hutsa dagoenean agertzen den mezua
+        tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
+
+        this.taulaEguneratu();
+
+
+        //Adding action to the choice box
+        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                });
+    }
+
+    //testua aldatzen denean erabiltzen da testua begiratzeko
     private void bilaketak(String testua){
         List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
         String url = "";
@@ -182,12 +182,12 @@ public class CMSMongoKudeatzaile {
         }
     }
 
-    public void datuaKargatu(List<CmsMongo> cmsLista){
+    private void datuaKargatu(List<CmsMongo> cmsLista){
         ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 
-    public void taulaEguneratu(){
+    private void taulaEguneratu(){
         cmsMongoList=CmsMongoKud.getInstance().lortuCmsMongo();
         cmsMongoListGuztiak=cmsMongoList;
         datuaKargatu(cmsMongoList);

@@ -8,6 +8,25 @@ public class CmsMongo {
     private String target;
     private Plugins plugins;
 
+    public String getTarget() {
+        return target;
+    }
+
+    public String getPlugins() {
+        try{
+            var emaitza=plugins.getMetaGenerator().toString();
+            return emaitza;
+        }
+        catch (NullPointerException e){
+            return "unknown";
+        }
+    }
+
+    public Plugins getPlug(){
+        return plugins;
+    }
+
+    //Plugins class
     public class Plugins{
         private MetaGenerator MetaGenerator;
         private HerrialdeMongo Country;
@@ -16,18 +35,11 @@ public class CmsMongo {
             return MetaGenerator;
         }
 
-        public void setMetaGenerator(MetaGenerator metaGenerator) {
-            this.MetaGenerator = metaGenerator;
-        }
-
         public HerrialdeMongo getCountry() {
             return Country;
         }
 
-        public void setCountry(HerrialdeMongo country) {
-            Country = country;
-        }
-
+        //MetaGenerator class
         public class MetaGenerator{
             private String[] string;
 
@@ -45,17 +57,13 @@ public class CmsMongo {
             }
         }
 
-
+        //HerrialdeMongo class
         public class HerrialdeMongo{
             private String[] module;
             private String[] string;
 
             public String getModule() {
                 return module[0];
-            }
-
-            public void setModule(String[] module) {
-                this.module = module;
             }
 
             public String getString() {
@@ -66,32 +74,6 @@ public class CmsMongo {
                 this.string = string;
             }
         }
-    }
-
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public String getPlugins() {
-        try{
-            var emaitza=plugins.getMetaGenerator().toString();
-            return emaitza;
-        }
-        catch (NullPointerException e){
-            return "unknown";
-        }
-    }
-
-    public Plugins getPlug(){
-        return plugins;
-    }
-
-    public void setPlugins(Plugins plugins) {
-        this.plugins = plugins;
     }
 
 }
