@@ -3,6 +3,7 @@ package ehu.isad.utils;
 import ehu.isad.model.MongoErabiltzailea;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,13 +12,11 @@ public class Bilaketa {
 
 
     public List<String> urlIrakurri(String url) {
+        //Zehaztutako URL-ari buruzko datuak lortzen dira WhatWeb exekutatuz.
+        //SE-aren eta erabiltzen ari den DB-aren arabera komando desberdinak exekutatzen dira.
         List<String> processes = new LinkedList<String>();
         try {
-            String line;
-            Process p=null;
-
             String komandoa="";
-
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
@@ -32,22 +31,27 @@ public class Bilaketa {
                 komandoa = "wsl " +Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+ komandoa+" -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb";
             }
 
-            p = Runtime.getRuntime().exec(komandoa);
-            p.waitFor();
+            lerroakGeitu(processes,komandoa);
 
-            System.out.println(komandoa);
-
-            BufferedReader input =
-                    new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                processes.add(line);
-            }
-            input.close();
         } catch (Exception err) {
             err.printStackTrace();
         }
-
         return processes;
+    }
+
+
+    private void lerroakGeitu(List<String> processes,  String komandoa) throws IOException, InterruptedException {
+        //Zehaztutako komandoa exekutatzen da eta prozesuan lortutako emaitza fitxategian gordetzen da
+        String line;
+        Process p = Runtime.getRuntime().exec(komandoa);
+        p.waitFor();
+
+        BufferedReader input =
+                new BufferedReader(new InputStreamReader(p.getInputStream()));
+        while ((line = input.readLine()) != null) {
+            processes.add(line);
+        }
+        input.close();
     }
 
 }

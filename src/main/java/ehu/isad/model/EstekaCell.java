@@ -9,7 +9,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 
 public class EstekaCell<T> extends TableCell<T, String> {
@@ -19,8 +18,6 @@ public class EstekaCell<T> extends TableCell<T, String> {
     public EstekaCell() {
         link = new Hyperlink();
         link.setOnAction(evt -> {
-            // remove row item from tableview
-         //   getTableView().getItems().remove(getTableRow().getIndex());
             System.out.println("estekan sakatu dut ");
         });
     }
@@ -29,7 +26,6 @@ public class EstekaCell<T> extends TableCell<T, String> {
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
         link = new Hyperlink(item);
-
         link.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

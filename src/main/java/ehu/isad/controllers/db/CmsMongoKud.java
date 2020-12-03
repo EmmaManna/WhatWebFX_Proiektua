@@ -4,17 +4,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ehu.isad.model.Cms;
 import ehu.isad.model.CmsMongo;
-import ehu.isad.model.Herrialdea;
 import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
-import javafx.scene.control.Hyperlink;
 import org.bson.Document;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 

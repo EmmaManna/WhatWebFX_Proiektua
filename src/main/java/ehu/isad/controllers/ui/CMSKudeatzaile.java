@@ -21,22 +21,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -194,19 +188,6 @@ public class CMSKudeatzaile implements Initializable {
                         this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
                     }
                 });
-    }
-
-
-    public class RemoveCell<T> extends TableCell<T, Void> {
-        private final Hyperlink link;
-
-        public RemoveCell() {
-            link = new Hyperlink("Remove");
-            link.setOnAction(evt -> {
-                // remove row item from tableview
-                getTableView().getItems().remove(getTableRow().getIndex());
-            });
-        }
     }
 
 

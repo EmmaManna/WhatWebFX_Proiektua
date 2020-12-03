@@ -15,9 +15,6 @@ public class MainKudeatzaile {
         this.mainApp = mainApp;
     }
 
-    public void setMainApp(WhatWebFX main){
-        this.mainApp = main;
-    }
 
     @FXML
     private Button btnCMS;
@@ -52,8 +49,10 @@ public class MainKudeatzaile {
     @FXML
     private WhatWebKudeatzaile whatWebController ;
 
+
     @FXML
     void onClick(ActionEvent event) {
+        //Erlaitz desberdinetan klik egitean bistaratu behar dena kudeatzen du
         if(event.getSource()==btnCMS){
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
             if (!erabiltzailea.getCollection().equals("")) {
@@ -74,14 +73,18 @@ public class MainKudeatzaile {
         }
     }
 
+
     @FXML
     void onClickClose(ActionEvent event) {
+        //Aplikazioa ixten du
         mainApp.getStage().close();
         System.exit(0);
     }
 
+
     @FXML
     void onClickMin(ActionEvent event) {
+        //Aplikazioa minimizaten du
         mainApp.getStage().setIconified(true);
     }
 
