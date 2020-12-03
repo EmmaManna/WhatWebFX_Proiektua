@@ -62,7 +62,8 @@ public class CMSMongoKudeatzaile {
             }
             else {
                 txt_bilatu.setText("");
-                txt_bilatu.setText("Jada URL bilatu duzu");            }
+                txt_bilatu.setText("Jada URL bilatu duzu");
+            }
         }
         else txt_bilatu.setText("URL bat sartu mesedez");
     }
