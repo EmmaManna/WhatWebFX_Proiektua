@@ -51,6 +51,7 @@ dependencies {
 
     implementation 'org.mongodb:mongo-java-driver:3.6+'
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'junit:junit:4.12'
 
 
     // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
@@ -62,6 +63,10 @@ dependencies {
     //sqlite
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 
+    //TestFx
+    testCompile "org.testfx:testfx-core:4.0.+"
+    testCompile "org.testfx:testfx-junit:4.0.+"
+
 }
 
 repositories {
@@ -72,6 +77,8 @@ test {
     useJUnitPlatform()
 }
 
+
+
 jlink {
     addExtraDependencies("javafx")
 
@@ -79,15 +86,18 @@ jlink {
     launcher {
         name = 'whatwebfx'
 
-        jvmArgs = [
-                "--add-opens", "javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons"
-        ]
+        jvmArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',
+                    '--add-opens', 'javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons',]
     }
 
     jpackage {
-        jpackageHome="/home/duxon/.sdkman/candidates/java/14.0.2.fx-zulu"
-        if (org.gradle.internal.os.OperatingSystem.current().windows) {
-            installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu', '--win-shortcut']
+        if (javafx.getPlatform().name() == "OSX") {
+            installerType = "dmg"
+            jpackageHome = "/Users/<user>/Downloads/jdk-13.jdk/Contents/Home"
+        } else if (javafx.getPlatform().name() == "WINDOWS") {
+            installerType = "exe"
+            jpackageHome = "C:\\Program Files\\Java\\jdk-14.0.2"
+            installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
         }
     }
 }

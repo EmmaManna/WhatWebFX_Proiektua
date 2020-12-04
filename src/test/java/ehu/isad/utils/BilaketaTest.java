@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BilaketaTest {
+public class BilaketaTest{
 
     private Bilaketa b = new Bilaketa();
+
+
 
     @Test
     void urlIrakurriTest() {

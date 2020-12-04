@@ -34,7 +34,7 @@
             <FontAwesomeIconView glyphName="SEARCH" layoutX="14.0" layoutY="53.0" size="19" />
             <TextField fx:id="txt_bilatu" layoutX="40.0" layoutY="34.0" onKeyTyped="#onTestuaAldatuDa" onMouseClicked="#onKlikEgin" prefHeight="28.0" prefWidth="349.0" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" />
             <ComboBox fx:id="cmbx_herrialdeak" layoutX="399.0" layoutY="34.0" prefHeight="28.0" prefWidth="137.0" promptText="-- Iragazkia --" style="-fx-background-color: #ffffff; -fx-border-color: #3F2B63;" stylesheets="@../fullpackstyling.css" visibleRowCount="5" />
-            <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
+            <Button fx:id="btn_addUrl" layoutX="544.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickAddURL" prefHeight="26.0" prefWidth="99.0" stylesheets="@../fullpackstyling.css" text="Add URL" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
                </graphic>
