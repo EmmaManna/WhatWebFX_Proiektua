@@ -16,6 +16,7 @@ public class HyperLinkCell implements  Callback<TableColumn<Cms, Hyperlink>, Tab
         TableCell<Cms, Hyperlink> cell = new TableCell<Cms, Hyperlink>() {
             @Override
             protected void updateItem(Hyperlink item, boolean empty) {
+                //Url bat badago eta klik egiten bazaio sistema eragilearen nabigatzailea ireki eta bilatzen du.
                 if (item != null) {
                     item.setOnAction(e -> {
                         String url = item.getText();
