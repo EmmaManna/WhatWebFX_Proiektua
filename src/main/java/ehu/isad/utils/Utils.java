@@ -22,8 +22,7 @@ public class Utils {
 
 
     public static final boolean ezabatu() {
-        //SQL-ko insertak dituen fitxategia ezabatzen da
-        //TODO: No entiendo muy bien
+        //SQL-ko insertak.sql dituen fitxategia ezabatzen da
         if("insertak.sql"==null){
             return true;
         }
