@@ -30,10 +30,8 @@ public class HyperLinkCell implements  Callback<TableColumn<Cms, Hyperlink>, Tab
                                 }
                             }).start();
                         }
-
                     });
                 }
-
                 setGraphic(item);
             }
 

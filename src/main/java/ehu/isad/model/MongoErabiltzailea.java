@@ -7,8 +7,7 @@ public class MongoErabiltzailea {
     private String pasahitza="";
     private String collection="";
 
-    private MongoErabiltzailea(){
-    }
+    private MongoErabiltzailea(){ }
 
     public static MongoErabiltzailea getInstance(){
         return erabiltzailea;

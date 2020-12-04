@@ -24,12 +24,6 @@ import java.util.ResourceBundle;
 
 public class WhatWebKudeatzaile implements Initializable {
 
-    private MainKudeatzaile mainKudeatzaile;
-
-    public void setMainKudeatzaile(MainKudeatzaile mainKudeatzaile) {
-        this.mainKudeatzaile = mainKudeatzaile;
-    }
-
     @FXML
     private TextField txt_url;
 
@@ -63,14 +57,6 @@ public class WhatWebKudeatzaile implements Initializable {
     public WhatWebKudeatzaile() { }
 
 
-    public TextField getTxt_url() {
-        return txt_url;
-    }
-
-    public void setTxt_url(TextField txt_url) {
-        this.txt_url = txt_url;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lblAktibatuta.setVisible(false);
@@ -81,26 +67,29 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onKlikEgin(MouseEvent event) {
+        //URL-a sartzeko testu kutxan klik egitean guztia ezabatzen da
         txt_log.setText("");
         txt_url.setText("");
     }
 
+
     @FXML
     void onClickScan(ActionEvent event) {
+        //Eskaneatzeko botoia sakatzen bada, WhatWeb-i dei egiten zaio datuak lortzeko eta kargatzeko
+        //Emaitza testu kutxan agertuko da.
+        //Ez bada URL-rik idazten edo datuak jada gordeta badaude mezu bat panatailaratuko da
         if(!txt_url.getText().equals("")){
             txt_log.setText("");
             if(WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_url.getText())){
                 txt_log.setText("Jada ditugu datuak");
             }
             else{
-                //Irudi kargatzen
                 Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
                 mgvw_loading.setImage(i);
                 mgvw_loading.setVisible(true);
                 txt_log.setWrapText(true);
 
                 Thread taskThread=hasieratuThread();
-
                 taskThread.start();
             }
         }
@@ -112,13 +101,16 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onKeyPressed(KeyEvent event) {
+        //Enter tekla sakatzen bada eskaneoa hasieratuko da
         if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
             onClickScan(new ActionEvent());
         }
     }
 
+
     @FXML
     void EnterSakatuCommit(KeyEvent event) {
+        //TODO: No sé qué hace JonQ
         if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
             onCommit(new ActionEvent());
         }
@@ -127,9 +119,9 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onCommit(ActionEvent event) {
+        //TODO: No sé qué hace JonQ
         if(!txtCollection.getText().isBlank()){
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
-
             erabiltzailea.setCollection(txtCollection.getText());
             erabiltzailea.setIzena(txtUser.getText());
             erabiltzailea.setPasahitza(txtPass.getText());
@@ -140,6 +132,7 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onClickCheckBox(ActionEvent event) {
+        //Pasahitza sartzen denenean ikustea edo ez ikustea kudeatzen du MongoDB kautotzean
         if (checkBoxIkusi.isSelected()){
             txtPassIkusgarri.setText(txtPass.getText());
             txtPass.setVisible(false);
@@ -153,6 +146,8 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onClickLogOut(ActionEvent event) {
+        //Logout botoian klik egitean MongoDB erabiltzailea hasieratzen da
+        // eta MongoDB desaktibatzen da
         MongoErabiltzailea.getInstance().setPasahitza("");
         MongoErabiltzailea.getInstance().setIzena("");
         MongoErabiltzailea.getInstance().setCollection("");
@@ -166,9 +161,10 @@ public class WhatWebKudeatzaile implements Initializable {
 
 
     public Thread hasieratuThread(){
-
+        //WhatWeb exekutatzen da Thread baten barruan aplikazioa ez blokeatzeko
+        //Datuak dagokion datu basean gordetzen dira eta emaitza testu kutxan agertzen da
+        //Bilatutako URL-a ez bada existitzen mezu bat pantailaratuko da.
         Thread taskThread = new Thread( () -> {
-
             String newLine = System.getProperty("line.separator");
             final StringBuilder emaitza = new StringBuilder();
             Bilaketa bilaketa=new Bilaketa();
@@ -177,13 +173,9 @@ public class WhatWebKudeatzaile implements Initializable {
                 emaitza.append( line + newLine );
             });
 
-            //mongo ez badu erabiltzen sartu datu basean
+            //Mongo ez badu erabiltzen sartu datu basean
             if (MongoErabiltzailea.getInstance().getCollection().equals("")){
-                try {
-                    WhatWebSQLKud.getInstantzia().insertIrakurri();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                DatuakSartuSQL();
             }
 
             Platform.runLater( () -> {
@@ -194,11 +186,19 @@ public class WhatWebKudeatzaile implements Initializable {
                     txt_log.setText(emaitza.toString());
                 }
                 mgvw_loading.setVisible(false);
-
             } );
-
         });
         return taskThread;
+    }
+
+
+    private void DatuakSartuSQL(){
+        //Eskaneoan lortzen diren datuak SQLiten gordetzen dira
+        try {
+            WhatWebSQLKud.getInstantzia().insertIrakurri();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

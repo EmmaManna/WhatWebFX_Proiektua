@@ -9,26 +9,27 @@ public class secureSQL {
     // singleton patroia
     private static secureSQL instantzia = new secureSQL();
 
-    private secureSQL(){
-    }
+    private secureSQL(){ }
 
     public static secureSQL getInstantzia() {
         return instantzia;
     }
 
+
     public ResultSet eskaeraBabestua(String query, List<String> parametroak, List<String> motak, List<Integer> likePos){
+        //Prepared Statement erabiliz datu baserako eskaera babestu egiten da
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         try {
             PreparedStatement ps = dbKudeatzaile.conn.prepareStatement(query);
             int kont = 0;
             int zenb = 1;
             while(kont < motak.size()){
-                if(motak.get(kont).equals("int")){
+                if(motak.get(kont).equals("int")){ //Integer tratatu
                     ps.setInt(zenb,Integer.parseInt(parametroak.get(kont)));
                 }
-                else{
+                else{ //String tratatu
                     if(likePos.size()>0){
-                        if(likePos.get(0) == zenb){
+                        if(likePos.get(0) == zenb){ //Kontsultan LIKE erabiltzen bada
                             ps.setString(zenb, "%"+parametroak.get(kont)+"%");
                             likePos.remove(0);
                         }
@@ -39,7 +40,6 @@ public class secureSQL {
                 kont++;
                 zenb++;
             }
-
             return ps.executeQuery();
 
         } catch (SQLException throwables) {

@@ -9,6 +9,7 @@ open module oinarria {
     requires java.desktop;
     requires mongo.java.driver;
     requires com.google.gson;
+    requires sqlite.jdbc;
 
 
     exports ehu.isad;

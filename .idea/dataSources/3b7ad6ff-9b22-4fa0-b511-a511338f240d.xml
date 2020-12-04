@@ -151,6 +151,7 @@
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="42" parent="11" name="target">
       <Position>2</Position>

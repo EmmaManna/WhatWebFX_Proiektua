@@ -5,7 +5,6 @@ import ehu.isad.utils.Utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,50 +16,56 @@ public class WhatWebSQLKud {
     // singleton patroia
     private static WhatWebSQLKud instantzia = new WhatWebSQLKud();
 
-    private WhatWebSQLKud(){
-    }
+    private WhatWebSQLKud(){ }
 
     public static WhatWebSQLKud getInstantzia() {
         return instantzia;
     }
 
+
     public void insertIrakurri() throws IOException {
+        //WhatWeb-etik lortutako INSERT-en fitxategiko lerroak SQLiterako itzultzen dira
+        // eta exekutatzen dira, datuak datu basean gordetzeko. Azkenik fitxategia ezabatzen da
         FileReader fileR = new FileReader(Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql");
         DBKudeatzaile dbKud = DBKudeatzaile.getInstantzia();
         try(BufferedReader bufferedReader = new BufferedReader(fileR)){
             String lerroa;
             while((lerroa=bufferedReader.readLine())!=null){
-                lerroa = lerroa.replace("IGNORE","OR IGNORE");
-                if(lerroa.contains("(status,target)")){
-                    lerroa = lerroa.replace("(status,target)","(status,target,lastUpdated)");
-                    lerroa = lerroa.substring(0,lerroa.length()-2);
-                    Calendar c = Calendar.getInstance();
-                    String eguna = Integer.toString(c.get(Calendar.DATE));
-                    String hila = Integer.toString(c.get(Calendar.MONTH));
-                    String urtea = Integer.toString(c.get(Calendar.YEAR));
-                    String data = urtea+"/"+hila+"/"+eguna;
-                    lerroa = lerroa+",'"+data+"');";
-                }
-
+                lerroa = this.lerroaItzuli(lerroa);
                 dbKud.execSQL(lerroa);
-
             }
         }
-    Utils.ezabatu();
+        Utils.ezabatu();
     }
 
+
+    private String lerroaItzuli(String lerroa){
+        //Lerroan beharrezko aldaketak gauzatzen ditu SQLite-n datuak txertatu ahal izateko
+        lerroa = lerroa.replace("IGNORE","OR IGNORE");
+        if(lerroa.contains("(status,target)")){
+            lerroa = lerroa.replace("(status,target)","(status,target,lastUpdated)");
+            lerroa = lerroa.substring(0,lerroa.length()-2);
+            Calendar c = Calendar.getInstance();
+            String eguna = Integer.toString(c.get(Calendar.DATE));
+            String hila = Integer.toString(c.get(Calendar.MONTH));
+            String urtea = Integer.toString(c.get(Calendar.YEAR));
+            String data = urtea+"/"+hila+"/"+eguna;
+            lerroa = lerroa+",'"+data+"');";
+        }
+        return lerroa;
+    }
+
+
     public Boolean jadaBilatuta(String url){
+        //Zehaztutako URL-a jada bilatu den konprobatzen du
         String query = "SELECT target FROM targets WHERE target= ? ";
         List<String> parametroak = new ArrayList<String>();
         parametroak.add(url);
         List<String> motak = new ArrayList<String>();
         motak.add("String");
-        ResultSet rs = this.eskaeraBabestua(query,parametroak,motak);
-        /*
-        String query = "SELECT target FROM targets WHERE target='"+url+"'";
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        ResultSet rs = dbKudeatzaile.execSQL(query);
-        */
+        List<Integer> likePos = new ArrayList<>();
+        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+
         try {
            if (rs.next()) {
                return true;
@@ -69,31 +74,6 @@ public class WhatWebSQLKud {
             throwables.printStackTrace();
         }
         return false;
-
-
     }
 
-    private ResultSet eskaeraBabestua(String query, List<String> parametroak, List<String> motak){
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        try {
-            PreparedStatement ps = dbKudeatzaile.conn.prepareStatement(query);
-            int kont = 0;
-            int zenb = 1;
-            while(kont < motak.size()){
-                if(motak.get(kont).equals("int")){
-                    ps.setInt(zenb,Integer.parseInt(parametroak.get(kont)));
-                }
-                else{
-                    ps.setString(zenb, parametroak.get(kont));
-                }
-                kont++;
-                zenb++;
-            }
-             return ps.executeQuery();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
 }

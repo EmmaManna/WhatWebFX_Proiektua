@@ -1,7 +1,6 @@
 package ehu.isad.controllers.ui;
 
 import ehu.isad.controllers.db.CmsMongoKud;
-import ehu.isad.controllers.db.WhatWebMongoKud;
 import ehu.isad.model.*;
 import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
@@ -45,28 +44,11 @@ public class CMSMongoKudeatzaile {
     @FXML
     private TableColumn<CmsMongo, String> clmn_cms;
 
-    public void hasieratu(){
-        clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
-        clmn_url.setCellFactory(tc -> new EstekaCell());
-
-        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
-
-
-        //Taula hutsa dagoenean agertzen den mezua
-        tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
-
-        this.taulaEguneratu();
-
-
-        //Adding action to the choice box
-        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
-                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
-                });
-    }
-
     @FXML
     void onClickAddURL(ActionEvent event) {
+        //Add url botoia sakatzean, WhatWeb-i egiten zaio dei eta datuak sartzen dira DB-an
+        //Bitartean kargatzen dagoela adieraziko da,
+        // URL-rik sartu ez bada mezu bat agertuko da. Jada bago ez da ezer egingo.
         if (!txt_bilatu.getText().equals("\\s+")){
             Boolean emaitza=false;
             int i=0;
@@ -83,21 +65,46 @@ public class CMSMongoKudeatzaile {
             }
             else {
                 txt_bilatu.setText("");
-                txt_bilatu.setText("Jada URL bilatu duzu");            }
+                txt_bilatu.setText(txt_bilatu.getText()+" jada bilatu duzu");
+            }
         }
         else txt_bilatu.setText("URL bat sartu mesedez");
     }
 
+
     @FXML
     void onKlikEgin(MouseEvent event) {
+        //Bilaketa kutxan klik egitean zegoen testua ezabatzen da
         txt_bilatu.setText("");
     }
 
+
     @FXML
     void onTestuaAldatuDa(KeyEvent event) {
+        //Bilaketa kutxan letra bat idatzen den bakoitzean taula eguneratzen da
         this.bilaketak(txt_bilatu.getText());
     }
 
+
+    public void hasieratu(){
+        clmn_url.setCellValueFactory(new PropertyValueFactory<>("target"));
+        clmn_url.setCellFactory(tc -> new EstekaCell());
+        clmn_cms.setCellValueFactory(new PropertyValueFactory<>("plugins"));
+
+        //Taula hutsa dagoenean agertzen den mezua
+        tbl_cms.setPlaceholder(new Label("Ez dago emaitzik"));
+
+        this.taulaEguneratu();
+
+        //Adding action to the choice box
+        cmbx_herrialdeak.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                    this.iragazkia(cmbx_herrialdeak.getItems().get(new_val.intValue()));
+                });
+    }
+
+
+    //testua aldatzen denean erabiltzen da testua begiratzeko
     private void bilaketak(String testua){
         List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
         String url = "";
@@ -110,6 +117,7 @@ public class CMSMongoKudeatzaile {
         }
         this.datuaKargatu(cmsListLag);
     }
+
 
     private void bilatuMongo(){
         StringBuilder builder=new StringBuilder();
@@ -138,7 +146,9 @@ public class CMSMongoKudeatzaile {
         taskThread.start();
     }
 
+
     private void comboBoxKargatu(){
+        //ComboBox-ean datuak sartzen dira
         List<Herrialdea> herrialdeLista = new ArrayList<>();
         for (int i=0;i<cmsMongoList.size();i++){
             var lag=cmsMongoList.get(i);
@@ -162,7 +172,9 @@ public class CMSMongoKudeatzaile {
         cmbx_herrialdeak.setItems(herrialdeak);
     }
 
+
     private void iragazkia(Herrialdea herrialdea){
+        //Zehaztutako herraldean zerbitzaria duten URL-ak lortu eta taula eguneratzen da
         if(!herrialdea.getString().equals("IRAGAZKI GABE")){
             List<CmsMongo> cmsListLag = new ArrayList<CmsMongo>();
             cmsMongoListGuztiak.forEach((p)->{
@@ -182,12 +194,17 @@ public class CMSMongoKudeatzaile {
         }
     }
 
-    public void datuaKargatu(List<CmsMongo> cmsLista){
+
+    private void datuaKargatu(List<CmsMongo> cmsLista){
+        //Taulan jarri beharreko datuak kargatzen dira
         ObservableList<CmsMongo> cmsak = FXCollections.observableArrayList(cmsLista);
         tbl_cms.setItems(cmsak);
     }
 
-    public void taulaEguneratu(){
+
+    private void taulaEguneratu(){
+        //Datu berriak satzen direnean, datuak DB-tik lortzen dira
+        //Taula eta comboBox-a eguneratzen dira
         cmsMongoList=CmsMongoKud.getInstance().lortuCmsMongo();
         cmsMongoListGuztiak=cmsMongoList;
         datuaKargatu(cmsMongoList);

@@ -16,7 +16,9 @@ public class DBKudeatzaile {
 
     private void conOpen(String dbpath) {
         try {
+            Class.forName("org.sqlite.JDBC").newInstance();
             String url = "jdbc:sqlite:"+ dbpath ;
+            DriverManager.registerDriver(new org.sqlite.JDBC());
             conn = DriverManager.getConnection(url);
 
             System.out.println("Database connection established");
@@ -26,23 +28,18 @@ public class DBKudeatzaile {
     }
 
 
-
     private void conClose() {
-
         if (conn != null)
             try {
                 conn.close();
             } catch (SQLException e) {
-
                 e.printStackTrace();
             }
-
         System.out.println("Database connection terminated");
-
     }
 
-    private ResultSet query(Statement s, String query) {
 
+    private ResultSet query(Statement s, String query) {
         ResultSet rs = null;
 
         try {
@@ -50,15 +47,14 @@ public class DBKudeatzaile {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return rs;
     }
 
     // singleton patroia
     private static DBKudeatzaile instantzia = new DBKudeatzaile();
 
-    private DBKudeatzaile()  {
 
+    private DBKudeatzaile()  {
         Properties properties = null;
         InputStream in = null;
 
@@ -75,14 +71,15 @@ public class DBKudeatzaile {
                 e.printStackTrace();
             }
         }
-
         this.conOpen(properties.getProperty("dbpath"));
 
     }
 
+
     public static DBKudeatzaile getInstantzia() {
         return instantzia;
     }
+
 
     public ResultSet execSQL(String query) {
         int count = 0;
@@ -104,7 +101,6 @@ public class DBKudeatzaile {
             System.out.println("Errorea query honetan: "+query);
             //e.printStackTrace();
         }
-
         return rs;
     }
 }

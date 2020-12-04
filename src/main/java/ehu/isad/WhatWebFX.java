@@ -4,7 +4,6 @@
 package ehu.isad;
 
 import ehu.isad.controllers.ui.*;
-import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,9 +23,7 @@ import java.io.IOException;
 public class WhatWebFX extends Application {
 
     private Parent mainUI;
-
     private Stage stage;
-
     private Scene sceneM;
 
     private MainKudeatzaile mainKud;
@@ -38,6 +35,7 @@ public class WhatWebFX extends Application {
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
     private double yOffset =0;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -58,12 +56,7 @@ public class WhatWebFX extends Application {
     private void pantailakKargatu() throws IOException {
         //Pantaila nagusia kargatu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Main.fxml"));
-        mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
-        serverKud = new ServerKudeatzaile();
-        whatWebKud = new WhatWebKudeatzaile();
-        cmsSQLKud = new CMSKudeatzaile(this);
-        cmsMongoKud = new CMSMongoKudeatzaile();
-
+        kudeatzaileakKargatu();
 
         Callback<Class<?>, Object> controllerFactory = type -> {
             if (type == MainKudeatzaile.class) {
@@ -77,8 +70,7 @@ public class WhatWebFX extends Application {
             } else if (type == CMSMongoKudeatzaile.class){
                 return cmsMongoKud;
             }
-            else {
-                // default behavior for controllerFactory:
+            else {// default behavior for controllerFactory:
                 try {
                     return type.newInstance();
                 } catch (Exception exc) {
@@ -87,14 +79,26 @@ public class WhatWebFX extends Application {
                 }
             }
         };
+
         loader.setControllerFactory(controllerFactory);
         mainUI = (Parent) loader.load();
         mainKud.hasieratu();
         sceneM = new Scene(mainUI);
     }
 
+
+    private void kudeatzaileakKargatu(){
+        //Aplikazioak erabiltzen dituen kudeatzaileak hasieratzen ditu
+        mainKud = new MainKudeatzaile(this); //  setMain() metodoa ekidituz
+        serverKud = new ServerKudeatzaile();
+        whatWebKud = new WhatWebKudeatzaile();
+        cmsSQLKud = new CMSKudeatzaile(this);
+        cmsMongoKud = new CMSMongoKudeatzaile();
+    }
+
+
     private void pantailaMugitu(){
-        //Pantaila nagusia
+        //Pantaila nagusia mugitu ahal izatea nahi dugun tokira saguarekin
         mainUI.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -113,11 +117,14 @@ public class WhatWebFX extends Application {
 
     }
 
+
     public Stage getStage() {
         return stage;
     }
 
+
     private void ikonoaJarri(String izena){
+        //Aplikazioan zehaztutako izena duen ikonoa jarri
         String path = Utils.lortuEzarpenak().getProperty("pathToImages")+izena+"icon.png";
         try {
             if(stage.getIcons().size()>0){
