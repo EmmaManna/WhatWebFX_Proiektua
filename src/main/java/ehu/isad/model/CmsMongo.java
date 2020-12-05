@@ -24,6 +24,19 @@ public class CmsMongo {
         return plugins;
     }
 
+
+    @Override
+    public String toString() {
+        try {
+            return "CmsMongo{" +
+                    "target='" + target + '\'' +
+                    ", plugins=" + plugins.getMetaGenerator() +
+                    '}';
+        } catch (NullPointerException e){
+            return "{}";
+        }
+    }
+
     //Plugins class
     public class Plugins{
         private MetaGenerator MetaGenerator;
@@ -36,6 +49,8 @@ public class CmsMongo {
         public HerrialdeMongo getCountry() {
             return Country;
         }
+
+
 
         //MetaGenerator class
         public class MetaGenerator{

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -42,7 +43,7 @@ class CMSKudeatzaileTest extends ApplicationTest {
     }
 
     @Test
-    void onClickAddURL() {
+    void onClickAddURL() throws FxRobotException{
         clickOn("#txt_bilatu");
         write("https://medium.com/");
         clickOn("#btn_addUrl");
