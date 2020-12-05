@@ -43,7 +43,7 @@ class ServerKudTest {
         Assertions.assertTrue(emaitza.size() == 1);
         Assertions.assertEquals("https://www.apple.com/es/",emaitza.get(0));
 
-        //Zenbait elementu, CMS bat ezaguna da
+        //Zenbait elementu
         b.urlIrakurri("https://ikasten.io/");
         WhatWebSQLKud.getInstantzia().insertIrakurri();
         emaitza = ServerKud.getInstantzia().lortuTargets();
@@ -100,11 +100,11 @@ class ServerKudTest {
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("","");
         Assertions.assertFalse(emaitza);
 
-        //Datu basean elementu bakarra, herrialdekoa da
+        //Datu basean elementu bakarra, zerbitzaria berdina
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("Apache","https://www.apple.com/es/");
         Assertions.assertTrue(emaitza);
 
-        //Datu basean elementu bakarra, ez da herrialdekoa
+        //Datu basean elementu bakarra, zerbitzari ezberdina
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("nginx","https://www.apple.com/es/");
         Assertions.assertFalse(emaitza);
 
@@ -114,11 +114,11 @@ class ServerKudTest {
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("","");
         Assertions.assertFalse(emaitza);
 
-        //Datu basean zenbait elementu, herrialdekoa da
+        //Datu basean zenbait elementu, zerbitzari berdina
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("Apache","https://www.apple.com/es/");
         Assertions.assertTrue(emaitza);
 
-        //Datu basean zenbait elementu, ez da herrialdekoa
+        //Datu basean zenbait elementu, zerbitzari ezberdina
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("nginx","https://www.apple.com/es/");
         Assertions.assertFalse(emaitza);
 
