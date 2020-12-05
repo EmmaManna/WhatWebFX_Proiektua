@@ -1,6 +1,8 @@
 package ehu.isad.utils;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -9,6 +11,13 @@ public class SareaTest {
 
     private Sarea s = new Sarea();
 
+    @BeforeEach
+    void setUp(){
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
 
     @Test
     void irudiaLortuTest() {
@@ -32,7 +41,7 @@ public class SareaTest {
         f.delete();
 
 
-        //URL-a beti jada CMS taulatik beti datorrenez, ez da beharrezkoa probatzea:
+        //URL-a beti CMS taulatik datorrenez, ez da beharrezkoa probatzea:
         //1. URL-a existitzen ez denean, taulan badago existitzen delako
         //2. String huts bat izatea, taulako datua hartzen delako
     }

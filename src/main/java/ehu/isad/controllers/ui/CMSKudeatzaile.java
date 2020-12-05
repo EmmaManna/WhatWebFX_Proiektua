@@ -109,10 +109,12 @@ public class CMSKudeatzaile implements Initializable {
                         cmsListGuziak = CmsKud.getInstantzia().lortuCmsak();
                         cmsList = CmsKud.getInstantzia().lortuCmsak();
                         this.datuaKargatu(cmsList);
+                        this.comboBoxKargatu();
                         imgLoadin.setVisible(false);
                     });
                 });
                 taskThread.start();
+
             }
             else {
                 txt_bilatu.setText(txt_bilatu.getText()+" jada gordeta dago");

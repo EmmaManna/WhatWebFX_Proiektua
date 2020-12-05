@@ -67,6 +67,9 @@ dependencies {
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
 
+    //Testak egin ahal izateko
+
+
 }
 
 repositories {
