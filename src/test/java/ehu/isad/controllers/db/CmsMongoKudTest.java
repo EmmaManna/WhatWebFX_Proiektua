@@ -34,7 +34,7 @@ public class CmsMongoKudTest {
         MongoErabiltzailea.getInstance().setCollection("EzDaBilduma");
         lista=CmsMongoKud.getInstance().lortuCmsMongo();
         lista.forEach((p)->{
-            Assertions.assertEquals(p,null);
+            Assertions.assertNull(p);
         });
     }
 

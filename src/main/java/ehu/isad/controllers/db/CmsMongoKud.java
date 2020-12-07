@@ -59,6 +59,9 @@ public class CmsMongoKud {
             // handle MongoDB exception
             e.printStackTrace();
         }
+        if (lista.isEmpty()){
+            System.out.println("lista hutsa dago...");
+        }
         return lista;
     }
 }
