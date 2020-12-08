@@ -96,7 +96,7 @@ public class ServerKud {
         motak.add("String");
         motak.add("String");
         List<Integer> likePos = new ArrayList<>();
-        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        ResultSet rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
 
         try {
             return rs.next();

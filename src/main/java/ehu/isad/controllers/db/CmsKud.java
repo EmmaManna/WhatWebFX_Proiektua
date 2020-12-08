@@ -73,7 +73,7 @@ public class CmsKud {
             motak.add("String");
             List<Integer> likePos = new ArrayList<>();
             likePos.add(1);
-            ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+            ResultSet rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
 
             try {
                 if(rs.next()){
@@ -141,7 +141,7 @@ public class CmsKud {
         motak.add("String");
         motak.add("String");
         List<Integer> likePos = new ArrayList<>();
-        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        ResultSet rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
 
         try {
           return rs.next();

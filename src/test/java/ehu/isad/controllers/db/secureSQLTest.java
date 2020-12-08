@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class secureSQLTest {
 
     @BeforeEach
@@ -41,7 +39,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         List<Integer> likePos = new ArrayList<>();
-        ResultSet rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        ResultSet rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
 
@@ -56,7 +54,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         likePos = new ArrayList<>();
-        rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
 
@@ -71,7 +69,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         likePos = new ArrayList<>();
-        rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
 
@@ -91,7 +89,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         likePos = new ArrayList<>();
-        rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
 
@@ -106,7 +104,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         likePos = new ArrayList<>();
-        rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
 
@@ -121,7 +119,7 @@ class secureSQLTest {
         motak.add("String");
         motak.add("String");
         likePos = new ArrayList<>();
-        rs = secureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
+        rs = SecureSQL.getInstantzia().eskaeraBabestua(query,parametroak,motak,likePos);
         emaitza = rs.next();
         Assertions.assertFalse(emaitza);
     }

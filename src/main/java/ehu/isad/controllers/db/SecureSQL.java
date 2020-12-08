@@ -5,13 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class secureSQL {
+public class SecureSQL {
     // singleton patroia
-    private static secureSQL instantzia = new secureSQL();
+    private static SecureSQL instantzia = new SecureSQL();
 
-    private secureSQL(){ }
+    private SecureSQL(){ }
 
-    public static secureSQL getInstantzia() {
+    public static SecureSQL getInstantzia() {
         return instantzia;
     }
 
