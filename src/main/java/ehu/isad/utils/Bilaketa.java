@@ -23,7 +23,7 @@ public class Bilaketa {
                 komandoa="whatweb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
-                komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInserts")+"insertak.sql " + url+" --color=never";
+                komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInsertsWSL")+"insertak.sql " + url+" --color=never";
             }
 
             //sistema eragilea
