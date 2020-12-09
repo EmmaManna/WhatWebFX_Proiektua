@@ -309,12 +309,14 @@ public class CMSKudeatzaile implements Initializable {
                 s.irudiaLortu(errenkada.getItem().getUrl().getText());
             }
             Platform.runLater(()->{
+                System.out.println("runlater");
                 imgLoadin.setVisible(false);
                 ikusten=true;
                 String irudia = errenkada.getItem().getUrl().getText();
                 irudia = ezabatuAtzekoa(irudia);
                 Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
-                irudiaBistaratu(irudia, bounds.getMinX(), bounds.getMinY());
+                irudiaBistaratu(irudia, bounds.getMinX()+100, bounds.getMinY()+100);
+                System.out.println("runlaterbukaera");
             });
         });
         taskThread.start();
@@ -327,6 +329,7 @@ public class CMSKudeatzaile implements Initializable {
         if (newValue&!pop.isShowing()) {
             ikusten = false;
             PopupPrestatu(errenkada);
+            System.out.println("hover");
 
             btn.setOnMouseMoved(new EventHandler<MouseEvent>() {
                 @Override

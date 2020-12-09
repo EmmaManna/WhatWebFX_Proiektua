@@ -14,15 +14,14 @@ import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
-
 import java.util.concurrent.TimeoutException;
 
 
-class CMSKudeatzaileTest extends ApplicationTest {
+public class MainKudeatzaileTest extends ApplicationTest{
 
     @Override
     public void start (Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(WhatWebFX.class.getResource("/FXML/cmsSQL.fxml"));
+        FXMLLoader loader = new FXMLLoader(WhatWebFX.class.getResource("/FXML/Main.fxml"));
         Parent mainUI = (Parent) loader.load();
         stage.setScene(new Scene(mainUI));
         stage.show();
@@ -30,7 +29,8 @@ class CMSKudeatzaileTest extends ApplicationTest {
     }
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
+
     }
 
     @AfterEach
@@ -41,17 +41,8 @@ class CMSKudeatzaileTest extends ApplicationTest {
     }
 
     @Test
-    void onClickAddURL() throws FxRobotException{
-        clickOn("#txt_bilatu");
-        write("https://medium.com/");
-        clickOn("#btn_addUrl");
+    void onClick(){
+
     }
 
-    @Test
-    void onKlikEgin() {
-    }
-
-    @Test
-    void onTestuaAldatuDa() {
-    }
 }
