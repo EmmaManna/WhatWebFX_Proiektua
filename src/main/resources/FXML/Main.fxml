@@ -27,7 +27,7 @@
                   </FontAwesomeIconView>
                </children>
             </Pane>
-            <Button fx:id="btnCMS" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="300.0" style="-fx-background-color: #004F79;" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="CMS" textFill="WHITE">
+            <Button fx:id="btnCMS" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="300.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="CMS" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="DATABASE" />
                </graphic>
@@ -38,7 +38,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnServer" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="305.0" style="-fx-background-color: #004F79;" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="Server" textFill="WHITE">
+            <Button fx:id="btnServer" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="305.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="Server" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -49,7 +49,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="SERVER" />
                </graphic>
             </Button>
-            <Button fx:id="btnWhatWeb" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="323.0" style="-fx-background-color: #004F79;" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="WhatWeb" textFill="WHITE">
+            <Button fx:id="btnWhatWeb" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onClick" prefHeight="68.0" prefWidth="323.0" styleClass="buttonMenu" stylesheets="@../fullpackstyling.css" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CODE" />
                </graphic>

@@ -1,33 +1,33 @@
 .button
 {
-    -fx-background-color : #3F2B63;
+    -fx-background-color : #004F79;
 }
 .button:hover
 {
-    -fx-background-color : #7156DD ;
+    -fx-background-color :  #007dc8 ;
 }
 .button:pressed
 {
-    -fx-background-color : #7156DD ;
+    -fx-background-color :  #007dc8 ;
     border-left-color: #ffffff;
 }
 
 
 .buttonMenu
 {
-    -fx-background-color : #3F2B63;
+    -fx-background-color :  #004F79;
 }
 .buttonMenu:hover
 {
-    -fx-background-color : #7156DD ;
+    -fx-background-color :  #007dc8 ;
 }
 .buttonMenu:pressed
 {
-    -fx-background-color : #7156DD ;
+    -fx-background-color :  #007dc8 ;
     border-left-color: #ffffff;
 }
 .buttonMenu:focused{
-    -fx-background-color: #7156DD ;
+    -fx-background-color: #007dc8;
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px 0px 0px 3px;
 }
@@ -106,7 +106,7 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size : 20;
-    -fx-background-color:   #7156DD;
+    -fx-background-color:    #004F79;
 }
 .table-view .column-header .label{
 
@@ -213,7 +213,7 @@
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3F2B63;
+    -fx-background-color:  #004F79;
     -fx-font-weight: bold;
 }
 
