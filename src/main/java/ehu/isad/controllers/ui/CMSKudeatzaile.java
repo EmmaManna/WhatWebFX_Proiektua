@@ -322,7 +322,7 @@ public class CMSKudeatzaile implements Initializable {
 
 
     private void ButtonHover(Button btn, TableRow<Cms> errenkada, Boolean newValue){
-        //Sagua botoiaren jainean jarrita badago preview-a agertzen da
+        //Sagua botoiaren gainean jarrita badago preview-a agertzen da
         //Lehenengo Screeshot-a bistaratuta ez dagoela konporbatzen du
         if (newValue&!pop.isShowing()) {
             ikusten = false;
