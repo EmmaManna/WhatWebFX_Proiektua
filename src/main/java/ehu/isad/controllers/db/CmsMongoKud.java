@@ -2,6 +2,7 @@ package ehu.isad.controllers.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.ClientSession;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ehu.isad.model.CmsMongo;
@@ -63,5 +64,34 @@ public class CmsMongoKud {
             System.out.println("lista hutsa dago...");
         }
         return lista;
+    }
+
+    public Boolean bilatuMongo(String url){
+        List<CmsMongo> list=new ArrayList<>();
+        try (MongoClient client = new MongoClient("localhost", 27017)) {
+
+            MongoDatabase database = client.getDatabase("whatweb");
+            MongoCollection<Document> collection = database.getCollection("whatweb");
+
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+            Document query = new Document();
+            query.append("target", url);
+
+            Consumer<Document> processBlock = new Consumer<Document>() {
+                @Override
+                public void accept(Document document) {
+                    var unekoa=new Gson().fromJson(document.toJson(), CmsMongo.class);
+                    list.add(unekoa);
+                }
+            };
+
+            collection.find(query).forEach(processBlock);
+
+        } catch (MongoException e) {
+            // handle MongoDB exception
+        }
+
+        return !list.isEmpty();
     }
 }

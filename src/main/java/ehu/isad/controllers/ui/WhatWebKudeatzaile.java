@@ -1,4 +1,5 @@
 package ehu.isad.controllers.ui;
+import ehu.isad.controllers.db.CmsMongoKud;
 import ehu.isad.controllers.db.WhatWebSQLKud;
 import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Bilaketa;
@@ -80,22 +81,38 @@ public class WhatWebKudeatzaile implements Initializable {
         //Ez bada URL-rik idazten edo datuak jada gordeta badaude mezu bat panatailaratuko da
         if(!txt_url.getText().equals("")){
             txt_log.setText("");
-            if(WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_url.getText())){
-                txt_log.setText("Jada ditugu datuak");
+            if(MongoErabiltzailea.getInstance().getCollection().equals("")){
+                if(WhatWebSQLKud.getInstantzia().jadaBilatuta(txt_url.getText())){
+                    txt_log.setText("Jada ditugu datuak");
+                }
+                else{
+                    HasieratuWWKomandoa();
+                }
             }
             else{
-                Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
-                mgvw_loading.setImage(i);
-                mgvw_loading.setVisible(true);
-                txt_log.setWrapText(true);
+                txt_log.setText("");
+                if(CmsMongoKud.getInstance().bilatuMongo(txt_url.getText())){
+                    txt_log.setText("Jada ditugu datuak");
+                }
+                else{
+                    HasieratuWWKomandoa();
+                }
 
-                Thread taskThread=hasieratuThread();
-                taskThread.start();
             }
         }
         else{
             txt_log.setText("URL bat idatzi mesedez.");
         }
+    }
+
+    private void HasieratuWWKomandoa() {
+        Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
+        mgvw_loading.setImage(i);
+        mgvw_loading.setVisible(true);
+        txt_log.setWrapText(true);
+
+        Thread taskThread=hasieratuThread();
+        taskThread.start();
     }
 
 

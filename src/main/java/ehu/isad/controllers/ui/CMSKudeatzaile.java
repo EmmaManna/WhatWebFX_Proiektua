@@ -253,7 +253,6 @@ public class CMSKudeatzaile implements Initializable {
     }
 
 
-    //FIXME: hover irakurketa gehiegi egiten ditu eta thread barruan dagoenez ez du ondo funtzionatzen...
     private void addButtonToTable() {
         //Botoiak taulako errenkada bakoitzean gehitzen ditu, eta propietateak zehazten dira
         Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>> cellFactory = new Callback<TableColumn<Cms, Button>, TableCell<Cms, Button>>() {

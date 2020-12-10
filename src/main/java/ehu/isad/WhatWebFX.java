@@ -37,6 +37,7 @@ public class WhatWebFX extends Application {
     private double yOffset =0;
 
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;

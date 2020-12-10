@@ -96,7 +96,7 @@ jlink {
     jpackage {
         if (javafx.getPlatform().name() == "OSX") {
             installerType = "dmg"
-            jpackageHome = "/Users/<user>/Downloads/jdk-13.jdk/Contents/Home"
+            jpackageHome = "~/.sdkman/candidates/java/14.0.2.fx-zulu"
         } else if (javafx.getPlatform().name() == "WINDOWS") {
             installerType = "exe"
             jpackageHome = "C:\\Program Files\\Java\\jdk-14.0.2"
