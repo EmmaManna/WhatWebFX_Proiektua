@@ -94,13 +94,16 @@ jlink {
     }
 
     jpackage {
-        if (javafx.getPlatform().name() == "OSX") {
-            installerType = "dmg"
-            jpackageHome = "~/.sdkman/candidates/java/14.0.2.fx-zulu"
-        } else if (javafx.getPlatform().name() == "WINDOWS") {
+        jpackageHome="/home/duxon/.sdkman/candidates/java/14.0.2.fx-zulu"
+
+        if (javafx.getPlatform().name() == "WINDOWS") {
             installerType = "exe"
             jpackageHome = "C:\\Program Files\\Java\\jdk-14.0.2"
             installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
+        }
+        else {
+            installerType = "deb"
+            jpackageHome = "/home/duxon/.sdkman/candidates/java/14.0.2.fx-zulu"
         }
     }
 }
