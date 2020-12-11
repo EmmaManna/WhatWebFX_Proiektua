@@ -70,8 +70,8 @@ public class CmsMongoKud {
         List<CmsMongo> list=new ArrayList<>();
         try (MongoClient client = new MongoClient("localhost", 27017)) {
 
-            MongoDatabase database = client.getDatabase("whatweb");
-            MongoCollection<Document> collection = database.getCollection("whatweb");
+            MongoDatabase database = client.getDatabase(Utils.lortuEzarpenak().getProperty("dbMongo"));
+            MongoCollection<Document> collection = database.getCollection(MongoErabiltzailea.getInstance().getCollection());
 
             // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
 
