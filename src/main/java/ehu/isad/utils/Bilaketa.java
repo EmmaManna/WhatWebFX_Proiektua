@@ -20,17 +20,16 @@ public class Bilaketa {
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
-                komandoa=Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"/plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+                komandoa=Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
-                komandoa = "whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInsertsWSL")+"insertak.sql " + url+" --color=never";
+                komandoa = Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInsertsWSL")+"insertak.sql " + url+" --color=never";
             }
 
             //sistema eragilea
             if(System.getProperty("os.name").toLowerCase().contains("win")) {
-                komandoa = "wsl " +Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+ komandoa+" -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb";
+                komandoa = "wsl " + komandoa+" -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb";
             }
-
             lerroakGeitu(processes,komandoa);
 
         } catch (Exception err) {
