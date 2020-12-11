@@ -25,10 +25,15 @@ sudo cp /usr/share/whatweb/plugins-disabled/charset.rb /usr/share/whatweb/my-plu
 
 Orain mongoDB dependentziak exekutatu daitezke arazo gabe
 
+##Esteka interesgarriak
+
 [Dokumentazioa](https://segurtasunaduxon.xyz) euskaraz eginda ikusi daiteke.
 Bestalde, [PowerPointa](https://www.reddit.com/r/orslokx/comments/kb67tf/efe_vol_2/) hemen aurkitu daiteke.
 
 UI Developed by:
+
 [@Duxon900](https://github.com/Duxon900)
+
 [@EmmaManna](https://github.com/EmmaManna)
+
 [@JonGondra](https://github.com/JonGondra)

@@ -20,7 +20,11 @@ public class Bilaketa {
 
             //MongoDB erabiltzen du?
             if (!MongoErabiltzailea.getInstance().getCollection().equals("")){
-                komandoa=Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb -p +"+Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+MongoErabiltzailea.getInstance().getCollection()+" "+url;
+                komandoa=Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb -p +"+
+                        Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+
+                        "plugins-disabled/charset.rb --color=never --log-mongo-host localhost --log-mongo-database "+
+                        Utils.lortuEzarpenak().getProperty("dbMongo")+" --log-mongo-collection "+
+                        MongoErabiltzailea.getInstance().getCollection()+" "+url;
             }
             else {
                 komandoa = Utils.lortuEzarpenak().getProperty("pathToExekutagarria")+"whatweb --log-sql="+ Utils.lortuEzarpenak().getProperty("pathToInsertsWSL")+"insertak.sql " + url+" --color=never";
