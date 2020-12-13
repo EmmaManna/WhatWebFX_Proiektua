@@ -1,5 +1,6 @@
 package ehu.isad.controllers.db;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.DriverManager;
@@ -71,7 +72,9 @@ public class DBKudeatzaile {
                 e.printStackTrace();
             }
         }
-        this.conOpen(properties.getProperty("dbpath"));
+        String pathprop= System.getProperty("user.home")+ File.separator+properties.getProperty("dbpath");
+
+        this.conOpen(pathprop);
     }
 
 
