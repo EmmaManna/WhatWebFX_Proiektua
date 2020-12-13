@@ -32,8 +32,8 @@ Orain mongoDB dependentziak exekutatu daitezke arazo gabe
 
 ##Esteka interesgarriak
 
-[Dokumentazioa](https://segurtasunaduxon.xyz) euskaraz eginda ikusi daiteke.
-Bestalde, [PowerPointa](https://www.reddit.com/r/orslokx/comments/kb67tf/efe_vol_2/) hemen aurkitu daiteke.
+[Dokumentazioa](https://github.com/UPV-EHU-Bilbao/WhatWebVFX/blob/master/WhatWebFX_JonGondra_EmmaManna_JonQuintano.pdf) euskaraz eginda ikusi daiteke.
+Bestalde, [PowerPointa](https://github.com/UPV-EHU-Bilbao/WhatWebVFX/blob/master/WhatWebFX.pptx) edo [Aurkezpena PDF]() eran hemen aurkitu daiteke.
 
 Gainera, [Windows exekutagarria]() eta [Linux exekutagarria]() eskura daude hemen.
 
