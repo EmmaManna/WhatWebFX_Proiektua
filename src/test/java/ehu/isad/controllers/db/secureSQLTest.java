@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +20,7 @@ class secureSQLTest {
     @AfterEach
     void tearDown() {
     }
+
 
     @Test
     void eskaeraBabestua() throws SQLException, IOException {

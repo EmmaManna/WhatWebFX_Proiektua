@@ -37,6 +37,7 @@ public class CmsMongo {
         }
     }
 
+
     //Plugins class
     public class Plugins{
         private MetaGenerator MetaGenerator;
@@ -49,7 +50,6 @@ public class CmsMongo {
         public HerrialdeMongo getCountry() {
             return Country;
         }
-
 
 
         //MetaGenerator class
@@ -69,6 +69,7 @@ public class CmsMongo {
                 return Arrays.toString(string);
             }
         }
+
 
         //HerrialdeMongo class
         public class HerrialdeMongo{

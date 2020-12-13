@@ -16,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,11 +121,7 @@ public class CMSMongoKudeatzaile {
     private void bilatuMongo(){
         StringBuilder builder=new StringBuilder();
 
-        imgLoadin.setImage(new Image(
-                        new File(
-                                Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()
-                )
-        );
+        imgLoadin.setImage(new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"gearloading.gif").toURI().toString()));
         imgLoadin.setVisible(true);
 
         Thread taskThread=new Thread(()->{
@@ -142,7 +137,6 @@ public class CMSMongoKudeatzaile {
                 txt_bilatu.setText("");
             });
         });
-
         taskThread.start();
     }
 
@@ -182,7 +176,6 @@ public class CMSMongoKudeatzaile {
                     if (p.getPlug().getCountry().getString().equals(herrialdea.getString())){
                         cmsListLag.add(p);
                     }
-
                 }
             });
             cmsMongoList = cmsListLag;

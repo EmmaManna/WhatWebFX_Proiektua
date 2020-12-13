@@ -1,4 +1,5 @@
 package ehu.isad.controllers.ui;
+
 import ehu.isad.controllers.db.CmsMongoKud;
 import ehu.isad.controllers.db.WhatWebSQLKud;
 import ehu.isad.model.MongoErabiltzailea;
@@ -6,7 +7,6 @@ import ehu.isad.utils.Bilaketa;
 import ehu.isad.utils.Utils;
 import javafx.application.Platform;
 import javafx.scene.control.*;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -97,13 +96,13 @@ public class WhatWebKudeatzaile implements Initializable {
                 else{
                     HasieratuWWKomandoa();
                 }
-
             }
         }
         else{
             txt_log.setText("URL bat idatzi mesedez.");
         }
     }
+
 
     private void HasieratuWWKomandoa() {
         Image i = new Image(new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"LOADING.gif").toURI().toString());
@@ -127,7 +126,6 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void EnterSakatuCommit(KeyEvent event) {
-        //TODO: No sé qué hace JonQ
         if (event.getCode().equals(KeyCode.getKeyCode("Enter"))){
             onCommit(new ActionEvent());
         }
@@ -136,7 +134,6 @@ public class WhatWebKudeatzaile implements Initializable {
 
     @FXML
     void onCommit(ActionEvent event) {
-        //TODO: No sé qué hace JonQ
         if(!txtCollection.getText().isBlank()){
             MongoErabiltzailea erabiltzailea=MongoErabiltzailea.getInstance();
             erabiltzailea.setCollection(txtCollection.getText());

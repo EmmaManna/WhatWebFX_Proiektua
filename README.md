@@ -1,6 +1,11 @@
 # WhatWebFX_Proiektua
 Informazio Sistemen Analisia eta Diseinua ikasgaiko proiektua. Helburua zein teknologia erabiltzen du webgune honek azpitik? galderari eratzutea da.
 
+##Aplikazioa erabiltzeko aurrebaldintzak:
+1. WhatWeb instalatuta izatea. Horretarako hurrengo estekan bilatu: https://github.com/urbanadventurer/WhatWeb
+2. Windows sistema eragilean Ubuntu aplikazioa instalatu WhatWeb bertan erabili ahal izateko. Hurrengo estekan bilatu: https://docs.microsoft.com/es-es/windows/wsl/install-win10
+3. Erabili nahi izatekotan MongoDB instalatu: https://www.mongodb.com/try/download/community
+
 ##MongoDB dependencies installation:
 ```bash
 sudo apt install gem
@@ -30,7 +35,9 @@ Orain mongoDB dependentziak exekutatu daitezke arazo gabe
 [Dokumentazioa](https://segurtasunaduxon.xyz) euskaraz eginda ikusi daiteke.
 Bestalde, [PowerPointa](https://www.reddit.com/r/orslokx/comments/kb67tf/efe_vol_2/) hemen aurkitu daiteke.
 
-UI Developed by:
+Gainera, [Windows exekutagarria]() eta [Linux exekutagarria]() eskura daude hemen.
+
+##UI Developed by:
 
 [@Duxon900](https://github.com/Duxon900)
 

@@ -147,7 +147,6 @@ public class ServerKudeatzaile {
 
 
     private void ZerbitzariakKargatuMongo(List<String> zerbitzariakListLag, String zerbitzaria){
-        //TODO: No sé que hace esto JonQ
         String url = "";
         for(int i=0; i < targets.size(); i++){
             url = targets.get(i);
@@ -159,7 +158,6 @@ public class ServerKudeatzaile {
 
 
     private void ZerbitzariakKargatuMongoCollection(List<String> zerbitzariakListLag, String zerbitzaria){
-        //TODO: No sé que hace esto JonQ
         List<String> finalZerbitzariakListLag = zerbitzariakListLag;
         mongoList.forEach((unekoa)->{
             if(unekoa.getPlug().getMetaGenerator()!=null){

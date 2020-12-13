@@ -1,7 +1,6 @@
 package ehu.isad.controllers.db;
 
 import ehu.isad.utils.Utils;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

@@ -2,7 +2,6 @@ package ehu.isad.controllers.db;
 
 import ehu.isad.model.Cms;
 import ehu.isad.model.Herrialdea;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

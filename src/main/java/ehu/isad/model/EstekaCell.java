@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableCell;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -21,6 +20,7 @@ public class EstekaCell<T> extends TableCell<T, String> {
             System.out.println("estekan sakatu dut ");
         });
     }
+
 
     @Override
     protected void updateItem(String item, boolean empty) {
@@ -42,7 +42,6 @@ public class EstekaCell<T> extends TableCell<T, String> {
                 }
             }
         });
-
         setGraphic(empty ? null : link);
     }
 

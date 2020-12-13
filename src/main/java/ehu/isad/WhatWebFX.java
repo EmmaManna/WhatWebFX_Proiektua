@@ -15,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class WhatWebFX extends Application {
     //Pantaila mugitzeko kalkulurako
     private double xOffset = 0;
     private double yOffset =0;
-
 
 
     @Override
@@ -115,7 +113,6 @@ public class WhatWebFX extends Application {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
-
     }
 
 

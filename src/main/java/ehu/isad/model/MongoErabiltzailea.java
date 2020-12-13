@@ -2,7 +2,6 @@ package ehu.isad.model;
 
 public class MongoErabiltzailea {
     private static MongoErabiltzailea erabiltzailea=new MongoErabiltzailea();
-
     private String izena="";
     private String pasahitza="";
     private String collection="";

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 
 public class SareaTest {
@@ -19,6 +18,7 @@ public class SareaTest {
     void tearDown() {
     }
 
+
     @Test
     void irudiaLortuTest() {
         //Existitzen den URL sinple bat eman eta irudia gorde dela egiaztatu
@@ -30,7 +30,6 @@ public class SareaTest {
         Assertions.assertTrue(f.exists());
         f.delete();
 
-
         //Existitzen den URL konplexu bat eman eta irudia gorde dela egiaztatu
         f = new File(Utils.lortuEzarpenak().getProperty("pathToImages")+"aws.amazon.com.png");
         if(f.exists()){
@@ -39,7 +38,6 @@ public class SareaTest {
         s.irudiaLortu("https://aws.amazon.com/education/awseducate/");
         Assertions.assertTrue(f.exists());
         f.delete();
-
 
         //URL-a beti CMS taulatik datorrenez, ez da beharrezkoa probatzea:
         //1. URL-a existitzen ez denean, taulan badago existitzen delako

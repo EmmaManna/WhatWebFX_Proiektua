@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -26,6 +25,7 @@ class ServerKudTest {
         DBKudeatzaile.getInstantzia().execSQL(query2);
         DBKudeatzaile.getInstantzia().execSQL(query3);
     }
+
 
     @Test
     void lortuTargets() throws IOException {
@@ -50,8 +50,8 @@ class ServerKudTest {
         Assertions.assertTrue(emaitza.size() == 2);
         Assertions.assertEquals("https://www.apple.com/es/", emaitza.get(0));
         Assertions.assertEquals("https://ikasten.io/", emaitza.get(1));
-
     }
+
 
     @Test
     void lortuZerbitzaria() throws IOException {
@@ -80,6 +80,7 @@ class ServerKudTest {
         Assertions.assertEquals("nginx",emaitza.get(1));
         Assertions.assertEquals("IRAGAZKI GABE",emaitza.get(2));
     }
+
 
     @Test
     void zerbitzariaDa() throws IOException {
@@ -129,6 +130,5 @@ class ServerKudTest {
         //SQLi bat egiten saiatu bigarren elementuan
         emaitza = ServerKud.getInstantzia().zerbitzariaDa("Apache","https://www.apple.com/es/ ' --");
         Assertions.assertFalse(emaitza);
-
     }
 }

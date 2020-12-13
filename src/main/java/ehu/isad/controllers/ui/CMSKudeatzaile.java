@@ -29,7 +29,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.util.Callback;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -124,9 +123,6 @@ public class CMSKudeatzaile implements Initializable {
             txt_bilatu.setText("URL bat sartu mesedez");
         }
     }
-
-
-    public CMSKudeatzaile() { }
 
 
     @FXML

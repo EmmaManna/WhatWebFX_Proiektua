@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -30,6 +29,7 @@ class CmsKudTest {
         DBKudeatzaile.getInstantzia().execSQL(query2);
         DBKudeatzaile.getInstantzia().execSQL(query3);
     }
+
 
     @Test
     void lortuCmsak() throws IOException, InterruptedException {
@@ -65,8 +65,8 @@ class CmsKudTest {
         Assertions.assertTrue(emaitza.size() == 2);
         Assertions.assertEquals("Ezezaguna", emaitza.get(0).getCms());
         Assertions.assertEquals("WordPress", emaitza.get(1).getCms());
-
     }
+
 
     @Test
     void lortuHerrialdeak() throws IOException {
@@ -95,6 +95,7 @@ class CmsKudTest {
         Assertions.assertEquals("IRELAND",emaitza.get(1).getString());
         Assertions.assertEquals("IRAGAZKI GABE",emaitza.get(2).getString());
     }
+
 
     @Test
     void herrialdekoaDa() throws IOException {
@@ -148,6 +149,5 @@ class CmsKudTest {
         //SQLi bat egiten saiatu hirugarren elementuan
         emaitza = CmsKud.getInstantzia().herrialdekoaDa("UKRAINE","https://www.apple.com/es/","UA ' --");
         Assertions.assertFalse(emaitza);
-
     }
 }

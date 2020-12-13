@@ -4,7 +4,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;

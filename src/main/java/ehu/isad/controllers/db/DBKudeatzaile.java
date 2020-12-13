@@ -72,7 +72,6 @@ public class DBKudeatzaile {
             }
         }
         this.conOpen(properties.getProperty("dbpath"));
-
     }
 
 

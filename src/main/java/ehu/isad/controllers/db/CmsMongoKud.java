@@ -2,7 +2,6 @@ package ehu.isad.controllers.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.client.ClientSession;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ehu.isad.model.CmsMongo;
@@ -10,7 +9,6 @@ import ehu.isad.model.MongoErabiltzailea;
 import ehu.isad.utils.Utils;
 import org.bson.Document;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -44,7 +42,6 @@ public class CmsMongoKud {
             projection.append("plugins.Country.module",1.0);
             projection.append("plugins.Country.string",1.0);
 
-
             Consumer<Document> processBlock = new Consumer<Document>() {
                 @Override
                 public void accept(Document document) {
@@ -53,7 +50,6 @@ public class CmsMongoKud {
                     lista.add(lag);
                 }
             };
-
             collection.find(query).projection(projection).forEach(processBlock);
 
         } catch (MongoException e) {
@@ -65,6 +61,7 @@ public class CmsMongoKud {
         }
         return lista;
     }
+
 
     public Boolean bilatuMongo(String url){
         List<CmsMongo> list=new ArrayList<>();
@@ -85,13 +82,11 @@ public class CmsMongoKud {
                     list.add(unekoa);
                 }
             };
-
             collection.find(query).forEach(processBlock);
 
         } catch (MongoException e) {
             // handle MongoDB exception
         }
-
         return !list.isEmpty();
     }
 }

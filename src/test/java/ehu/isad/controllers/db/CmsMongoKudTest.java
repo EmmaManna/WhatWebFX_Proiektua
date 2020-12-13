@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 public class CmsMongoKudTest {
@@ -18,7 +17,6 @@ public class CmsMongoKudTest {
 
     @AfterEach
     void tearDown(){
-
     }
 
 
@@ -38,6 +36,7 @@ public class CmsMongoKudTest {
         });
     }
 
+
     @Test
     void atributuGehiago(){
         //metodo honek era normal batean baino atributu gehiago badaude begiratuko du
@@ -48,6 +47,7 @@ public class CmsMongoKudTest {
         CmsMongo cmsTxarto=new Gson().fromJson(txarto, CmsMongo.class);
         Assertions.assertEquals(cmsTxarto.toString(),cmsOndo.toString());
     }
+
 
     @Test
     void atributuGutxiago(){

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -26,6 +25,7 @@ class WhatWebSQLKudTest {
         DBKudeatzaile.getInstantzia().execSQL(query2);
         DBKudeatzaile.getInstantzia().execSQL(query3);
     }
+
 
     @Test
     void insertIrakurri() throws IOException {
@@ -65,6 +65,7 @@ class WhatWebSQLKudTest {
         Assertions.assertEquals("https://ikasten.io/",emaitza.get(1));
     }
 
+
     @Test
     void jadaBilatuta() throws IOException {
         Boolean emaitza;
@@ -97,7 +98,6 @@ class WhatWebSQLKudTest {
         WhatWebSQLKud.getInstantzia().insertIrakurri();
         emaitza = WhatWebSQLKud.getInstantzia().jadaBilatuta("https://www.instagram.com/");
         Assertions.assertFalse(emaitza);
-
 
         //Zenbait elementu, badago
         b.urlIrakurri("https://www.instagram.com/");
