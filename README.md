@@ -35,7 +35,7 @@ Orain mongoDB dependentziak exekutatu daitezke arazo gabe
 [Dokumentazioa](https://github.com/UPV-EHU-Bilbao/WhatWebVFX/blob/master/WhatWebFX_JonGondra_EmmaManna_JonQuintano.pdf) euskaraz eginda ikusi daiteke.
 Bestalde, [PowerPointa](https://github.com/UPV-EHU-Bilbao/WhatWebVFX/blob/master/WhatWebFX.pptx) edo [Aurkezpena PDF]() eran hemen aurkitu daiteke.
 
-Gainera, [Windows exekutagarria]() eta [Linux exekutagarria]() eskura daude hemen.
+Gainera, [Windows exekutagarria](https://github.com/UPV-EHU-Bilbao/WhatWebVFX/releases/tag/1.0) eta [Linux exekutagarria]() eskura daude hemen.
 
 ##UI Developed by:
 
