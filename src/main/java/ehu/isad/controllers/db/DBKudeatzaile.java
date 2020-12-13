@@ -72,6 +72,7 @@ public class DBKudeatzaile {
                 e.printStackTrace();
             }
         }
+
         this.conOpen(properties.getProperty("dbpath"));
     }
 
