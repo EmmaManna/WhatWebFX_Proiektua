@@ -72,9 +72,7 @@ public class DBKudeatzaile {
                 e.printStackTrace();
             }
         }
-        String pathprop= System.getProperty("user.home")+ File.separator+properties.getProperty("dbpath");
-
-        this.conOpen(pathprop);
+        this.conOpen(properties.getProperty("dbpath"));
     }
 
 
