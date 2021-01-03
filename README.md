@@ -7,14 +7,24 @@ Informazio Sistemen Analisia eta Diseinua ikasgaiko proiektua. Helburua zein tek
 2. Windows sistema eragilean Ubuntu aplikazioa instalatu WhatWeb bertan erabili ahal izateko. Hurrengo estekan bilatu: https://docs.microsoft.com/es-es/windows/wsl/install-win10
 3. Erabili nahi izatekotan MongoDB instalatu: https://www.mongodb.com/try/download/community
 
+#Mongo instalazioa
+Mongo instalatzea ez da erreza, beraz hemen agertzen dira guk jarraitutako pausuak
+```bash
+$ sudo apt-get install -y mongodb-org
+$ sudo apt install mongodb-server-core -y
+$ sudo apt install mongodb-clients -y
+```
 
 ## MongoDB dependencies installation
 ```bash
-sudo apt install gem
-sudo apt install ruby-dev
-sudo gem install json
-sudo gem install rchardet
-sudo gem install mongo
+$ sudo apt install gem
+$ sudo apt install ruby-dev
+$ sudo apt install make
+$ sudo apt install build-essential
+
+$ sudo gem install json
+$ sudo gem install rchardet
+$ sudo gem install mongo
 ```
 
 Ondoren aurkitu non dauden _my-plugins_(karpeta) eta **charset.db**:
